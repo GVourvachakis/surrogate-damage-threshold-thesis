@@ -1,0 +1,251 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{theme_surrogate_thesis}[2026/07/15 Public MSc thesis Beamer style]
+
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{hyperref}
+\usetikzlibrary{positioning}
+
+\definecolor{GVCanvas}{HTML}{FEFEFC}
+\definecolor{GVTitleRed}{HTML}{7A1E1E}
+\definecolor{GVRedTint}{HTML}{F7ECEB}
+\definecolor{GVTeal}{HTML}{0B6F6A}
+\definecolor{GVTealTint}{HTML}{EAF4F2}
+\definecolor{GVCharcoal}{HTML}{202124}
+\definecolor{GVSlate}{HTML}{6B7280}
+\definecolor{GVSourceBlue}{HTML}{0072B2}
+\definecolor{GVDiffusionGreen}{HTML}{009E73}
+\definecolor{GVCouplingOrange}{HTML}{D55E00}
+\definecolor{GVCapacityPurple}{HTML}{CC79A7}
+
+\usetheme{default}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+\setbeamercolor{normal text}{fg=GVCharcoal,bg=GVCanvas}
+\setbeamercolor{background canvas}{bg=GVCanvas}
+\setbeamercolor{frametitle}{fg=GVTitleRed,bg=GVCanvas}
+\setbeamercolor{title}{fg=GVTitleRed,bg=GVCanvas}
+\setbeamercolor{structure}{fg=GVTeal}
+\setbeamercolor{alerted text}{fg=GVCouplingOrange}
+\setbeamerfont{frametitle}{series=\bfseries,size=\fontsize{15}{18}\selectfont}
+\setbeamerfont{title}{series=\bfseries,size=\fontsize{18}{22}\selectfont}
+\setbeamerfont{footline}{size=\tiny}
+\setbeamerfont{caption}{size=\scriptsize}
+\setbeamertemplate{caption}[numbered]
+
+\newif\ifGVWatermark
+\GVWatermarktrue
+\newif\ifGVShowFooter
+\GVShowFootertrue
+\newif\ifGVSupplementary
+\GVSupplementaryfalse
+\newcommand{\GVSlideLabel}{}
+\newcommand{\GVSlideSource}{}
+
+\newcommand{\GVSetMainSlide}[1]{%
+  \GVShowFootertrue%
+  \GVSupplementaryfalse%
+  \gdef\GVSlideLabel{#1 / 24}%
+}
+\newcommand{\GVSetSupplementarySlide}[1]{%
+  \GVShowFootertrue%
+  \GVSupplementarytrue%
+  \gdef\GVSlideLabel{#1}%
+}
+\newcommand{\GVSetBackupSlide}[1]{%
+  \GVShowFootertrue%
+  \GVSupplementaryfalse%
+  \gdef\GVSlideLabel{#1}%
+}
+\newcommand{\GVSetNoFooter}{%
+  \GVShowFooterfalse%
+  \GVSupplementaryfalse%
+  \gdef\GVSlideLabel{}%
+}
+\newcommand{\GVSetSource}[1]{\gdef\GVSlideSource{#1}}
+
+\newcommand{\GVBackupButton}[2]{%
+  \hyperlink{#1}{%
+    \tikz[baseline=-0.55ex]\node[
+      draw=GVTeal,
+      fill=GVTealTint,
+      rounded corners=2pt,
+      inner xsep=5pt,
+      inner ysep=2pt,
+      font=\scriptsize,
+      text=GVTeal
+    ] {#2};%
+  }%
+}
+\newcommand{\GVBackupIndexButton}{\GVBackupButton{supp:index}{Index}}
+\newcommand{\GVBackupSectionButton}[2]{\GVBackupButton{#1}{#2}}
+\newcommand{\GVBackupCard}[3]{%
+  \begin{tikzpicture}[baseline=-0.55ex]
+    \node[
+      draw=GVTeal,
+      fill=GVTealTint,
+      rounded corners=2pt,
+      line width=0.55pt,
+      inner xsep=5pt,
+      inner ysep=4pt,
+      align=left
+    ] {\begin{minipage}{0.90\textwidth}\raggedright%
+      \hyperlink{#1}{\small\textbf{\color{GVTitleRed}#2}}\par
+      \vspace{0.08cm}\scriptsize\color{GVSlate}#3\par
+      \vspace{0.10cm}\hyperlink{#1}{\scriptsize\color{GVTeal}\textbf{Open section}}%
+    \end{minipage}};
+  \end{tikzpicture}%
+}
+
+\setbeamertemplate{frametitle}{%
+  \vspace{0.25cm}%
+  \hspace{0.65cm}%
+  \begin{minipage}[t]{0.86\paperwidth}%
+    \raggedright%
+    \strut\insertframetitle\strut%
+  \end{minipage}%
+  \ifGVSupplementary%
+    \hfill%
+    \tikz[baseline=(marker.base)]\node[
+      fill=GVTealTint,
+      draw=GVTeal,
+      rounded corners=2pt,
+      inner xsep=5pt,
+      inner ysep=2pt,
+      font=\scriptsize,
+      text=GVTeal
+    ] (marker) {Supplementary};%
+  \fi%
+  \par\vspace{0.18cm}%
+}
+
+\setbeamertemplate{footline}{%
+  \ifGVShowFooter%
+    \leavevmode%
+    \hbox{%
+      \begin{beamercolorbox}[wd=0.78\paperwidth,ht=2.6ex,dp=1.3ex,leftskip=0.65cm]{normal text}%
+        {\color{GVSlate}\rule{\dimexpr0.78\paperwidth-0.65cm\relax}{0.25pt}}\par\vspace{-0.25ex}%
+        {\usebeamerfont{footline}\color{GVSlate}\GVSlideSource}%
+      \end{beamercolorbox}%
+      \begin{beamercolorbox}[wd=0.22\paperwidth,ht=2.6ex,dp=1.3ex,rightskip=0.65cm plus1fil]{normal text}%
+        {\usebeamerfont{footline}\color{GVSlate}\GVSlideLabel}%
+      \end{beamercolorbox}%
+    }%
+  \fi%
+}
+
+\newcommand{\GVOmissionNotice}[1]{%
+  \begin{center}%
+    \begin{beamercolorbox}[wd=0.78\textwidth,sep=0.85em,center]{normal text}%
+      \scriptsize\color{GVCharcoal}#1%
+    \end{beamercolorbox}%
+  \end{center}%
+}
+
+\providecommand{\GVProgramme}{MSc Programme in Materials Science and Engineering}
+\providecommand{\GVInstitution}{University of Crete}
+\providecommand{\GVAffiliations}{Research affiliations: IACM/FORTH \textperiodcentered{} IESL/FORTH}
+\providecommand{\GVSupervisors}{}
+\providecommand{\GVCommittee}{}
+
+\newcommand{\GVTitlePage}{%
+  \begin{tikzpicture}[remember picture,overlay]%
+    \ifGVWatermark%
+      \node[
+        anchor=north east,
+        text=GVSlate,
+        opacity=0.14,
+        align=left,
+        font=\large
+      ] at ([xshift=-0.15cm,yshift=-2.85cm]current page.north east) {%
+        \(\begin{aligned}
+          C_e\partial_t T_e &= \cdots-G(T_e-T_l)+S\\
+          C_l\partial_t T_l &= \cdots+G(T_e-T_l)
+        \end{aligned}\)%
+      };%
+    \fi%
+  \end{tikzpicture}%
+  \vspace*{0.32cm}%
+  \noindent%
+  \begin{minipage}[t]{0.53\textwidth}%
+    {\scriptsize\color{GVSlate}\textbf{Materials Science and Engineering}\par}%
+    {\scriptsize\color{GVSlate}University of Crete}%
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[t]{0.30\textwidth}\raggedleft%
+    {\scriptsize\color{GVSlate}\textbf{IACM/FORTH}\par}%
+    {\scriptsize\color{GVSlate}\textbf{IESL/FORTH}}%
+  \end{minipage}%
+  \par\vspace{0.85cm}%
+  \begin{minipage}{0.88\textwidth}%
+    {\usebeamerfont{title}\color{GVTitleRed}\inserttitle\par}%
+    \vspace{0.28cm}%
+    {\color{GVTeal}\rule{0.28\textwidth}{2.2pt}\par}%
+    \vspace{0.42cm}%
+    {\large\textbf{\insertauthor}\par}%
+    \vspace{0.10cm}%
+    {\normalsize\GVProgramme\par}%
+    {\normalsize\GVInstitution\par}%
+    \vspace{0.12cm}%
+    {\small\color{GVSlate}\GVAffiliations\par}%
+  \end{minipage}%
+  \vfill%
+  \noindent%
+  \begin{minipage}[t]{0.56\textwidth}%
+    {\scriptsize\color{GVSlate}\textsc{Supervisors}\par}%
+    {\small\GVSupervisors\par}%
+  \end{minipage}%
+  \hfill%
+  \begin{minipage}[t]{0.34\textwidth}%
+    {\scriptsize\color{GVSlate}\textsc{Committee}\par}%
+    {\small\GVCommittee\par}%
+  \end{minipage}%
+  \par\vspace{0.30cm}%
+  \hfill{\small\color{GVSlate}\insertdate}%
+}
+
+\newcommand{\GVRoadmap}{%
+  \begin{center}%
+    \begin{tikzpicture}[node distance=0.15cm]%
+      \node[
+        draw=GVTeal,
+        fill=GVTeal,
+        text=white,
+        rounded corners=2pt,
+        minimum width=0.21\textwidth,
+        minimum height=1.15cm,
+        align=center
+      ] (physics) {Model formulation\\and closures};%
+      \node[
+        right=of physics,
+        draw=GVTeal,
+        fill=GVTealTint,
+        text=GVCharcoal,
+        rounded corners=2pt,
+        minimum width=0.21\textwidth,
+        minimum height=1.15cm,
+        align=center
+      ] (numerics) {Numerical pTTM\\schemes};%
+      \node[
+        right=of numerics,
+        draw=GVTeal,
+        fill=GVTealTint,
+        text=GVCharcoal,
+        rounded corners=2pt,
+        minimum width=0.21\textwidth,
+        minimum height=1.15cm,
+        align=center
+      ] (thresholds) {Melting-threshold\\computation};%
+      \node[
+        right=of thresholds,
+        draw=GVTeal,
+        fill=GVTealTint,
+        text=GVCharcoal,
+        rounded corners=2pt,
+        minimum width=0.21\textwidth,
+        minimum height=1.15cm,
+        align=center
+      ] (surrogate) {Surrogate response\\modelling};%
+    \end{tikzpicture}%
+  \end{center}%
+}

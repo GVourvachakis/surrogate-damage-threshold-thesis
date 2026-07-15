@@ -2,9 +2,8 @@
 
 ## Status
 
-The public-safe extended-thesis root is available at `thesis/thesis.tex`.
-The presentation root has not yet been imported; its guarded target reports
-the missing root clearly until that separate import is complete.
+The public-safe extended-thesis root is available at `thesis/thesis.tex` and
+the public-safe presentation root is available at `presentation/main.tex`.
 
 ## Intended commands
 
@@ -14,7 +13,7 @@ the missing root clearly until that separate import is complete.
     make clean
     make verify
 
-The active thesis root is `thesis/thesis.tex`. The future presentation root is
+The active thesis root is `thesis/thesis.tex`. The active presentation root is
 `presentation/main.tex`.
 
 ## Intended thesis sequence
@@ -29,17 +28,17 @@ The thesis script uses the portable pdfLaTeX and Biber sequence:
 
 ## Intended presentation sequence
 
-Once the presentation source is imported, the presentation script will use
-latexmk. The equivalent explicit sequence is:
+The presentation script uses a portable two-pass pdfLaTeX sequence and writes
+all generated output to the ignored `presentation/build/` directory:
 
     cd presentation
-    pdflatex -interaction=nonstopmode main.tex
-    pdflatex -interaction=nonstopmode main.tex
+    pdflatex -halt-on-error -interaction=nonstopmode -output-directory=build main.tex
+    pdflatex -halt-on-error -interaction=nonstopmode -output-directory=build main.tex
 
 ## Requirements
 
-Use a current TeX Live installation with pdfLaTeX, Biber, BibLaTeX, latexmk,
-and packages required by the eventual public source. A clean-clone build will
+Use a current TeX Live installation with pdfLaTeX, Biber, BibLaTeX, Beamer,
+TikZ, and the packages required by the public source. A clean-clone build will
 record the tested environment before the first release.
 
 Generated files, including PDFs, remain untracked. Public PDFs are Release

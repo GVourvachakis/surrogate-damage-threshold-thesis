@@ -9,16 +9,12 @@ if [ ! -f "$source_root" ]; then
     exit 2
 fi
 
-if command -v latexmk >/dev/null 2>&1; then
-    cd "$repo_root/presentation"
-    exec latexmk -pdf main.tex
-fi
-
 if ! command -v pdflatex >/dev/null 2>&1; then
     printf '%s\n' "Required command is unavailable: pdflatex" >&2
     exit 127
 fi
 
 cd "$repo_root/presentation"
-pdflatex -interaction=nonstopmode main.tex
-pdflatex -interaction=nonstopmode main.tex
+mkdir -p build
+pdflatex -halt-on-error -interaction=nonstopmode -output-directory=build main.tex
+pdflatex -halt-on-error -interaction=nonstopmode -output-directory=build main.tex

@@ -2,18 +2,18 @@
 
 ## Overview
 
-This repository provides public-safe LaTeX source for an extended MSc thesis.
-The compact thesis variant and presentation source will be added after separate
-public-safety checks. Its current objective is reliable thesis-source
-compilation; it does not claim full simulation, dataset, or figure-level
-reproducibility.
+This repository provides public-safe LaTeX source for an extended MSc thesis
+and its presentation. The compact thesis variant will be added after a separate
+public-safety check. Its current objective is reliable source compilation; it
+does not claim full simulation, dataset, or figure-level reproducibility.
 
 ## Repository structure
 
 - thesis/ contains the public extended-thesis source and selected public-safe
   compile inputs.
-- presentation/ is reserved for public presentation source after its separate
-  import and verification.
+- presentation/ contains the public-safe Beamer source. It reuses selected
+  public-safe thesis figures and uses explicit omission notices where an asset
+  cannot be redistributed.
 - docs/ records build, branch, release, reproducibility, provenance, and
   public-source policies.
 - LICENSES/ and NOTICE.md describe separately licensed template and build-tool
@@ -32,7 +32,7 @@ contain PDFs, and no release-pdfs branch is used.
 
 The thesis build requires a current TeX Live installation with pdfLaTeX,
 Biber, BibLaTeX, and the packages recorded in docs/BUILD.md. The presentation
-target remains inactive until its public-safe source is imported.
+build requires pdfLaTeX and the Beamer/TikZ packages recorded there.
 
 ## Build commands
 
@@ -42,8 +42,7 @@ target remains inactive until its public-safe source is imported.
     make clean
     make verify
 
-The thesis target is active. Commands for components not yet imported print a
-clear instruction instead.
+The extended-thesis and presentation targets are active.
 
 ## Release PDFs
 
