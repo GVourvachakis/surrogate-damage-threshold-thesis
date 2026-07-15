@@ -1,9 +1,9 @@
 # Reproducibility Scope
 
 The initial public target is source compilation from a clean clone for both
-`thesis/thesis.tex` and `presentation/main.tex`. It does not claim full
-regeneration of simulation outputs, input datasets, surrogate-training
-workflows, or every historic figure.
+thesis variants at `thesis/thesis.tex` and for `presentation/main.tex`. It does
+not claim full regeneration of simulation outputs, input datasets,
+surrogate-training workflows, or every historic figure.
 
 Implementation code and broader numerical workflows are maintained separately
 in the public DeeplIPSS repository:

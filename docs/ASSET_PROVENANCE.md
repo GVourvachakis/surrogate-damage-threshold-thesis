@@ -47,6 +47,13 @@ Third-party/adapted Chapter 1 raster figures are represented by a labelled
 public-source omission notice. External cross-model comparison figures and
 supplied numeric values are omitted pending documented redistribution terms.
 
+## Compact-thesis branch coverage
+
+The compact-thesis branch reuses the same public-safe figure inventory and
+omission policy. Its compact thesis root includes Appendices A--C only;
+Appendix D is deliberately excluded because it depends on a cross-reference
+outside the compact source scope.
+
 ## Presentation import inventory
 
 The presentation contains no copied raster, logo, generated-output, or project

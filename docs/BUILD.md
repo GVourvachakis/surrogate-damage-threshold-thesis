@@ -13,8 +13,9 @@ the public-safe presentation root is available at `presentation/main.tex`.
     make clean
     make verify
 
-The active thesis root is `thesis/thesis.tex`. The active presentation root is
-`presentation/main.tex`.
+The active thesis root is `thesis/thesis.tex`. On main it builds the extended
+variant; on compact-thesis it builds the compact variant. The active
+presentation root is `presentation/main.tex` on both branches.
 
 ## Intended thesis sequence
 

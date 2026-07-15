@@ -5,7 +5,7 @@
 
 The previous chapters established the physical and numerical setting for two-temperature modelling of ultrashort laser heating in metallic films. Direct finite-difference pTTM simulations remain the reference calculation in this chapter, but repeated forward solves become expensive when fluence, optical response, thermophysical parameters, and film geometry must be explored over a broad domain. The purpose of the present chapter is therefore to formulate a data-driven surrogate framework for the maximum lattice-temperature response and for the damage-threshold fluence inferred from that response.
 
-This chapter contains two complementary surrogate studies. The first is a two-dimensional linear pTTM surrogate study, in which a filtered synthetic response dataset is used to train LightGBM and residual MLP regressors. The second is a nonlinear two-dimensional pTTM extension at the \(\num{20000}\) accepted-sample scale, using temperature-dependent \(C_e(T_e)\) and \(G(T_e)\), Lorentz--Drude optical descriptors, and source-term-informed feature engineering. In both studies, the surrogate target is the maximum lattice temperature \(T_{l,\max}\), and damage-threshold fluences are obtained by inverting predicted temperature--fluence responses. The nonlinear analysis is included at a smaller accepted-sample scale than the linear study, and large-scale nonlinear datasets remain future work.
+This chapter contains two complementary surrogate studies. The first is a two-dimensional linear pTTM surrogate study, in which a filtered synthetic response dataset is used to train LightGBM and residual MLP regressors. The second is a nonlinear two-dimensional pTTM extension at the \(\num{20000}\) accepted-sample scale, using temperature-dependent \(C_e(T_e)\) and \(G(T_e)\), Lorentz--Drude optical descriptors, and source-term-informed features. In both studies, the surrogate target is the maximum lattice temperature \(T_{l,\max}\), and damage-threshold fluences are obtained by inverting predicted temperature--fluence responses. The nonlinear analysis is included at a smaller accepted-sample scale than the linear study, and large-scale nonlinear datasets remain future work.
 
 \section{Synthetic two-dimensional linear pTTM dataset}
 
@@ -341,7 +341,7 @@ For $Q\in\{C_e,G\}$, real-material thermophysical curves are fitted in log-space
     B_{j,0}(T)
     =
     \begin{cases}
-        1, & \tau_j\leq T<\tau_{j+1},\\
+        1, & \tau_j\leq T<\tau_{j+1}, \\
         0, & \mathrm{otherwise},
     \end{cases}
 \end{equation}
@@ -382,7 +382,7 @@ For a real material $m$ and property $Q$, the fitted log-spline coefficients sol
         \log Q_m(T_r)
         -
         \sum_{j=0}^{6}c_j B_{j,3}(T_r)
-    \right]^2.
+        \right]^2.
 \end{equation}
 The fitted log curve is therefore
 \begin{equation}

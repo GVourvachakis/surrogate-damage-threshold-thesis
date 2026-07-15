@@ -21,8 +21,8 @@ introduces the temperature-dependent optical models used to evaluate
 reflectivity and ballistic-corrected absorption. Section~\ref{sec:ch3-fitting}
 then presents the data-driven fitting of the electron heat capacity and
 electron--phonon coupling factor. Section~\ref{sec:ch3-heatsource}
-connects these constitutive ingredients to the volumetric source model,
-including a DLIP demonstration, and
+connects these constitutive ingredients to the volumetric source model
+used in the threshold calculations, and
 Section~\ref{sec:ch3-ablation} formulates the certified threshold-search
 algorithm together with representative 1D and 2D results. Gold and nickel
 serve as the primary illustrative materials, while silver, copper, iron,
@@ -210,8 +210,7 @@ source used by the pTTM solver.
 \subsection{Debye model for water}
 \label{sec:ch3-optical-water}
 
-For completeness, and in view of DLIP applications in aqueous
-environments, the dielectric response of water is modelled by the
+For completeness, the dielectric response of water is modelled by the
 two-pole Debye bipolar expression
 \begin{equation}
     \epsilon_{DB}(\omega)
@@ -408,13 +407,10 @@ For direct comparison with the ab-initio gold benchmark reported by Fang
 et al., see Fig.~\ref{fig:ch1-ce-g-literature} in Chapter~1, where the
 original literature curves are presented.
 
-\section{Laser heat source and DLIP interference patterning}
+\section{Volumetric source model for threshold calculations}
 \label{sec:ch3-heatsource}
 
-\subsection{Single-beam volumetric source}
-\label{sec:ch3-heatsource-single}
-
-The single-beam volumetric source follows the physical formulation
+The threshold calculations use the single-beam volumetric source
 \eqref{eq:ch1-ulp_heat_source}, with the optical response
 \((R, \alpha')\) computed from the temperature-dependent models of
 \S\ref{sec:ch3-optical}. At the numerical level, the source
@@ -423,89 +419,16 @@ the temperature-independent Gaussian intensity profile is separated from
 the temperature-dependent attenuation factor
 \(K_{\mathrm{src}}\), which carries the ballistic correction and the
 finite-thickness factor. The one- and two-dimensional reductions then
-follow directly from the dimensionality reductions already detailed in
-\S\ref{sec:ch1-absorption}.
+follow directly from the source-model reductions detailed in
+\S\ref{sec:ch1-heat-source}.
 
-The standard parameter set used for the DLIP source demonstrations is
-listed in Table~\ref{tab:ch3-heatsource-params}.
-
-\begin{table}[htbp]
-    \centering
-    \caption{Standard parameters used in the DLIP heat-source demonstrations.}
-    \label{tab:ch3-heatsource-params}
-    \begin{tabular}{@{}ll@{}}
-        \toprule
-        \rowcolor{gray!20}
-        \textbf{Parameter}           & \textbf{Value}                        \\
-        \midrule
-        Wavelength \(\lambda\)       & \(\SI{800}{nm}\)                      \\
-        Beam radius \(R_0\)          & \(\SI{5}{\micro\metre}\)              \\
-        Pulse duration \(\tau_p\)    & \(\SI{200}{fs}\)                      \\
-        Fluence \(F\)                & \(\SI{1.0}{\joule\per\square\metre}\) \\
-        Surface focus \(z_s\)        & 0                                     \\
-        Penetration depth \(\delta\) & \(\SI{15}{nm}\)                       \\
-        Reflectivity \(R\)           & 0.1                                   \\
-        Interpulse delay \(\tau_d\)  & \(\SI{50}{fs}\)                       \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-\subsection{DLIP interference patterns}
-\label{sec:ch3-heatsource-dlip}
-
-In the DLIP setting, the source inherits an interference-modulated
-intensity factor \(I_{\mathrm{interf}}\) according to
-\eqref{eq:ch1-interference_intensity}. The geometric period
-\(\Lambda_N\) depends on both the number of beams and the incidence angle,
-as derived in \S\ref{sec:ch1-dlip}, while the thermal model itself
-remains identical to the single-beam case once the modified intensity has
-been specified.
-
-Figure~\ref{fig:ch3-dlip-modes} collects the representative interference
-patterns obtained for incidence angle \(\theta = 20^\circ\). The two-beam configuration
-generates the expected line pattern, the three-beam case produces a
-hexagonal lattice, and the four-beam arrangements yield dot-like lattices
-whose morphology depends on the polarisation sequence.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.62\linewidth]{figures/ch3/interference_modes_theta_20.png}
-    \caption{Interference patterns for \(\theta = 20^\circ\) and varying number of beams and polarisation sequences: two-beam (line pattern), three-beam (hexagonal), four-beam TE (dot-lattice), and four-beam TE/TM.}
-    \label{fig:ch3-dlip-modes}
-\end{figure}
-
-The corresponding single-pulse (SP) and double-pulse (DP) intensity
-fields are shown in Fig.~\ref{fig:ch3-dlip-sp-dp}. The double-pulse mode
-preserves the same spatial interference geometry but modifies the thermal
-history through the interpulse delay.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.78\linewidth]{figures/ch3/total_intensity_SP_and_DP.png}
-    \caption{Total intensity distributions for single-pulse (SP, top row) and double-pulse (DP, bottom row) modes at the peak of the first pulse (\(t = 3\tau_p\)), for two, three, and four beams. The double-pulse mode introduces an interpulse delay of \(\tau_d = \SI{50}{fs}\), giving different thermal histories without altering the spatial interference pattern.}
-    \label{fig:ch3-dlip-sp-dp}
-\end{figure}
-
-The full spatio-temporal source evolution is reported in
-Fig.~\ref{fig:ch3-heatsource-evolution}. In both SP and DP modes the
-energy deposition remains strongly localised near the surface, but the
-temporal sequence shifts by the imposed delay and produces distinct
-heating trajectories.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.62\linewidth]{figures/ch3/heatsource_plots_SP_vs_DP.png}
-    \caption{Spatio-temporal evolution of the volumetric heat source \(S(\varrho, z, t)\) for SP (top) and DP (bottom) excitation.
-        Left: depth--time profile at $\varrho = 0$ showing near-surface energy deposition peaking at \(\SI{600}{fs}\) (SP) and \(\SI{650}{fs}\) (DP). Right: radial profile at peak intensity, showing the structured Bessel-like multi-ring pattern.}
-    \label{fig:ch3-heatsource-evolution}
-\end{figure}
-
-The spatial period measured directly from the sampled interference field
-is subject to a small sub-grid uncertainty. A simple three-point local
-maximum detector identifies the correct peak structure, but cannot resolve
-the true peak location when it lies between grid points. More refined
-peak-finding procedures would therefore improve the period estimate
-without changing the underlying physics.
+In the retained threshold study, the source is the unpatterned
+single-beam source. The relevant source parameters are therefore the
+operating wavelength, pulse duration, beam radius in the two-dimensional
+runs, incident fluence, and the temperature-dependent optical quantities
+entering \((1-R)\alpha'\). Their numerical values are reported with the
+threshold-study configurations in Tables~\ref{tab:ch3-1d-params}
+and~\ref{tab:ch3-2d-params}.
 
 \section{Damage threshold estimation}
 \label{sec:ch3-ablation}

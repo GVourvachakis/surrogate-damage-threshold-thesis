@@ -2,10 +2,10 @@
 
 ## Overview
 
-This repository provides public-safe LaTeX source for an extended MSc thesis
-and its presentation. The compact thesis variant will be added after a separate
-public-safety check. Its current objective is reliable source compilation; it
-does not claim full simulation, dataset, or figure-level reproducibility.
+This repository provides public-safe LaTeX source for an extended MSc thesis,
+a compact thesis variant, and its presentation. Its current objective is
+reliable source compilation; it does not claim full simulation, dataset, or
+figure-level reproducibility.
 
 ## Repository structure
 
@@ -21,9 +21,9 @@ does not claim full simulation, dataset, or figure-level reproducibility.
 
 ## Branches
 
-- main will contain the extended thesis and presentation source.
-- compact-thesis will contain the compact thesis variant after it has been
-  assembled and verified.
+- main contains the extended thesis and presentation source.
+- compact-thesis contains the compact thesis variant and inherits the
+  presentation source from main.
 
 Approved PDFs, if published, are GitHub Release assets. Source branches do not
 contain PDFs, and no release-pdfs branch is used.
@@ -42,7 +42,8 @@ build requires pdfLaTeX and the Beamer/TikZ packages recorded there.
     make clean
     make verify
 
-The extended-thesis and presentation targets are active.
+On main, the thesis target builds the extended variant. On compact-thesis, it
+builds the compact variant. The presentation target is active on both branches.
 
 ## Release PDFs
 
