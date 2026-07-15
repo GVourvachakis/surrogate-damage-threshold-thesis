@@ -1,11 +1,12 @@
 # Build Guide
 
-## Status
+## Active roots
 
-The public-safe extended-thesis root is available at `thesis/thesis.tex` and
-the public-safe presentation root is available at `presentation/main.tex`.
+The active thesis root is `thesis/thesis.tex`. On main it builds the extended
+variant; on compact-thesis it builds the compact variant. The active
+presentation root is `presentation/main.tex` on both branches.
 
-## Intended commands
+## Build commands
 
     make thesis
     make presentation
@@ -13,10 +14,7 @@ the public-safe presentation root is available at `presentation/main.tex`.
     make clean
     make verify
 
-The active thesis root is `thesis/thesis.tex`. The active presentation root is
-`presentation/main.tex`.
-
-## Intended thesis sequence
+## Thesis sequence
 
 The thesis script uses the portable pdfLaTeX and Biber sequence:
 
@@ -26,7 +24,7 @@ The thesis script uses the portable pdfLaTeX and Biber sequence:
     pdflatex -interaction=nonstopmode thesis.tex
     pdflatex -interaction=nonstopmode thesis.tex
 
-## Intended presentation sequence
+## Presentation sequence
 
 The presentation script uses a portable two-pass pdfLaTeX sequence and writes
 all generated output to the ignored `presentation/build/` directory:
@@ -38,8 +36,9 @@ all generated output to the ignored `presentation/build/` directory:
 ## Requirements
 
 Use a current TeX Live installation with pdfLaTeX, Biber, BibLaTeX, Beamer,
-TikZ, and the packages required by the public source. A clean-clone build will
-record the tested environment before the first release.
+TikZ, and the packages required by the public source. The tested v1.0.0 release
+environment, exact source revisions, page counts, and verification results are
+recorded in `BUILD_MANIFEST.txt` attached to the GitHub Release.
 
 Generated files, including PDFs, remain untracked. Public PDFs are Release
 assets rather than source-branch files.

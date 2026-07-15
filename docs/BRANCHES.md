@@ -2,17 +2,17 @@
 
 ## main
 
-main will contain the extended thesis source, the presentation source, public
+main contains the extended thesis source, the presentation source, public
 documentation, build scaffolding, and licensing records.
 
 ## compact-thesis
 
-compact-thesis is reserved for the compact thesis variant. It will be created
-only after the extended public source is assembled, the compact appendix set is
-applied, and a clean build has no unresolved citations or references.
+compact-thesis contains the compact thesis source at `thesis/thesis.tex`. It
+includes Chapters 1--4 and Appendices A--C. Appendix D is intentionally absent
+from the compact branch. The presentation source is inherited and available on
+both branches.
 
 ## Releases
 
-Approved PDFs belong only in GitHub Releases. No release-pdfs branch is used.
-An optional documentation site may be considered later, independently of the
-source-branch design.
+PDFs belong in GitHub Releases, not branch history. No `release-pdfs` branch
+is used. `gh-pages` remains optional and absent.

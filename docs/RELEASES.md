@@ -1,7 +1,7 @@
 # Release Policy
 
-Public PDFs will be created only from clean public-safe builds and uploaded as
-GitHub Release assets. Source branches contain no PDFs and no release-pdfs
+Public PDFs are produced only from clean public-safe builds and distributed as
+GitHub Release assets. Source branches contain no PDFs, and no `release-pdfs`
 branch is used.
 
 Each release requires:
