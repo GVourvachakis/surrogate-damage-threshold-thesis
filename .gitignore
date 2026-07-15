@@ -1,0 +1,36 @@
+# LaTeX and Biber build products
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+# Build directories and shell-escape artefacts
+build/
+out/
+_minted*/
+
+# Local/editor files
+.DS_Store
+.vscode/
+*.code-workspace
+context/
+
+# Final PDFs are distributed through GitHub Releases, never source branches.
+*.pdf
+
+# Temporary archives
+*.zip
+*.tar
+*.tar.gz

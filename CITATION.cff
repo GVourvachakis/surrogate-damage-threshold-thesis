@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as described below."
+type: thesis
+title: "Surrogate Modelling for Damage Threshold Estimation in Ultrashort Laser-Metal Interactions"
+authors:
+  - family-names: "Vourvachakis"
+    given-names: "Georgios S."
+repository-code: "https://github.com/OWNER/surrogate-damage-threshold-thesis"
+abstract: "Public-safe source and supporting documentation for an MSc thesis and presentation on surrogate modelling for ultrashort laser-metal damage-threshold estimation."
