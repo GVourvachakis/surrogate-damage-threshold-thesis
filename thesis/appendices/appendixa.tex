@@ -1,0 +1,520 @@
+\chapter{IMEX-ARK2 Derivation with Strong Gauss-Seidel Predictor for the pTTM}
+\label{app:imex-derivation}
+
+This appendix records the stage algebra underlying the nonlinear scheme introduced in \S\ref{sec:ch2-nonlinear}. The objective is to make explicit how the semi-discrete pTTM, written in the notation of \eqref{eq:ch2-r1}--\eqref{eq:ch2-r2}, gives rise to the sequential Crank--Nicolson/Gauss--Seidel update when the two-stage ARK2(1)2[2]SA pair is combined with the strong Gauss--Seidel predictor of Algorithm~5 in \cite{Huang_2019}. The Runge--Kutta classification follows \cite{Ascher_1997,Kennedy_2003}.
+
+\section{Monolithic Crank--Nicolson Reformulation}
+
+Consider the general two-field semi-discrete system
+\begin{align}
+    M_u \dot{\mathbf{u}} & = \mathbf{F}_u(t,\mathbf{u},\mathbf{v}), \notag \\
+    M_v \dot{\mathbf{v}} & = \mathbf{F}_v(t,\mathbf{u},\mathbf{v}),
+\end{align}
+which may be written compactly as
+\begin{equation}
+    \mathbf{M}(t,\boldsymbol{\theta}) \dot{\boldsymbol{\theta}}
+    =
+    \mathbf{F}(t,\boldsymbol{\theta}),
+    \qquad
+    \boldsymbol{\theta} \coloneqq
+    \begin{bmatrix}
+        \mathbf{u} \\
+        \mathbf{v}
+    \end{bmatrix},
+    \label{eq:app-imex-integral-form}
+\end{equation}
+with
+\[
+    \mathbf{M}
+    \coloneqq
+    \begin{bmatrix}
+        M_u \mathbf{I} & \mathbf{0}     \\
+        \mathbf{0}     & M_v \mathbf{I}
+    \end{bmatrix},
+    \qquad
+    \mathbf{F}
+    \coloneqq
+    \begin{bmatrix}
+        \mathbf{F}_u \\
+        \mathbf{F}_v
+    \end{bmatrix}.
+\]
+Integrating \eqref{eq:app-imex-integral-form} over one timestep $[t^n,t^{n+1}]$ gives
+\begin{equation}
+    \int_{t^n}^{t^{n+1}} \mathbf{M}(\tau,\boldsymbol{\theta}) \dot{\boldsymbol{\theta}}(\tau)\, d\tau
+    =
+    \int_{t^n}^{t^{n+1}} \mathbf{F}(\tau,\boldsymbol{\theta}(\tau))\, d\tau .
+\end{equation}
+Applying the trapezoidal rule to the left-hand side yields
+\begin{equation}
+    \int_{t^n}^{t^{n+1}} \mathbf{M}(\tau,\boldsymbol{\theta}) \dot{\boldsymbol{\theta}}(\tau)\, d\tau
+    \approx
+    \frac{1}{2}
+    \bigl(\mathbf{M}^n + \mathbf{M}^{n+1}\bigr)
+    \bigl(\boldsymbol{\theta}^{n+1} - \boldsymbol{\theta}^n\bigr),
+    \label{eq:app-imex-trapezoidal-lhs}
+\end{equation}
+while the right-hand side becomes
+\begin{equation}
+    \int_{t^n}^{t^{n+1}} \mathbf{F}(\tau,\boldsymbol{\theta}(\tau))\, d\tau
+    \approx
+    \frac{\Delta_t}{2}
+    \bigl(\mathbf{F}^n + \mathbf{F}^{n+1}\bigr).
+    \label{eq:app-imex-trapezoidal-rhs}
+\end{equation}
+Combining \eqref{eq:app-imex-trapezoidal-lhs} and \eqref{eq:app-imex-trapezoidal-rhs} therefore gives the generic monolithic Crank--Nicolson step
+\begin{equation}
+    \bigl(\mathbf{M}^n + \mathbf{M}^{n+1}\bigr)\boldsymbol{\theta}^{n+1}
+    - \Delta_t \mathbf{F}^{n+1}
+    =
+    \bigl(\mathbf{M}^n + \mathbf{M}^{n+1}\bigr)\boldsymbol{\theta}^{n}
+    + \Delta_t \mathbf{F}^{n},
+    \label{eq:app-imex-general-form}
+\end{equation}
+where $\Delta_t \coloneqq t^{n+1}-t^n$.
+
+\section{Linear Monolithic Picard Form}
+
+In the constant-coefficient setting one has $\mathbf{M}=\mathbf{I}$ and
+\begin{equation}
+    \mathbf{F}(t,\boldsymbol{\theta})
+    =
+    \mathbf{L}_{\mathrm{lin}} \boldsymbol{\theta}
+    +
+    \mathbf{S}_{\mathrm{lin}}(t,\boldsymbol{\theta}),
+    \label{eq:app-imex-linear-split}
+\end{equation}
+with
+\begin{equation}
+    \mathbf{L}_{\mathrm{lin}}
+    \coloneqq
+    \begin{bmatrix}
+        D_1 \mathbf{L}_{1D} - c_1 \mathbf{I} & c_1 \mathbf{I}                       \\
+        c_2 \mathbf{I}                       & D_2 \mathbf{L}_{1D} - c_2 \mathbf{I}
+    \end{bmatrix},
+    \qquad
+    \mathbf{S}_{\mathrm{lin}}(t,\boldsymbol{\theta})
+    \coloneqq
+    \begin{bmatrix}
+        \mathbf{s}(t,\mathbf{u},\mathbf{v}) \\
+        \mathbf{0}
+    \end{bmatrix}.
+\end{equation}
+Substituting \eqref{eq:app-imex-linear-split} into \eqref{eq:app-imex-general-form} yields
+\begin{equation}
+    \left(\mathbf{I} - \frac{\Delta_t}{2}\mathbf{L}_{\mathrm{lin}}\right)\boldsymbol{\theta}^{n+1}
+    =
+    \left(\mathbf{I} + \frac{\Delta_t}{2}\mathbf{L}_{\mathrm{lin}}\right)\boldsymbol{\theta}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl(
+    \mathbf{S}_{\mathrm{lin}}(t^n,\boldsymbol{\theta}^n)
+    +
+    \mathbf{S}_{\mathrm{lin}}(t^{n+1},\boldsymbol{\theta}^{n+1})
+    \Bigr).
+    \label{eq:app-imex-linear-cn}
+\end{equation}
+Since the source remains nonlinear through its temperature dependence, a fixed-point linearisation is introduced by lagging the source term to the current iterate $\boldsymbol{\theta}^{n+1}_{k}$. The resulting Picard step is
+\begin{equation}
+    \left(\mathbf{I} - \frac{\Delta_t}{2}\mathbf{L}_{\mathrm{lin}}\right)\boldsymbol{\theta}^{n+1}_{k+1}
+    =
+    \left(\mathbf{I} + \frac{\Delta_t}{2}\mathbf{L}_{\mathrm{lin}}\right)\boldsymbol{\theta}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl(
+    \mathbf{S}_{\mathrm{lin}}(t^n,\boldsymbol{\theta}^n)
+    +
+    \mathbf{S}_{\mathrm{lin}}(t^{n+1},\boldsymbol{\theta}^{n+1}_{k})
+    \Bigr),
+    \label{eq:app-imex-linear-picard}
+\end{equation}
+which is the abstract form of the linear monolithic iteration used in \S\ref{sec:ch2-linear}.
+
+\section{Nonlinear LCS Decomposition and Monolithic Picard Form}
+
+For the nonlinear pTTM, let
+\begin{equation}
+    \boldsymbol{\theta}
+    \coloneqq
+    \begin{bmatrix}
+        \mathbf{u} \\
+        \mathbf{v}
+    \end{bmatrix},
+    \qquad
+    \mathbf{F}(t,\boldsymbol{\theta})
+    =
+    \mathbf{L}(\boldsymbol{\theta})[\boldsymbol{\theta}]
+    +
+    \mathbf{C}(\boldsymbol{\theta})[\boldsymbol{\theta}]
+    +
+    \mathbf{S}(t,\boldsymbol{\theta}),
+    \label{eq:app-imex-lcs-split}
+\end{equation}
+where
+\begin{align}
+    \mathbf{L}(\boldsymbol{\theta})[\boldsymbol{\theta}]
+     & \coloneqq
+    \begin{bmatrix}
+        \mathbf{d}_e(\mathbf{u},\mathbf{v}) \\
+        \mathbf{d}_l(\mathbf{v})
+    \end{bmatrix},
+     &
+    \mathbf{C}(\boldsymbol{\theta})[\boldsymbol{\theta}]
+     & \coloneqq
+    \begin{bmatrix}
+        - \mathbf{C}_1(\mathbf{u})(\mathbf{u}-\mathbf{v}) \\
+        \mathbf{C}_2(\mathbf{u})(\mathbf{u}-\mathbf{v})
+    \end{bmatrix},
+    \notag                                                  \\
+    \mathbf{S}(t,\boldsymbol{\theta})
+     & \coloneqq
+    \begin{bmatrix}
+        \mathbf{s}(t,\mathbf{u},\mathbf{v}) \\
+        \mathbf{0}
+    \end{bmatrix},
+     &
+    \mathbf{d}_e(\mathbf{u},\mathbf{v})
+     & \coloneqq D_1(\mathbf{u})\mathcal{K}(K)[\mathbf{u}],
+    \qquad
+    \mathbf{d}_l(\mathbf{v}) \coloneqq D_2 \mathcal{L}[\mathbf{v}].
+    \label{eq:app-imex-lcs-operators}
+\end{align}
+Here \(\mathbf{C}_1(\mathbf{u})\) and \(\mathbf{C}_2(\mathbf{u})\) are the diagonal coupling operators introduced below \eqref{eq:ch2-r2}. Substituting \eqref{eq:app-imex-lcs-split} into \eqref{eq:app-imex-general-form} with \(\mathbf{M}=\mathbf{I}\) gives
+\begin{equation}
+    \left(
+    \mathbf{I}
+    -
+    \frac{\Delta_t}{2}
+    \bigl(
+    \mathbf{L}^{n+1}
+    +
+    \mathbf{C}^{n+1}
+    \bigr)
+    \right)
+    [\boldsymbol{\theta}^{n+1}]
+    =
+    \left(
+    \mathbf{I}
+    +
+    \frac{\Delta_t}{2}
+    \bigl(
+    \mathbf{L}^{n}
+    +
+    \mathbf{C}^{n}
+    \bigr)
+    \right)
+    [\boldsymbol{\theta}^{n}]
+    +
+    \frac{\Delta_t}{2}
+    \bigl(
+    \mathbf{S}^{n}
+    +
+    \mathbf{S}^{n+1}
+    \bigr),
+    \label{eq:app-imex-monolithic-cn}
+\end{equation}
+where, for example,
+\[
+    \mathbf{L}^{n+1}
+    \coloneqq
+    \mathbf{L}(\boldsymbol{\theta}^{n+1}),
+    \qquad
+    \mathbf{C}^{n+1}
+    \coloneqq
+    \mathbf{C}(\boldsymbol{\theta}^{n+1}),
+    \qquad
+    \mathbf{S}^{n+1}
+    \coloneqq
+    \mathbf{S}(t^{n+1},\boldsymbol{\theta}^{n+1}).
+\]
+Lagging all nonlinear coefficients to the current Picard iterate \(\boldsymbol{\theta}^{n+1}_k\) produces the frozen-coefficient linear system
+\begin{equation}
+    \mathbf{A}^{n+1}_k \boldsymbol{\theta}^{n+1}_{k+1}
+    =
+    \mathbf{B}^{n+1}_k,
+    \label{eq:app-imex-monolithic-picard}
+\end{equation}
+with
+\begin{align}
+    \mathbf{A}^{n+1}_k
+     & \coloneqq
+    \mathbf{I}
+    -
+    \frac{\Delta_t}{2}
+    \bigl(
+    \mathbf{L}(\boldsymbol{\theta}^{n+1}_k)
+    +
+    \mathbf{C}(\boldsymbol{\theta}^{n+1}_k)
+    \bigr),
+    \notag       \\
+    \mathbf{B}^{n+1}_k
+     & \coloneqq
+    \left(
+    \mathbf{I}
+    +
+    \frac{\Delta_t}{2}
+    \bigl(
+    \mathbf{L}(\boldsymbol{\theta}^{n})
+    +
+    \mathbf{C}(\boldsymbol{\theta}^{n})
+    \bigr)
+    \right)
+    [\boldsymbol{\theta}^{n}]
+    +
+    \frac{\Delta_t}{2}
+    \Bigl(
+    \mathbf{S}(t^n,\boldsymbol{\theta}^{n})
+    +
+    \mathbf{S}(t^{n+1},\boldsymbol{\theta}^{n+1}_k)
+    \Bigr).
+\end{align}
+Equation \eqref{eq:app-imex-monolithic-picard} is the monolithic Picard form from which the partitioned strong Gauss--Seidel variant is obtained.
+
+\section{Strong Gauss--Seidel Predictor and IMEX Split}
+
+The nonlinear chapter scheme uses the two-stage explicit trapezoidal/implicit trapezoidal pair, that is, Heun for the explicit part and Crank--Nicolson for the implicit part. In the notation of \cite{Kennedy_2003,Ascher_1997}, this is the ARK2(1)2[2]SA scheme with coefficients
+\begin{equation}
+    \hat{\mathbf{A}}
+    =
+    \begin{bmatrix}
+        0 & 0 \\
+        1 & 0
+    \end{bmatrix},
+    \qquad
+    \mathbf{A}
+    =
+    \begin{bmatrix}
+        0           & 0           \\
+        \frac{1}{2} & \frac{1}{2}
+    \end{bmatrix},
+    \qquad
+    \hat{\mathbf{b}}
+    =
+    \mathbf{b}
+    =
+    \begin{bmatrix}
+        \frac{1}{2} \\
+        \frac{1}{2}
+    \end{bmatrix},
+    \qquad
+    \mathbf{c}
+    =
+    \begin{bmatrix}
+        0 \\
+        1
+    \end{bmatrix}.
+    \label{eq:app-imex-ark-coeffs}
+\end{equation}
+The scheme is stiffly accurate because the last implicit stage coincides with the timestep update.
+
+For the pTTM, subsystem \(1\) is the electron field \(\mathbf{u}\) and subsystem \(2\) is the lattice field \(\mathbf{v}\). The strong Gauss--Seidel predictor from \cite[Algorithm~5]{Huang_2019} therefore becomes
+\begin{equation}
+    \tilde{\mathbf{c}}^{u}(\mathbf{u}_{n,j},\mathbf{v}_{n,j}; \mathbf{u}^{n},\mathbf{v}^{n})
+    =
+    \mathbf{c}^{u}(\mathbf{u}_{n,j},\mathbf{v}^{n}),
+    \label{eq:app-imex-predictor-u}
+\end{equation}
+for the electron subsystem, and
+\begin{equation}
+    \tilde{\mathbf{c}}^{v}(\mathbf{u}_{n,j},\mathbf{v}_{n,j}; \mathbf{u}^{n},\mathbf{v}^{n})
+    =
+    \mathbf{c}^{v}(\mathbf{u}_{n,j},\mathbf{v}_{n,j}),
+    \label{eq:app-imex-predictor-v}
+\end{equation}
+for the lattice subsystem. Stage-wise, this means
+\begin{align}
+    \tilde{\mathbf{c}}^{u}\big|_{j=1}
+     & =
+    \mathbf{c}^{u}(\mathbf{u}^{n},\mathbf{v}^{n}),
+     &
+    \tilde{\mathbf{c}}^{u}\big|_{j=2}
+     & =
+    \mathbf{c}^{u}(\mathbf{u}_{n,2},\mathbf{v}^{n}),
+    \label{eq:app-imex-predictor-stage-u} \\
+    \tilde{\mathbf{c}}^{v}\big|_{j=1}
+     & =
+    \mathbf{c}^{v}(\mathbf{u}^{n},\mathbf{v}^{n}),
+     &
+    \tilde{\mathbf{c}}^{v}\big|_{j=2}
+     & =
+    \mathbf{c}^{v}(\mathbf{u}_{n,2},\mathbf{v}_{n,2}).
+    \label{eq:app-imex-predictor-stage-v}
+\end{align}
+
+The residual is decomposed according to the additive IMEX split
+\begin{equation}
+    \mathbf{r}(\boldsymbol{\theta},t)
+    =
+    \mathbf{f}(\boldsymbol{\theta},\tilde{\mathbf{c}},t)
+    +
+    \mathbf{g}(\boldsymbol{\theta},\tilde{\mathbf{c}},t),
+    \label{eq:app-imex-split}
+\end{equation}
+where the implicit part contains diffusion and electron--phonon coupling, while the explicit part contains the non-stiff source contribution:
+\begin{align}
+    \mathbf{g}(\boldsymbol{\theta},\tilde{\mathbf{c}},t)
+     & \coloneqq
+    \begin{bmatrix}
+        \mathbf{d}_e(\mathbf{u},\mathbf{v}^{n}) - \mathbf{C}_1(\mathbf{u})(\mathbf{u}-\mathbf{v}^{n}) \\
+        \mathbf{d}_l(\mathbf{v}) + \mathbf{C}_2(\mathbf{u})(\mathbf{u}-\mathbf{v})
+    \end{bmatrix},
+    \label{eq:app-imex-g-def} \\
+    \mathbf{f}(\boldsymbol{\theta},\tilde{\mathbf{c}},t)
+     & \coloneqq
+    \begin{bmatrix}
+        \mathbf{s}(t,\mathbf{u},\mathbf{v}^{n}) \\
+        \mathbf{0}
+    \end{bmatrix}.
+    \label{eq:app-imex-f-def}
+\end{align}
+This is the ``implicit diffusion + coupling, explicit source'' split used in \S\ref{sec:ch2-nonlinear}.
+
+\section{Recovery of the Sequential Crank--Nicolson/Gauss--Seidel Update}
+
+For the two-stage coefficients \eqref{eq:app-imex-ark-coeffs}, the stage equations take the form
+\begin{align}
+    \boldsymbol{\theta}_{n,1}
+     & =
+    \boldsymbol{\theta}^{n},
+    \label{eq:app-imex-stage-one-state} \\
+    \boldsymbol{\theta}_{n,2}
+     & =
+    \boldsymbol{\theta}^{n}
+    +
+    \Delta_t \hat{\mathbf{k}}_{n,1}
+    +
+    \frac{\Delta_t}{2}\mathbf{k}_{n,1}
+    +
+    \frac{\Delta_t}{2}\mathbf{k}_{n,2},
+    \label{eq:app-imex-stage-two-state}
+\end{align}
+with
+\begin{align}
+    \hat{\mathbf{k}}_{n,j}
+     & =
+    \mathbf{f}(\boldsymbol{\theta}_{n,j},\tilde{\mathbf{c}}_{n,j},t_{n,j}),
+     &
+    \mathbf{k}_{n,j}
+     & =
+    \mathbf{g}(\boldsymbol{\theta}_{n,j},\tilde{\mathbf{c}}_{n,j},t_{n,j}).
+    \label{eq:app-imex-stage-velocities}
+\end{align}
+At the first stage, \eqref{eq:app-imex-stage-one-state} implies \(\mathbf{u}_{n,1}=\mathbf{u}^{n}\) and \(\mathbf{v}_{n,1}=\mathbf{v}^{n}\). Consequently,
+\begin{equation}
+    \hat{\mathbf{k}}^{u}_{n,1}
+    =
+    \mathbf{s}(t^n,\mathbf{u}^{n},\mathbf{v}^{n}),
+    \qquad
+    \hat{\mathbf{k}}^{v}_{n,1}
+    =
+    \mathbf{0},
+    \label{eq:app-imex-stage-one-explicit}
+\end{equation}
+while the implicit stage terms are
+\begin{align}
+    \mathbf{k}^{u}_{n,1}
+     & =
+    \mathbf{d}_e(\mathbf{u}^{n},\mathbf{v}^{n})
+    - \mathbf{C}_1(\mathbf{u}^{n})(\mathbf{u}^{n}-\mathbf{v}^{n}),
+    \label{eq:app-imex-stage-one-implicit-u} \\
+    \mathbf{k}^{v}_{n,1}
+     & =
+    \mathbf{d}_l(\mathbf{v}^{n})
+    + \mathbf{C}_2(\mathbf{u}^{n})(\mathbf{u}^{n}-\mathbf{v}^{n}).
+    \label{eq:app-imex-stage-one-implicit-v}
+\end{align}
+
+The second-stage electron equation follows from \eqref{eq:app-imex-stage-two-state} together with \eqref{eq:app-imex-predictor-stage-u}:
+\begin{equation}
+    \begin{aligned}
+        \mathbf{u}_{n,2}
+         & =
+        \mathbf{u}^{n}
+        +
+        \frac{\Delta_t}{2}
+        \mathbf{s}(t^n,\mathbf{u}^{n},\mathbf{v}^{n})
+        +
+        \frac{\Delta_t}{2}
+        \mathbf{s}(t^{n+1},\mathbf{u}_{n,2},\mathbf{v}^{n}) \\
+         & \quad
+        +
+        \frac{\Delta_t}{2}
+        \Bigl[
+            \mathbf{r}^{1}(\mathbf{u}^{n},\mathbf{v}^{n},t^{n})
+            -
+            \mathbf{s}(t^n,\mathbf{u}^{n},\mathbf{v}^{n})
+            \Bigr]
+        +
+        \frac{\Delta_t}{2}
+        \Bigl[
+            \mathbf{r}^{1}(\mathbf{u}_{n,2},\mathbf{v}^{n},t^{n+1})
+            -
+            \mathbf{s}(t^{n+1},\mathbf{u}_{n,2},\mathbf{v}^{n})
+            \Bigr].
+    \end{aligned}
+    \label{eq:app-imex-stage-two-u}
+\end{equation}
+After cancellation of the explicit source terms between the explicit and implicit contributions, \eqref{eq:app-imex-stage-two-u} reduces to
+\begin{equation}
+    \mathbf{u}_{n,2}
+    =
+    \mathbf{u}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl[
+        \mathbf{r}^{1}(\mathbf{u}^{n},\mathbf{v}^{n},t^{n})
+        +
+        \mathbf{r}^{1}(\mathbf{u}_{n,2},\mathbf{v}^{n},t^{n+1})
+        \Bigr].
+    \label{eq:app-imex-stage-two-u-reduced}
+\end{equation}
+
+The lattice stage is treated after the electron stage and therefore uses the updated electron value \(\mathbf{u}_{n,2}\). Since the lattice explicit contribution vanishes identically, the second-stage lattice equation is
+\begin{equation}
+    \mathbf{v}_{n,2}
+    =
+    \mathbf{v}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl[
+        \mathbf{r}^{2}(\mathbf{u}^{n},\mathbf{v}^{n},t^{n})
+        +
+        \mathbf{r}^{2}(\mathbf{u}_{n,2},\mathbf{v}_{n,2},t^{n+1})
+        \Bigr].
+    \label{eq:app-imex-stage-two-v}
+\end{equation}
+
+Because the scheme is stiffly accurate, the timestep solution coincides with the last implicit stage:
+\begin{equation}
+    \mathbf{u}^{n+1} = \mathbf{u}_{n,2},
+    \qquad
+    \mathbf{v}^{n+1} = \mathbf{v}_{n,2}.
+    \label{eq:app-imex-stiffly-accurate}
+\end{equation}
+Substituting \eqref{eq:app-imex-stiffly-accurate} into \eqref{eq:app-imex-stage-two-u-reduced} and \eqref{eq:app-imex-stage-two-v} yields the sequential Crank--Nicolson/Gauss--Seidel update
+\begin{align}
+    \mathbf{u}^{n+1}
+     & =
+    \mathbf{u}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl[
+        \mathbf{r}^{1}(\mathbf{u}^{n},\mathbf{v}^{n},t^{n})
+        +
+        \mathbf{r}^{1}(\mathbf{u}^{n+1},\mathbf{v}^{n},t^{n+1})
+        \Bigr],
+    \label{eq:app-imex-final-u} \\
+    \mathbf{v}^{n+1}
+     & =
+    \mathbf{v}^{n}
+    +
+    \frac{\Delta_t}{2}
+    \Bigl[
+        \mathbf{r}^{2}(\mathbf{u}^{n},\mathbf{v}^{n},t^{n})
+        +
+        \mathbf{r}^{2}(\mathbf{u}^{n+1},\mathbf{v}^{n+1},t^{n+1})
+        \Bigr].
+    \label{eq:app-imex-final-v}
+\end{align}
+Equation \eqref{eq:app-imex-final-u} shows that the electron problem is solved with the lattice field lagged to time level \(n\), whereas \eqref{eq:app-imex-final-v} shows that the lattice problem uses the updated electron field \(\mathbf{u}^{n+1}\).
+This corresponds to the sequential strong Gauss--Seidel structure used in \S\ref{sec:ch2-nonlinear}.

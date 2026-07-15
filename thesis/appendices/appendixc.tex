@@ -1,0 +1,156 @@
+\chapter{Supplementary Diagnostics for Linear and Nonlinear TTM Surrogates}
+\label{app:ch4-sampling-support}
+
+This appendix collects distributional diagnostics that support the sampling choices used in Chapter~\ref{ch:regression}. The figures and tables are included as provenance for the linear material-support checks, the nonlinear sampling design, and the nonlinear surrogate diagnostics. They are supplementary checks rather than a replacement for the main Chapter~\ref{ch:regression} narrative.
+
+\section{Real-material support for the linear pTTM validation set}
+
+Figure~\ref{fig:app-ch4-linear-material-parameters} summarises the selected real-material thermophysical and optical quantities used to contextualise the linear pTTM validation cases. The figure complements the percentile-support heatmap in Figure~\ref{fig:ch4-material-feature-support} by showing the raw material-level variation behind that support diagnostic.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{figures/ch4/linear_ttm/selected_material_physical_parameters_linear.png}
+    \caption{Selected real-material physical, thermophysical, and optical parameters for the linear pTTM validation materials. The truncated axes make cross-material variation visible while preserving the role of the figure as support evidence rather than a primary result.}
+    \label{fig:app-ch4-linear-material-parameters}
+\end{figure}
+
+\section{Real-material Lorentz--Drude descriptor support}
+
+The nonlinear extension in Chapter~\ref{ch:regression} samples optical inputs as Lorentz--Drude descriptors before deriving reflectivity and absorption. Figure~\ref{fig:app-ch4-ld-oscillator-histograms} records the real-material descriptor support used to motivate that choice, including plasma frequency, oscillator strengths, damping factors, and resonance energies.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{figures/ch4/nonlinear_ttm/real_material_ld_oscillator_histograms.png}
+    \caption{Real-material Lorentz--Drude optical oscillator descriptor distributions used to motivate descriptor-level optical sampling in the nonlinear pTTM extension.}
+    \label{fig:app-ch4-ld-oscillator-histograms}
+\end{figure}
+
+\section{Synthetic nonlinear sampling diagnostics}
+
+Figures~\ref{fig:app-ch4-nonlinear-sampled-marginals}--\ref{fig:app-ch4-nonlinear-correlation-diagnostic} document the accepted synthetic nonlinear sampling distribution. These diagnostics support the methodology of Chapter~\ref{ch:regression}; they do not report nonlinear model accuracy.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{figures/ch4/nonlinear_ttm/nonlinear_sampled_parameter_marginals.png}
+    \caption{Marginal distributions of sampled nonlinear scalar and Lorentz--Drude descriptor inputs before deriving optical source quantities.}
+    \label{fig:app-ch4-nonlinear-sampled-marginals}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{figures/ch4/nonlinear_ttm/nonlinear_derived_parameter_marginals.png}
+    \caption{Marginal distributions of derived nonlinear quantities, including optical source quantities obtained from sampled Lorentz--Drude descriptors.}
+    \label{fig:app-ch4-nonlinear-derived-marginals}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{figures/ch4/nonlinear_ttm/nonlinear_scalar_feature_correlation.png}
+    \caption{Correlation structure among nonlinear scalar and derived features induced by the descriptor-to-source transformation.}
+    \label{fig:app-ch4-nonlinear-correlation-diagnostic}
+\end{figure}
+
+\section{Nonlinear 2D TTM generation and acceptance diagnostics}
+
+The nonlinear dataset used the production grid and accepted-sample policy summarised in Table~\ref{tab:appc-nonlinear-stage-20k-generation}. The table records generation and acceptance diagnostics only; it is included to document the computational provenance of the nonlinear surrogate inputs.
+
+\begin{table}[H]
+    \centering
+    \caption{Generation and acceptance diagnostics for the 20,000-sample nonlinear 2D TTM dataset.}
+    \label{tab:appc-nonlinear-stage-20k-generation}
+    \small
+    \input{tables/ch4/surrogate/nonlinear_stage_20k_generation_summary.tex}
+\end{table}
+
+\section{Source-term-informed feature set}
+
+The nonlinear surrogate used the source-term-informed feature set. The internal analysis identifier was \texttt{source\_enhanced}; this identifier is retained only for reproducibility. Table~\ref{tab:appc-nonlinear-selected-features} gives the compact definition of the feature groups, including the source-prefactor descriptors. The product $F\chi_{S,0}$ is a prefactor descriptor for the laser source, not the complete volumetric source term.
+
+\begin{table}[H]
+    \centering
+    \caption{Compact definition of the source-term-informed feature set used in the nonlinear surrogate analysis.}
+    \label{tab:appc-nonlinear-selected-features}
+    \scriptsize
+    \input{tables/ch4/surrogate/nonlinear_selected_feature_definitions.tex}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.96\textwidth]{figures/ch4/nonlinear_ttm/final_20k/selected_feature_correlation_matrix.png}
+    \caption{Correlation matrix for the selected source-term-informed nonlinear feature set. The dense matrix is retained as an appendix diagnostic rather than a main-text figure.}
+    \label{fig:appc-nonlinear-selected-feature-correlation}
+\end{figure}
+
+\section{Nonlinear model configurations}
+
+The held-out nonlinear surrogate metrics are reported in Table~\ref{tab:ch4-nonlinear-model-metrics}. Table~\ref{tab:appc-nonlinear-model-configurations} documents the fixed bounded configurations used for the 20,000-sample nonlinear analysis. A full nonlinear hyperparameter optimisation was not run for this dataset.
+
+\begin{table}[H]
+    \centering
+    \caption{Model configurations used in the nonlinear 2D TTM surrogate analysis.}
+    \label{tab:appc-nonlinear-model-configurations}
+    \scriptsize
+    \input{tables/ch4/surrogate/nonlinear_model_configurations.tex}
+\end{table}
+
+\section{Nonlinear material-validation diagnostics}
+
+Table~\ref{tab:appc-nonlinear-material-availability} records which real-material nonlinear validation cases were available. Table~\ref{tab:appc-nonlinear-material-metrics} then summarises the material-validation metrics for those available cases. Figures~\ref{fig:appc-nonlinear-ag-validation}--\ref{fig:appc-nonlinear-cu-validation} give the supplementary noble-metal validation overlays.
+
+\begin{table}[H]
+    \centering
+    \caption{Material availability for the nonlinear validation and threshold checks.}
+    \label{tab:appc-nonlinear-material-availability}
+    \small
+    \input{tables/ch4/surrogate/nonlinear_material_availability.tex}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Material-validation metrics for available nonlinear real-material curves.}
+    \label{tab:appc-nonlinear-material-metrics}
+    \small
+    \input{tables/ch4/surrogate/nonlinear_20k_material_metrics.tex}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.78\textwidth]{figures/ch4/nonlinear_ttm/final_20k/nonlinear_Ag_validation.png}
+    \caption{Ag nonlinear material-validation overlay for the source-term-informed LightGBM and MLP surrogates.}
+    \label{fig:appc-nonlinear-ag-validation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.78\textwidth]{figures/ch4/nonlinear_ttm/final_20k/nonlinear_Au_validation.png}
+    \caption{Au nonlinear material-validation overlay for the source-term-informed LightGBM and MLP surrogates.}
+    \label{fig:appc-nonlinear-au-validation}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.78\textwidth]{figures/ch4/nonlinear_ttm/final_20k/nonlinear_Cu_validation.png}
+    \caption{Cu nonlinear material-validation overlay for the source-term-informed LightGBM and MLP surrogates.}
+    \label{fig:appc-nonlinear-cu-validation}
+\end{figure}
+
+\section{External threshold comparisons}
+
+External cross-model threshold values and the corresponding comparison graphics are omitted from this public source pending documented redistribution terms.
+
+\section{Grid-refinement check for direct nonlinear thresholds}
+
+The grid-refinement diagnostics below report only internally generated direct nonlinear threshold calculations.
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Direct nonlinear threshold stability on the refined grid for available material cases.\label{fig:appc-nonlinear-high-grid-stability}]{%
+        \includegraphics[width=0.48\textwidth]{figures/ch4/nonlinear_ttm/final_20k/high_grid_threshold_stability.png}
+    }
+    \hfill
+    \subfloat[Relative change between report-grid and refined-grid direct nonlinear thresholds.\label{fig:appc-nonlinear-high-grid-delta}]{%
+        \includegraphics[width=0.48\textwidth]{figures/ch4/nonlinear_ttm/final_20k/high_grid_delta_vs_report.png}
+    }
+    \caption{Grid-refinement diagnostics for the direct nonlinear Ag, Ni, and Ti threshold checks.}
+    \label{fig:appc-nonlinear-high-grid-summary}
+\end{figure}

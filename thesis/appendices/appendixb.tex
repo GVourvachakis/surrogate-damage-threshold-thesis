@@ -1,0 +1,312 @@
+\chapter{Equilibration Estimation and Ablation-Threshold Search}
+\label{app:equilibration-ablation}
+
+\section{Equilibration index estimation}
+\label{app:equilibration}
+
+Let the surface equilibration signal be defined by the electron--lattice
+temperature gap
+\begin{equation}
+    s(t) \coloneqq T_e(\mathbf{r}_{\mathrm{surf}}, t) - T_l(\mathbf{r}_{\mathrm{surf}}, t),
+    \label{eq:app-signal}
+\end{equation}
+where \(\mathbf{r}_{\mathrm{surf}}\) is a prescribed representative point on the irradiated surface.
+In the one-dimensional setting, \(\mathbf{r}_{\mathrm{surf}}\) is the surface node \(z=z_s\).
+In the two-dimensional setting, one may select any maximiser of the peak surface electron temperature,
+\begin{equation}
+    \varrho_* \in \operatorname*{arg\,max}_{\varrho}
+    \max_{0 \le t \le \tau_f} T_e(\varrho,z_s,t),
+    \qquad
+    \mathbf{r}_{\mathrm{surf}} \coloneqq (\varrho_*,z_s),
+    \label{eq:app-surface-argmax}
+\end{equation}
+with the understanding that if the maximiser is not unique, any fixed choice is admissible.
+
+Let \(t_n\), \(n=0,\dots,N-1\), denote the discrete output times and define
+\begin{equation}
+    s_n \coloneqq s(t_n).
+\end{equation}
+If optional smoothing is applied, let \(w\ge 1\) be an odd window width and define the truncated centred moving average
+\begin{equation}
+    I_n \coloneqq
+    \left\{
+    m\in\mathbb{Z} :
+    |m|\le \frac{w-1}{2},
+    \ 0\le n-m \le N-1
+    \right\},
+    \qquad
+    \tilde s_n \coloneqq \frac{1}{|I_n|}\sum_{m\in I_n} s_{n-m}.
+    \label{eq:app-smoothed-series}
+\end{equation}
+When no smoothing is required, one may simply set \(\tilde s_n \equiv s_n\).
+This role of local smoothing is consistent with the Savitzky--Golay viewpoint of local least-squares filtering, although the present implementation uses only a moving average unless higher-order smoothing is explicitly desired \cite{Savitzky_1964}.
+
+Define the peak index by the first maximiser of the processed sequence,
+\begin{equation}
+    n_{\mathrm{peak}}
+    \coloneqq
+    \min\operatorname*{arg\,max}_{0\le n < N} \tilde s_n,
+    \qquad
+    s_{\mathrm{peak}} \coloneqq \tilde s_{n_{\mathrm{peak}}}.
+    \label{eq:app-peak-index}
+\end{equation}
+The pre-pulse baseline may be taken as
+\begin{equation}
+    s_{\mathrm{base}} \coloneqq \tilde s_0,
+    \qquad
+    \Delta_s \coloneqq \max\{s_{\mathrm{peak}}-s_{\mathrm{base}},\,0\}.
+    \label{eq:app-baseline-rise}
+\end{equation}
+If several pre-pulse output samples are available, \(s_{\mathrm{base}}\) may alternatively be replaced by their average.
+
+Introduce an absolute tolerance \(\varepsilon_{\mathrm{abs}}>0\) (K) and a relative tolerance
+\(\varepsilon_{\mathrm{rel}}\in(0,1)\). The adaptive return threshold is
+\begin{equation}
+    \Theta
+    \coloneqq
+    s_{\mathrm{base}}
+    +
+    \max\!\bigl(
+    \varepsilon_{\mathrm{abs}},
+    \varepsilon_{\mathrm{rel}}\Delta_s
+    \bigr).
+    \label{eq:app-threshold}
+\end{equation}
+This construction is analogous in spirit to adaptive-threshold rules based on signal and noise levels, as in the Pan--Tompkins framework, though here the threshold is referenced to the baseline and peak excursion of the equilibration signal rather than to running electrocardiogram peak statistics \cite{Pan_1985}.
+
+The equilibration index is then defined by the first post-peak threshold return,
+\begin{equation}
+    n_{\mathrm{eq}}
+    \coloneqq
+    \begin{cases}
+        n_{\mathrm{peak}},
+         & \Delta_s \le \varepsilon_{\mathrm{abs}}, \\[0.5ex]
+        \min\{n\ge n_{\mathrm{peak}} : \tilde s_n \le \Theta\},
+         & \text{if such an index exists},          \\[0.5ex]
+        N-1,
+         & \text{otherwise}.
+    \end{cases}
+    \label{eq:app-neq}
+\end{equation}
+The associated physical equilibration-time estimator is
+\begin{equation}
+    \hat t_{\mathrm{eq}} \coloneqq t_{n_{\mathrm{eq}}}.
+    \label{eq:app-teq}
+\end{equation}
+
+This is a single-threshold post-peak crossing rule.
+It is therefore not a hysteresis detector in the strict sense of Canny,
+where a high threshold starts a structure and a lower threshold continues it under a connectivity condition \cite{Canny_1986}.
+Its role here is instead to suppress premature post-peak returns caused by mild oscillations or temporal discretisation effects.
+
+
+\section{Exponential bracketing and bisection refinement}
+\label{app:exp-bisection}
+
+\subsection{Threshold definition and structural assumptions}
+
+For fixed material parameters and fixed pulse parameters, define
+\begin{equation}
+    T_{l,\max}(F)
+    \coloneqq
+    \max_{(t,\mathbf{r})\in(0,\tau_f]\times\Omega}
+    T_l(\mathbf{r},t;F),
+    \label{eq:app-tlmax}
+\end{equation}
+and the melting-onset predicate
+\begin{equation}
+    D(F)
+    \iff
+    T_{l,\max}(F)\ge T_m.
+    \label{eq:app-damage-predicate}
+\end{equation}
+The threshold fluence is
+\begin{equation}
+    F_{\mathrm{th}}
+    \coloneqq
+    \inf\{F>0 : D(F)\}.
+    \label{eq:app-threshold-fluence}
+\end{equation}
+
+We assume:
+\begin{enumerate}
+    \item \(D(0)=\mathrm{false}\);
+    \item \(D\) is monotone nondecreasing, i.e.
+          \[
+              F_a<F_b \Longrightarrow D(F_a)\Rightarrow D(F_b);
+          \]
+    \item when a sharp complexity count is desired, \(T_{l,\max}(F)\) is continuous in \(F\), so that the threshold set is right-closed.
+\end{enumerate}
+
+\subsection{Exponential bracketing}
+
+Let \(F_{\mathrm{init}}>0\) and \(r>1\). Define
+\begin{equation}
+    F_n \coloneqq F_{\mathrm{init}}r^n,
+    \qquad n\in\mathbb{N}_0.
+    \label{eq:app-exp-sequence}
+\end{equation}
+If the search succeeds, let
+\begin{equation}
+    n_* \coloneqq \min\{n\ge 0 : D(F_n)\}.
+    \label{eq:app-exp-index}
+\end{equation}
+The initial bracket is
+\begin{equation}
+    F_l^{(0)} \coloneqq
+    \begin{cases}
+        0,         & n_*=0,    \\
+        F_{n_*-1}, & n_*\ge 1,
+    \end{cases}
+    \qquad
+    F_u^{(0)} \coloneqq F_{n_*}.
+    \label{eq:app-initial-bracket}
+\end{equation}
+Under the monotonicity assumption, this implies
+\[
+    D(F_l^{(0)})=\mathrm{false},
+    \qquad
+    D(F_u^{(0)})=\mathrm{true},
+    \qquad
+    F_{\mathrm{th}}\in[F_l^{(0)},F_u^{(0)}].
+\]
+
+If \(F_{\mathrm{init}}\le F_{\mathrm{th}}\), then the first successful index satisfies the elementary bound
+\begin{equation}
+    n_*
+    \le
+    1+
+    \left\lceil
+    \frac{\log(F_{\mathrm{th}}/F_{\mathrm{init}})}{\log r}
+    \right\rceil.
+    \label{eq:app-exp-cost}
+\end{equation}
+If, in addition, \(D(F_{\mathrm{th}})=\mathrm{true}\) (for instance by continuity of \(T_{l,\max}\) in \(F\)), then the sharper identity holds:
+\begin{equation}
+    n_*
+    =
+    \left\lceil
+    \frac{\log(F_{\mathrm{th}}/F_{\mathrm{init}})}{\log r}
+    \right\rceil.
+    \label{eq:app-exp-cost-sharp}
+\end{equation}
+The number of simulator evaluations in the exponential phase is therefore
+\begin{equation}
+    n_{\exp}=n_*+1.
+\end{equation}
+
+The relevance of \cite{Beigel_1990} is conceptual: it places this exponential-bracketing phase in the broader class of unbounded-search algorithms. In the present geometric schedule, however, \eqref{eq:app-exp-cost} is obtained directly from the inequality \(F_{\mathrm{init}}r^{n_*}\ge F_{\mathrm{th}}\).
+
+\subsection{Bisection refinement}
+
+Given a bracket \([F_l^{(0)},F_u^{(0)}]\) with
+\[
+    D(F_l^{(0)})=\mathrm{false},
+    \qquad
+    D(F_u^{(0)})=\mathrm{true},
+\]
+define
+\begin{equation}
+    F_m^{(k)}
+    \coloneqq
+    \frac{F_l^{(k)}+F_u^{(k)}}{2}.
+    \label{eq:app-midpoint}
+\end{equation}
+The update is
+\begin{equation}
+    (F_l^{(k+1)},F_u^{(k+1)})
+    \coloneqq
+    \begin{cases}
+        (F_l^{(k)},F_m^{(k)}), & D(F_m^{(k)})=\mathrm{true},  \\
+        (F_m^{(k)},F_u^{(k)}), & D(F_m^{(k)})=\mathrm{false}.
+    \end{cases}
+    \label{eq:app-bisection-update}
+\end{equation}
+By monotonicity, the invariant
+\[
+    F_{\mathrm{th}}\in[F_l^{(k)},F_u^{(k)}]
+\]
+is preserved for all \(k\ge 0\).
+
+The bracket width satisfies
+\begin{equation}
+    W_k \coloneqq F_u^{(k)}-F_l^{(k)}
+    =
+    \frac{F_u^{(0)}-F_l^{(0)}}{2^k},
+    \label{eq:app-bisection-width}
+\end{equation}
+so it is sufficient to choose
+\begin{equation}
+    k
+    \ge
+    \left\lceil
+    \log_2\!\left(
+    \frac{F_u^{(0)}-F_l^{(0)}}{\varepsilon}
+    \right)
+    \right\rceil
+    \label{eq:app-bisection-cost}
+\end{equation}
+in order to guarantee \(W_k\le \varepsilon\).
+
+At termination, define the midpoint estimator
+\begin{equation}
+    \hat F_{\mathrm{th}}
+    \coloneqq
+    \frac{F_l+F_u}{2}.
+    \label{eq:app-midpoint-estimate}
+\end{equation}
+Since \(F_{\mathrm{th}}\in[F_l,F_u]\), its deterministic enclosure error satisfies
+\begin{equation}
+    \bigl|\hat F_{\mathrm{th}}-F_{\mathrm{th}}\bigr|
+    \le
+    \delta F_{\mathrm{bis}}
+    \coloneqq
+    \frac{F_u-F_l}{2}.
+    \label{eq:app-bisection-uncertainty}
+\end{equation}
+
+\subsection{Slope-propagated and combined uncertainty}
+
+Suppose a local temperature uncertainty \(\delta T\) is available and that
+\(T_{l,\max}\) is locally differentiable in \(F\) near the threshold.
+Using two nearby fluence values \(F_a\neq F_b\), define the secant slope
+\begin{equation}
+    \hat S
+    \coloneqq
+    \frac{T_{l,\max}(F_a)-T_{l,\max}(F_b)}{F_a-F_b}.
+    \label{eq:app-slope}
+\end{equation}
+If \(\hat S\neq 0\), the corresponding first-order propagated fluence uncertainty is
+\begin{equation}
+    \delta F_T
+    \coloneqq
+    \frac{\delta T}{|\hat S|}.
+    \label{eq:app-temp-uncertainty}
+\end{equation}
+
+The bisection half-width \(\delta F_{\mathrm{bis}}\) is a deterministic enclosure.
+If \(\delta F_T\) and \(\delta F_{\mathrm{other}}\) are instead interpreted as independent
+standard uncertainties, then the combined standard uncertainty may be written as
+\begin{equation}
+    u_F
+    \coloneqq
+    \sqrt{
+        \delta F_{\mathrm{bis}}^2
+        +
+        \delta F_T^2
+        +
+        \delta F_{\mathrm{other}}^2
+    }.
+    \label{eq:app-combined-uncertainty}
+\end{equation}
+If a conservative worst-case bound is preferred, one may use
+\begin{equation}
+    \delta F_{\mathrm{wc}}
+    \coloneqq
+    \delta F_{\mathrm{bis}}
+    +
+    \delta F_T
+    +
+    \delta F_{\mathrm{other}}.
+\end{equation}
+If no additional temperature-error estimate is available, the natural reported quantity is simply the deterministic bracketing uncertainty \(\delta F_{\mathrm{bis}}\).

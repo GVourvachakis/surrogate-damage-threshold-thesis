@@ -1,0 +1,2353 @@
+%% Sample bibliography file for mitthesis.cls
+%%
+%% Revised: 01 August 2024
+%% Copyright John H. Lienhard, MIT
+%% Offered under the MIT license: https://ctan.org/license/mit 
+
+%% REFER TO biblatex documentation for details about possible fields
+%% bibtex support depends on the bibtex style (.bst) and is usually more limited
+
+@article{DKE1969,
+  author  = {Donald K. Edwards},
+  year    = {1969},
+  title   = {Radiative Transfer Characteristics of Materials},
+  journal = {{ASME} J. Heat Transfer},
+  volume  = 91,
+  number  = 1,
+  pages   = {1--15},
+  doi     = {10.1115/1.3580108},
+  month   = feb
+}
+%% @article requires these fields: author, title, journaltitle, year/date
+%%
+%% Optional fields in biblatex: translator, annotator, commentator, subtitle,
+%%		titleaddon, editor, editora, editorb, editorc, journalsubtitle,
+%%		journaltitleaddon, issuetitle, issuesubtitle,
+%%		issuetitleaddon, language, origlanguage, series, volume,
+%%		number, eid, issue, month, pages, version, note, issn, addendum,
+%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
+
+@book{ww1920,
+  author    = {Edwin Taylor Whittaker and George Neville Watson},
+  year      = {1920},
+  title     = {A Course of Modern Analysis},
+  edition   = {3},
+  publisher = {Cambridge University Press},
+  address   = {Cambridge, UK},
+  url       = {https://archive.org/details/courseofmodernan00whit}
+}
+%% @book requires these fields: author, title, year/date
+%%
+%% Optional fields: editor, editora, editorb, editorc, translator,
+%%		annotator, commentator, introduction, foreword, afterword,
+%%		subtitle, titleaddon, maintitle, mainsubtitle, maintitleaddon,
+%%		language, origlanguage, volume, part, edition, volumes, series,
+%%		number, note, publisher, location, isbn, eid, chapter, pages,
+%%		pagetotal, addendum, pubstate, doi, eprint, eprintclass,
+%%		eprinttype, url, urldate
+
+@inproceedings{Swaminathan2017IDABRO,
+  author     = {Swaminathan, Jaichander and Stover, Richard L. and Tow, Emily W. and Warsinger, David M. and Lienhard, John H.},
+  booktitle  = {Proceedings of IDA World Congress on Desalination and Water Reuse},
+  title      = {Effect of Practical Losses on Optimal Design of Batch {RO} Systems},
+  year       = {2017},
+  month      = oct,
+  publisher  = {International Desalination Association},
+  venue      = {S{\~a}o Paulo, Brazil},
+  eventdate  = {2017-10-15/2017-10-20},
+  eprinttype = {hdl},
+  eprint     = {1721.1/111971},
+  number     = {IDA17WC-58334}
+}
+%% @inproceedings requires these fields: author, title, booktitle, year/date
+%%
+%% Optional fields: editor, subtitle, titleaddon, maintitle,
+%%		mainsubtitle, maintitleaddon, booksubtitle, booktitleaddon,
+%%		eventtitle, eventtitleaddon, eventdate, venue, language,
+%%		volume, part, volumes, series, number, note, organization,
+%%		publisher, location, month, isbn, eid, chapter, pages, addendum,
+%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
+
+@report{reynolds1958,
+  author      = {William C. Reynolds and William M. Kays and Stephen J. Kline},
+  title       = {Heat Transfer in the Incompressible Turbulent Boundary Layer. {I}---Constant Wall Temperature},
+  type        = {NASA Technical Memorandum No.},
+  number      = {12-1-58W},
+  institution = {National Aeronautics and Space Administration},
+  address     = {Washington, DC},
+  year        = {1958},
+  eprinttype  = {hdl},
+  eprint      = {2060/19980228020},
+  month       = dec
+}
+%% Equivalent links for this case: 	url = {https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19980228020.pdf},
+%%									url = {https://hdl.handle.net/2060/19980228020},                                 
+%%
+%% @report requires these fields: author, title, type, institution, year/date
+%%
+%% Optional fields: subtitle, titleaddon, language, number, version,
+%%		note, location, month, isrn, eid, chapter, pages, pagetotal,
+%%		addendum, pubstate, doi, eprint, eprintclass, eprinttype, url,urldate
+
+@incollection{clauser56,
+  author    = {Francis H. Clauser},
+  year      = {1956},
+  title     = {The Turbulent Boundary Layer},
+  booktitle = {Advances in Applied Mechanics},
+  editor    = {H. L. Dryden and Th. von K\'arm\'an},
+  volume    = {4},
+  publisher = {Elsevier},
+  address   = {Amsterdam, The Netherlands},
+  pages     = {1--51},
+  doi       = {10.1016/S0065-2156(08)70370-3}
+}
+%% This case is an article in series of edited books where the series title is the same for all volumes.
+%%
+%% incollection requires these fields:  author, title, editor, booktitle, year/date
+%%
+%% Optional fields: editor, editora, editorb, editorc, translator,
+%%		annotator, commentator, introduction, foreword, afterword,
+%%		subtitle, titleaddon, maintitle, mainsubtitle, maintitleaddon,
+%%		booksubtitle, booktitleaddon, language, origlanguage, volume,
+%%		part, edition, volumes, series, number, note, publisher,
+%%		location, isbn, eid, chapter, pages, addendum, pubstate, doi,
+%%		eprint, eprintclass, eprinttype, url, urldate
+
+@thesis{gibbs1863,
+  author  = {Joisah Willard Gibbs},
+  year    = {1863},
+  title   = {On the Form of the Teeth of Wheels in Spur Gearing},
+  type    = {Ph.{D}. dissertation},
+  school  = {Yale University},
+  address = {New Haven, CT}
+}
+%% phdthesis requires these fields: author, title, type, institution, year/date
+%%
+%% Optional fields: subtitle, titleaddon, language, note, location,
+%%		month, isbn, eid, chapter, pages, pagetotal, addendum, pubstate,
+%%		doi, eprint, eprintclass, eprinttype, url, urldate
+%%
+%% Use the type field to specify the type of thesis. type = {},
+
+@proceedings{johnson1965,
+  editor       = {Howard W. Johnson},
+  title        = {The Title of the Proceedings},
+  year         = 1965,
+  volume       = 2,
+  organization = {Organization},
+  venue        = {City, State},
+  eventdate    = {1965-04-27/1965-04-28},
+  url          = {https://news.mit.edu/2009/obit-johnson}
+}
+%% @proceedings requires these fields: title, year/date
+%%
+%%	Optional fields: editor, subtitle, titleaddon, maintitle,
+%%		mainsubtitle, maintitleaddon, eventtitle, eventtitleaddon, eventdate, venue, language, volume, part, volumes, series,
+%%		number, note, organization, publisher, location, month, isbn, eid, chapter, pages, pagetotal, addendum, pubstate, doi, eprint,
+%%		eprintclass, eprinttype, url, urldate
+
+@manual{GSL,
+  title        = {{GNU} Scientific Library},
+  author       = {Mark Galassi 
+                  and Jim Davies
+                  and James Theiler
+                  and Brian Gough
+                  and Gerard Jungman
+                  and Patrick Alken
+                  and Michael Booth
+                  and Fabrice Rossi
+                  and Rhys Ulerich},
+  version      = {2.4},
+  organization = {Free Software Foundation},
+  address      = {Boston, MA},
+  year         = 2017,
+  url          = {https://www.gnu.org/software/gsl/},
+  urldate      = {2018-12-12}
+}
+%% @manual requires these fields: author/editor, title, year/date
+%%
+%% Optional fields: subtitle, titleaddon, language, edition, type,
+%%		series, number, version, note, organization, publisher,
+%%		location, isbn, eid, chapter, pages, pagetotal, addendum,
+%%		pubstate, doi, eprint, eprintclass, eprinttype, url, urldate
+
+@online{sharpe1,
+  author       = {Michael Sharpe},
+  year         = {2022},
+  month        = mar,
+  title        = {New {TX} Font Package},
+  version      = {1.71},
+  organization = {Comprehensive \TeX\ Archive Network},
+  url          = {https://ctan.org/pkg/newtx},
+  urldate      = {2023-05-29}
+}
+%% @online requires these fields: author/editor, title, year/date, doi/eprint/url
+%%
+%% Optional fields: subtitle, titleaddon, language, version, note,
+%%		organization, month, addendum, pubstate, eprintclass, eprinttype, urldate
+
+@misc{Fong2015,
+  title        = {Analytical Methods for Squaring the Disc},
+  year         = {2015},
+  author       = {Chamberlain Fong},
+  howpublished = {{\itshape ArXiv e-prints}},
+  eprint       = {1509.06344},
+  eprinttype   = {arxiv},
+  month        = sep
+}
+%% @misc requires these fields: author/editor, title, year/date
+%%
+%% Optional fields: subtitle, titleaddon, language, howpublished, type, version, note, 
+%%		organization, location, month, addendum, pubstate, doi, eprint, eprintclass, 
+%%		eprinttype, url, urldate
+
+@book{kirk2288a,
+  author    = {James Tiberius Kirk},
+  year      = {2288},
+  title     = {Decline and Fall of the Romulan Empire},
+  edition   = 7,
+  series    = {Humankind's Greatest Writings},
+  number    = {23},
+  publisher = {Vulcan Free Press},
+  address   = {T'Paal},
+  addendum  = {To appear.}
+}
+%% One book in a series of books
+%% Under bibtex, replace addendum by note
+
+@bookinbook{churchill1948,
+  author    = {Winston S. Churchill},
+  year      = {1948},
+  title     = {{The Gathering Storm}},
+  maintitle = {The Second World War},
+  volume    = {1},
+  chapter   = {5, {``The Locust Years''}},
+  pages     = {66--89},
+  url       = {https://www.worldcat.org/oclc/3025315},
+  publisher = {Houghton Mifflin Co.},
+  address   = {Boston}
+}
+%% one book in a multivolume book written by a single author
+%% with bibtex, revert to "inbook"
+
+@book{johnson1980,
+  editor    = {Howard Johnson},
+  year      = {1980},
+  title     = {Title of Edited Book},
+  publisher = {John Wiley and Sons, Inc.},
+  address   = {New York, NY}
+}
+%% edited book
+
+@book{fourier1822,
+  author    = {Jean Baptiste Joseph Fourier},
+  year      = {1822},
+  title     = {Th\'{e}orie Analytique de la Chaleur},
+  publisher = {Firmin Didot, P\`{e}re et Fils},
+  address   = {Paris},
+  url       = {https://archive.org/details/analyticaltheory00fourrich}
+}
+%% old book, not much difference
+
+@online{dlmf,
+  title        = {{NIST} {D}igital Library of Mathematical Functions},
+  version      = {1.1.19},
+  year         = {2023},
+  month        = mar,
+  editor       = {F. W. J. Olver and A. B. {Olde Daalhuis} and D. W. Lozier and B. I. Schneider and
+                  R. F. Boisvert and C. W. Clark and B. R. Miller and B. V. Saunders},
+  organization = {National Institute of Standards and Technology},
+  address      = {Gaithersburg, MD},
+  url          = {https://dlmf.nist.gov/},
+  urldate      = {2023-05-29}
+}
+
+@article{lienhard2020,
+  author  = {Lienhard, John H.},
+  title   = {Heat Transfer in Flat-Plate Boundary Layers: A Correlation for Laminar, Transitional, and Turbulent Flow},
+  journal = {{ASME} J. Heat Transfer},
+  volume  = {142},
+  number  = {6},
+  eid     = {061805},
+  year    = {2020},
+  month   = jun,
+  doi     = {10.1115/1.4046795 }
+}
+%% note use of: eid in place of pages
+%%     url = {https://doi.org/10.1115/1.4055833},
+
+@manual{amsmath,
+  author       = {{American Mathematical Society} and {The \LaTeX\ Project}},
+  year         = {2020},
+  month        = feb,
+  title        = {User's Guide for the \textsf{amsmath} Package },
+  version      = {2.1},
+  organization = {Comprehensive \TeX\ Archive Network},
+  url          = {https://ctan.org/tex-archive/macros/latex/required/amsmath/amsldoc.pdf},
+  urldate      = {2023-05-29}
+}
+
+@article{euler1740,
+  author     = {Leonard Euler},
+  year       = 1740,
+  title      = {De Summis Serierum Reciprocarum},
+  journal    = {Commentarii Acad\-emiae Scientiarum Petropolitanae},
+  volume     = 7,
+  pages      = {123--134},
+  eprinttype = {arxiv},
+  eprint     = {math/0506415},
+  addendum   = {First communicated to Daniel Bernoulli in 1734 and read before the St.\ Petersburg Academy in December 1735}
+}
+% with bibtex, change addendum to note.
+
+@article{montijano2014,
+  title   = {Numerical Methods With LuaLaTeX},
+  author  = {Juan I. Montijano and Mario P{\'{e}}rez and Luis R{\'{a}}ndez and Juan Luis Varona},
+  year    = 2014,
+  volume  = 35,
+  month   = jan,
+  number  = {1},
+  pages   = {51--56},
+  journal = {TUGboat},
+  url     = {https://tug.org/TUGboat/tb35-1/tb109montijano.pdf}
+}
+
+@online{mpl,
+  title        = {{mpl} Colormaps},
+  author       = {St{\'e}fan {van der Walt} and Nathaniel Smith},
+  url          = {https://bids.github.io/colormap/},
+  urldate      = {2018-08-26},
+  year         = 2015,
+  organization = {GitHub},
+  address      = {San Francisco, CA},
+  month        = sep
+}
+
+@book{baehr1998,
+  author    = {H. D. Baehr and K. Stephan},
+  title     = {Heat and Mass Transfer},
+  publisher = {Springer-Verlag},
+  address   = {Berlin},
+  year      = {1998},
+  isbn      = {3-540-63695-1}
+}
+
+@book{Forsman_1998,
+  title     = {Dense, Strongly Coupled Plasmas in Femtosecond Laser-matter Interactions},
+  author    = {Forsman, A.},
+  series    = {Thesis: Ph. D},
+  url       = {https://books.google.gr/books?id=fg20zwEACAAJ},
+  year      = {1998},
+  publisher = {University of British Columbia}
+}
+
+@article{ByskovNielsen_2011,
+  author  = {Byskov-Nielsen, Jeppe and Savolainen, Juha-Matti and Christensen, Martin Snogdahl and Balling, Peter},
+  title   = {Ultra-short pulse laser ablation of copper, silver and tungsten: experimental data and two-temperature model simulations},
+  journal = {Applied Physics A},
+  year    = {2011},
+  volume  = {103},
+  number  = {2},
+  pages   = {447--453},
+  doi     = {10.1007/s00339-011-6363-7},
+  url     = {https://link.springer.com/article/10.1007/s00339-011-6363-7}
+}
+
+@inproceedings{Zhao_2014,
+  title  = {Ultrashort laser pulse-matter interaction: Fundamentals and early stage plasma dynamics},
+  author = {Xin Zhao},
+  year   = {2014},
+  url    = {https://api.semanticscholar.org/CorpusID:117323308}
+}
+
+@inproceedings{Bulgakova_2021,
+  author    = {Bulgakova, N. M. and Lizunov, S. A. and Zhukov, V. P. and Bulgakov, A. V.},
+  title     = {Optical response of metals to ultrashort laser pulses: A puzzle for optical models},
+  booktitle = {International Conference on Laser, Plasma and Radiation-Matter Interactions (LPRM)},
+  year      = {2021},
+  address   = {Doln{\'i} B{\v{r}}e{\v{z}}any, Czech Republic},
+  note      = {LP-I-13},
+  url       = {https://cyberleninka.ru/article/n/optical-response-of-metals-to-ultrashort-laser-pulses-a-puzzle-for-optical-models}
+}
+
+@article{Petrov_2021,
+  title     = {Modeling of short-pulse laser-metal interactions in the warm dense matter regime using the two-temperature model},
+  author    = {Petrov, G. M. and Davidson, A. and Gordon, D. and Pe\~nano, J.},
+  journal   = {Phys. Rev. E},
+  volume    = {103},
+  issue     = {3},
+  pages     = {033204},
+  numpages  = {11},
+  year      = {2021},
+  month     = {03},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevE.103.033204},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevE.103.033204}
+}
+
+
+@book{Takabe_2024,
+  title     = {The Physics of Laser Plasmas and Applications - Volume 2: Fluid Models and Atomic Physics of Plasmas},
+  author    = {Takabe, H.},
+  isbn      = {9783031454738},
+  series    = {Springer Series in Plasma Science and Technology},
+  url       = {https://books.google.gr/books?id=t9b9EAAAQBAJ},
+  year      = {2024},
+  publisher = {Springer International Publishing}
+}
+
+@article{Shim_2026,
+  author   = {Shim, Huieun and Nguyen, Sy Khiem and Lee, Hyeonji and Shin, Jaehee and Yoon, Ilsun and Sohn, Youngku},
+  title    = {Nonequilibrium Photothermal Reactions Under Pulsed Laser Excitation: Mechanisms, Dynamics, and Applications},
+  journal  = {ChemCatChem},
+  volume   = {18},
+  number   = {7},
+  pages    = {e01870},
+  keywords = {electrocatalysis, laser-matter interactions, nonequilibrium photothermal reaction, pulsed laser excitation, surface restructuring},
+  doi      = {https://doi.org/10.1002/cctc.202501870},
+  url      = {https://chemistry-europe.onlinelibrary.wiley.com/doi/abs/10.1002/cctc.202501870},
+  eprint   = {https://chemistry-europe.onlinelibrary.wiley.com/doi/pdf/10.1002/cctc.202501870},
+  year     = {2026}
+}
+
+@misc{Zhang_2015,
+  title         = {Micro- and Nanoscale Heat Transfer in Femtosecond Laser Processing of Metals},
+  author        = {Yuwen Zhang and D. Y. Tzou and J. K. Chen},
+  year          = {2015},
+  eprint        = {1511.03566},
+  archiveprefix = {arXiv},
+  primaryclass  = {physics.comp-ph},
+  url           = {https://arxiv.org/abs/1511.03566}
+}
+
+@article{Hohlfeld_2000,
+  title   = {Electron and lattice dynamics following optical excitation of metals},
+  journal = {Chemical Physics},
+  volume  = {251},
+  number  = {1},
+  pages   = {237-258},
+  year    = {2000},
+  issn    = {0301-0104},
+  doi     = {https://doi.org/10.1016/S0301-0104(99)00330-4},
+  url     = {https://www.sciencedirect.com/science/article/pii/S0301010499003304},
+  author  = {J. Hohlfeld and S.-S. Wellershoff and J. Güdde and U. Conrad and V. Jähnke and E. Matthias}
+}
+
+@article{Driel_1987,
+  title     = {Kinetics of high-density plasmas generated in Si by 1.06- and 0.53-\ensuremath{\mu}m picosecond laser pulses},
+  author    = {van Driel, Henry M.},
+  journal   = {Phys. Rev. B},
+  volume    = {35},
+  issue     = {15},
+  pages     = {8166--8176},
+  numpages  = {0},
+  year      = {1987},
+  month     = {05},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.35.8166},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.35.8166}
+}
+
+@article{Wellershoff_1999,
+  author  = {S.-S. Wellershoff and J. Hohlfeld and J. G{\"u}dde and E. Matthias},
+  title   = {The role of electron--phonon coupling in femtosecond laser damage of metals},
+  journal = {Applied Physics A},
+  year    = {1999},
+  volume  = {69},
+  number  = {1},
+  pages   = {S99--S107},
+  month   = {12},
+  doi     = {10.1007/s003399900305},
+  url     = {https://doi.org/10.1007/s003399900305},
+  issn    = {1432-0630}
+}
+
+@article{Chen_2001,
+  author    = {J. K. Chen, J. E. Beraun},
+  title     = {NUMERICAL STUDY OF ULTRASHORT LASER PULSE INTERACTIONS WITH METAL FILMS},
+  journal   = {Numerical Heat Transfer, Part A: Applications},
+  volume    = {40},
+  number    = {1},
+  pages     = {1--20},
+  year      = {2001},
+  publisher = {Taylor \& Francis},
+  doi       = {10.1080/104077801300348842},
+  url       = {https://doi.org/10.1080/104077801300348842},
+  eprint    = {https://doi.org/10.1080/104077801300348842}
+}
+
+@article{Alexopoulou_2023,
+  title     = {A Critical Assessment Regarding Two-Temperature Models: An Investigation of the Different Forms of Two-Temperature Models, the Various Ultrashort Pulsed Laser Models and Computational Methods},
+  volume    = {31},
+  issn      = {1886-1784},
+  url       = {http://dx.doi.org/10.1007/s11831-023-09974-1},
+  doi       = {10.1007/s11831-023-09974-1},
+  number    = {1},
+  journal   = {Archives of Computational Methods in Engineering},
+  publisher = {Springer Science and Business Media LLC},
+  author    = {Alexopoulou, Vasiliki E. and Markopoulos, Angelos P.},
+  year      = {2023},
+  month     = aug,
+  pages     = {93-123}
+}
+
+@article{Song_2023,
+  title    = {A critical review on the simulation of ultra-short pulse laser-metal interactions based on a two-temperature model (TTM)},
+  journal  = {Optics \& Laser Technology},
+  volume   = {159},
+  pages    = {109001},
+  year     = {2023},
+  issn     = {0030-3992},
+  doi      = {https://doi.org/10.1016/j.optlastec.2022.109001},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0030399222011471},
+  author   = {Shijie Song and Qinghua Lu and Peilei Zhang and Hua Yan and Haichuan Shi and Zhishui Yu and Tianzhu Sun and Zhirong Luo and Yingtao Tian},
+  keywords = {Ultrashort pulse laser, LIPSS, Electromagnetic models, Matter reorganization models, TTM}
+}
+
+@article{Bonse_2020,
+  title     = {Maxwell Meets Marangoni—A Review of Theories on Laser‐Induced Periodic Surface Structures},
+  volume    = {14},
+  issn      = {1863-8899},
+  url       = {http://dx.doi.org/10.1002/lpor.202000215},
+  doi       = {10.1002/lpor.202000215},
+  number    = {10},
+  journal   = {Laser \& Photonics Reviews},
+  publisher = {Wiley},
+  author    = {Bonse, Jörn and Gräf, Stephan},
+  year      = {2020},
+  month     = aug
+}
+@article{M_ller_2020,
+  title     = {Applying Ultrashort Pulsed Direct Laser Interference Patterning for Functional Surfaces},
+  volume    = {10},
+  issn      = {2045-2322},
+  url       = {http://dx.doi.org/10.1038/s41598-020-60592-4},
+  doi       = {10.1038/s41598-020-60592-4},
+  number    = {1},
+  journal   = {Scientific Reports},
+  publisher = {Springer Science and Business Media LLC},
+  author    = {Müller, Daniel Wyn and Fox, Tobias and Grützmacher, Philipp G. and Suarez, Sebastian and Mücklich, Frank},
+  year      = {2020},
+  month     = feb
+}
+
+@article{Tsibidis_2012,
+  title     = {Dynamics of ripple formation on silicon surfaces by ultrashort laser pulses in subablation conditions},
+  author    = {Tsibidis, G. D. and Barberoglou, M. and Loukakos, P. A. and Stratakis, E. and Fotakis, C.},
+  journal   = {Phys. Rev. B},
+  volume    = {86},
+  issue     = {11},
+  pages     = {115316},
+  numpages  = {14},
+  year      = {2012},
+  month     = {09},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.86.115316},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.86.115316}
+}
+
+@article{Grigoropoulos_1986,
+  author   = {Grigoropoulos, Costas P. and Buckholz, Richard H. and Domoto, Gerald A.},
+  title    = {A heat transfer algorithm for the laser‐induced melting and recrystallization of thin silicon layers},
+  journal  = {Journal of Applied Physics},
+  volume   = {60},
+  number   = {7},
+  pages    = {2304-2309},
+  year     = {1986},
+  month    = {10},
+  abstract = {This paper describes some numerical calculations for the temperature fields associated with laser melting and subsequent recrystallization of a thin silicon film on a conductive (glass) substrate. Particular attention has been paid to the change in the material properties with temperature and to the change in reflectivity which occurs when the silicon undergoes a phase change. Thin film optics have also been incorporated into the solution. Physical arguments and experimental observations suggest the possibility of the coexistence of liquid and solid phases. Here an attempt has been made to simulate this process numerically by using a scheme based on the enthalpy formulation. The numerical algorithm given allows the representation of regions where both the liquid and solid phases coexist. This method of solution has not been applied to cases where the reflectivity changes are considered in the ‘‘slush’’ formation. This is the first numerical simulation to include this effect.},
+  issn     = {0021-8979},
+  doi      = {10.1063/1.337139},
+  url      = {https://doi.org/10.1063/1.337139},
+  eprint   = {https://pubs.aip.org/aip/jap/article-pdf/60/7/2304/18606789/2304_1_online.pdf}
+}
+
+@article{Hamad_2016,
+  author  = {Abubaker H. Hamad},
+  title   = {Effects of Different Laser Pulse Regimes (Nanosecond, Picosecond and Femtosecond) on the Ablation of Materials for Production of Nanoparticles in Liquid Solution},
+  year    = {2016},
+  note    = {Research on laser pulse regimes on nanoparticle production by ablation in liquid solution},
+  journal = {},
+  url     = {https://typeset.io/pdf/effects-of-different-laser-pulse-regimes-nanosecond-2kqjflapqi.pdf}
+}
+
+@article{Fraggelakis_2021,
+  title     = {Tailoring submicrometer periodic surface structures via ultrashort pulsed direct laser interference patterning},
+  author    = {Fraggelakis, F. and Tsibidis, G. D. and Stratakis, E.},
+  journal   = {Phys. Rev. B},
+  volume    = {103},
+  issue     = {5},
+  pages     = {054105},
+  numpages  = {15},
+  year      = {2021},
+  month     = {02},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.103.054105},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.103.054105}
+}
+
+@article{Vaghasiya_2022,
+  doi       = {10.1088/1361-6463/ac4dca},
+  url       = {https://doi.org/10.1088/1361-6463/ac4dca},
+  year      = {2022},
+  month     = {02},
+  publisher = {IOP Publishing},
+  volume    = {55},
+  number    = {17},
+  pages     = {175109},
+  author    = {Vaghasiya, Hardik and Krause, Stephan and Miclea, Paul-Tiberiu},
+  title     = {Thermal and non-thermal ablation mechanisms in crystalline silicon by femtosecond laser pulses: classical approach of the carrier density two temperature model},
+  journal   = {Journal of Physics D: Applied Physics}
+}
+
+@article{Vaghasiya_2023,
+  author    = {Hardik Vaghasiya and Stephan Krause and Paul-Tiberiu Miclea},
+  journal   = {Opt. Mater. Express},
+  keywords  = {Femtosecond lasers; Laser ablation; Laser beams; Laser sources; Optical properties; Ultrafast lasers},
+  number    = {4},
+  pages     = {982--996},
+  publisher = {Optica Publishing Group},
+  title     = {Fundamental study of a femtosecond laser ablation mechanism in gold and the impact of the GHz repetition rate and number of pulses on ablation volume},
+  volume    = {13},
+  month     = {04},
+  year      = {2023},
+  url       = {https://opg.optica.org/ome/abstract.cfm?URI=ome-13-4-982},
+  doi       = {10.1364/OME.474452}
+}
+
+@article{Penchev_2016,
+  title    = {Experimental investigation of 3D scanheads for laser micro-processing},
+  journal  = {Optics \& Laser Technology},
+  volume   = {81},
+  pages    = {55-59},
+  year     = {2016},
+  issn     = {0030-3992},
+  doi      = {https://doi.org/10.1016/j.optlastec.2016.01.035},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0030399215304618},
+  author   = {Pavel Penchev and Stefan Dimov and Debajyoti Bhaduri},
+  keywords = {Laser micro-processing, 3D scanheads, Dynamic Focusing Module, Dynamic capabilities}
+}
+
+@article{Dong_2019,
+  author    = {Yiwei Dong and Zongpu Wu and Yancheng You and Chunping Yin and Wenhui Qu and Xiaoji Li},
+  journal   = {Opt. Mater. Express},
+  keywords  = {Femtosecond lasers; Finite element method; High power lasers; Laser materials; Laser sources; Ultrafast lasers},
+  number    = {11},
+  pages     = {4194--4208},
+  publisher = {Optica Publishing Group},
+  title     = {Numerical simulation of multi-pulsed femtosecond laser ablation: effect of a moving laser focus},
+  volume    = {9},
+  month     = {11},
+  year      = {2019},
+  url       = {https://opg.optica.org/ome/abstract.cfm?URI=ome-9-11-4194},
+  doi       = {10.1364/OME.9.004194}
+}
+
+@article{Tsibidis_2019,
+  title     = {Modelling of the ultrafast dynamics and surface plasmon properties of silicon upon irradiation with mid-IR femtosecond laser pulses},
+  author    = {Petrakakis, E. and Tsibidis, G. D. and Stratakis, E.},
+  journal   = {Phys. Rev. B},
+  volume    = {99},
+  issue     = {19},
+  pages     = {195201},
+  numpages  = {11},
+  year      = {2019},
+  month     = {05},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.99.195201},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.99.195201}
+}
+
+@article{Rethfeld_2002,
+  title     = {Ultrafast dynamics of nonequilibrium electrons in metals under femtosecond laser irradiation},
+  author    = {Rethfeld, B. and Kaiser, A. and Vicanek, M. and Simon, G.},
+  journal   = {Phys. Rev. B},
+  volume    = {65},
+  issue     = {21},
+  pages     = {214303},
+  numpages  = {11},
+  year      = {2002},
+  month     = {05},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.65.214303},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.65.214303}
+}
+
+@article{Schoenlein_1987,
+  title     = {Femtosecond studies of nonequilibrium electronic processes in metals},
+  author    = {Schoenlein, R. W. and Lin, W. Z. and Fujimoto, J. G. and Eesley, G. L.},
+  journal   = {Phys. Rev. Lett.},
+  volume    = {58},
+  issue     = {16},
+  pages     = {1680--1683},
+  numpages  = {0},
+  year      = {1987},
+  month     = {04},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevLett.58.1680},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevLett.58.1680}
+}
+
+@article{Vial_2005,
+  title     = {Improved analytical fit of gold dispersion: Application to the modeling of extinction spectra with a finite-difference time-domain method},
+  author    = {Vial, Alexandre and Grimault, Anne-Sophie and Mac\'{\i}as, Demetrio and Barchiesi, Dominique and de la Chapelle, Marc Lamy},
+  journal   = {Phys. Rev. B},
+  volume    = {71},
+  issue     = {8},
+  pages     = {085416},
+  numpages  = {7},
+  year      = {2005},
+  month     = {02},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.71.085416},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.71.085416}
+}
+
+@article{Powell_1969,
+  author    = {C. J. Powell},
+  journal   = {J. Opt. Soc. Am.},
+  keywords  = {Energy; Inelastic scattering; Materials; Metals; Optical constants; Transmittance},
+  number    = {6},
+  pages     = {738--743},
+  publisher = {Optica Publishing Group},
+  title     = {Analysis of Optical- and Inelastic-Electron-Scattering Data. Parametric Calculations$\ast$†},
+  volume    = {59},
+  month     = {06},
+  year      = {1969},
+  url       = {https://opg.optica.org/abstract.cfm?URI=josa-59-6-738},
+  doi       = {10.1364/JOSA.59.000738}
+}
+
+@article{Rakic_1998,
+  author    = {Aleksandar D. Raki\'{c} and Aleksandra B. Djuri\v{s}i\'{c} and Jovan M. Elazar and Marian L. Majewski},
+  journal   = {Appl. Opt.},
+  keywords  = {Laser materials; Optical properties; Vertical cavity surface emitting lasers; Thin films, optical properties; Matrix methods; Optical constants; Optical properties; Phase shift; Reflection coefficient; Thin films},
+  number    = {22},
+  pages     = {5271--5283},
+  publisher = {Optica Publishing Group},
+  title     = {Optical properties of metallic films for vertical-cavity optoelectronic devices},
+  volume    = {37},
+  month     = {08},
+  year      = {1998},
+  url       = {https://opg.optica.org/ao/abstract.cfm?URI=ao-37-22-5271},
+  doi       = {10.1364/AO.37.005271}
+}
+
+@article{Ren_2011,
+  author  = {Ren, Yunpeng and Chen, J. K. and Zhang, Yuwen and Huang, Jing},
+  title   = {Ultrashort laser pulse energy deposition in metal films with phase changes},
+  journal = {Applied Physics Letters},
+  volume  = {98},
+  number  = {19},
+  pages   = {191105},
+  year    = {2011},
+  month   = {05},
+  issn    = {0003-6951},
+  doi     = {10.1063/1.3579539},
+  url     = {https://doi.org/10.1063/1.3579539},
+  eprint  = {https://pubs.aip.org/aip/apl/article-pdf/doi/10.1063/1.3579539/14450548/191105\_1\_online.pdf}
+}
+
+@article{Kaganov_1956,
+  title   = {Relaxation between electrons and the Crystalline Lattice},
+  author  = {M. I. Kaganov and I. M. Lifshitz and L. V. Tanatarov},
+  journal = {Soviet Physics JETP},
+  volume  = {4},
+  number  = {2},
+  pages   = {173--178},
+  year    = {1957},
+  note    = {Originally in Zh. Eksp. Teor. Fiz. 31, 232--237 (1956)}
+}
+
+@article{Anisimov_1974,
+  author  = {Anisimov, S. I. and Kapeliovich, B. L. and Perel'man, T. L.},
+  title   = {Electron emission from metal surfaces exposed to ultrashort laser pulses},
+  journal = {Soviet Physics JETP},
+  year    = {1974},
+  volume  = {39},
+  number  = {2},
+  pages   = {375--377}
+}
+
+@inproceedings{Anisimov_1997,
+  author       = {Sergei I. Anisimov and Baerbel Rethfeld},
+  title        = {{Theory of ultrashort laser pulse interaction with a metal}},
+  volume       = {3093},
+  booktitle    = {Nonresonant Laser-Matter Interaction (NLMI-9)},
+  editor       = {Vitali I. Konov and Mikhail N. Libenson},
+  organization = {International Society for Optics and Photonics},
+  publisher    = {SPIE},
+  pages        = {192 -- 203},
+  year         = {1997},
+  doi          = {10.1117/12.271674},
+  url          = {https://doi.org/10.1117/12.271674}
+}
+
+@article{Forouhi_1986,
+  title     = {Optical dispersion relations for amorphous semiconductors and amorphous dielectrics},
+  author    = {Forouhi, A. R. and Bloomer, I.},
+  journal   = {Phys. Rev. B},
+  volume    = {34},
+  issue     = {10},
+  pages     = {7018--7026},
+  numpages  = {0},
+  year      = {1986},
+  month     = {11},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.34.7018},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.34.7018}
+}
+
+@article{Qiu_1992,
+  title   = {Short-pulse laser heating on metals},
+  journal = {International Journal of Heat and Mass Transfer},
+  volume  = {35},
+  number  = {3},
+  pages   = {719-726},
+  year    = {1992},
+  issn    = {0017-9310},
+  doi     = {https://doi.org/10.1016/0017-9310(92)90131-B},
+  url     = {https://www.sciencedirect.com/science/article/pii/001793109290131B},
+  author  = {T.Q. Qiu and C.L. Tien}
+}
+
+@article{Eidmann_2000,
+  title     = {Hydrodynamic simulation of subpicosecond laser interaction with solid-density matter},
+  author    = {Eidmann, K. and Meyer-ter-Vehn, J. and Schlegel, T. and H\"uller, S.},
+  journal   = {Phys. Rev. E},
+  volume    = {62},
+  issue     = {1},
+  pages     = {1202--1214},
+  numpages  = {0},
+  year      = {2000},
+  month     = {07},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevE.62.1202},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevE.62.1202}
+}
+
+@article{Matthiessen_1864,
+  author   = {Matthiessen, Augustus and Vogt, August Christoph Carl},
+  title    = {IV. On the influence of temperature on the electric conducting-power of alloys},
+  journal  = {Philosophical Transactions of the Royal Society of London},
+  number   = {154},
+  pages    = {167-200},
+  year     = {1864},
+  month    = {12},
+  abstract = {The influence of temperature on the electric conducting-power of the pure metals in a solid state has been proved to be very great*, and as very little is as yet known with regard to the influence of temperature on the electric conducting-power of alloys, we undertook this research in order, if possible, to discover the law which regulates this property. For the sake of clearness, we have thought it advisable to divide this subject into four parts, and they will be treated of in the following order:— 1. Experiments on the influence of temperature on the electric conducting-power of alloys composed of two metals. 2. Experiments on the influence of temperature on the electric conducting-power of some alloys composed of three metals. 3. On a method by which the conducting-power of a pure metal may be deduced from that of the impure one. 4. Miscellaneous and general remarks.},
+  issn     = {0261-0523},
+  doi      = {10.1098/rstl.1864.0004},
+  url      = {https://doi.org/10.1098/rstl.1864.0004},
+  eprint   = {https://royalsocietypublishing.org/rstl/article-pdf/doi/10.1098/rstl.1864.0004/1455699/rstl.1864.0004.pdf}
+}
+
+@article{Jiang_2005,
+  author  = {Jiang, Lan and Tsai, Hai-Lung},
+  title   = {Improved Two-Temperature Model and Its Application in Ultrashort Laser Heating of Metal Films},
+  journal = {Journal of Heat Transfer},
+  volume  = {127},
+  number  = {10},
+  pages   = {1167-1173},
+  year    = {2005},
+  month   = {06},
+  issn    = {0022-1481},
+  doi     = {10.1115/1.2035113},
+  url     = {https://doi.org/10.1115/1.2035113},
+  eprint  = {https://asmedigitalcollection.asme.org/heattransfer/article-pdf/127/10/1167/5504614/1167_1.pdf}
+}
+
+
+@article{Fang_2012,
+  title    = {Improved two-temperature model including electron density of states effects for Au during femtosecond laser pulses},
+  journal  = {Solid State Communications},
+  volume   = {152},
+  number   = {2},
+  pages    = {108-111},
+  year     = {2012},
+  issn     = {0038-1098},
+  doi      = {https://doi.org/10.1016/j.ssc.2011.10.031},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0038109811005680},
+  author   = {Ranran Fang and Hua Wei and Zhihua Li and Duanming Zhang},
+  keywords = {A. Femtosecond laser, B. Two-temperature model, D. Electron density of states}
+}
+
+@article{Lin_2008,
+  title     = {Electron-phonon coupling and electron heat capacity of metals under conditions of strong electron-phonon nonequilibrium},
+  author    = {Lin, Zhibin and Zhigilei, Leonid V. and Celli, Vittorio},
+  journal   = {Phys. Rev. B},
+  volume    = {77},
+  issue     = {7},
+  pages     = {075133},
+  numpages  = {17},
+  year      = {2008},
+  month     = {02},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.77.075133},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.77.075133}
+}
+
+@article{Jiang_2004,
+  doi       = {10.1088/0022-3727/37/10/012},
+  url       = {https://dx.doi.org/10.1088/0022-3727/37/10/012},
+  year      = {2004},
+  month     = {04},
+  publisher = {},
+  volume    = {37},
+  number    = {10},
+  pages     = {1492},
+  author    = {L Jiang and H L Tsai},
+  title     = {Prediction of crater shape in femtosecond laser ablation of dielectrics},
+  journal   = {Journal of Physics D: Applied Physics}
+}
+
+@article{Jiang_2007,
+  title    = {Modeling of ultrashort laser pulse-train processing of metal thin films},
+  journal  = {International Journal of Heat and Mass Transfer},
+  volume   = {50},
+  number   = {17},
+  pages    = {3461-3470},
+  year     = {2007},
+  issn     = {0017-9310},
+  doi      = {https://doi.org/10.1016/j.ijheatmasstransfer.2007.01.049},
+  url      = {https://www.sciencedirect.com/science/article/pii/S001793100700155X},
+  author   = {Lan Jiang and Hai-Lung Tsai},
+  keywords = {Ultrashort laser pulses, Pulse-train, Thin film processing}
+}
+
+@article{Chen_2002,
+  author    = {J. K. Chen and W. P. Latham and J. E. Beraun},
+  title     = {AXISYMMETRIC MODELING OF FEMTOSECOND-PULSE LASER HEATING ON METAL FILMS},
+  journal   = {Numerical Heat Transfer, Part B: Fundamentals},
+  volume    = {42},
+  number    = {1},
+  pages     = {1--17},
+  year      = {2002},
+  publisher = {Taylor \& Francis},
+  doi       = {10.1080/10407790190053806},
+  url       = {https://doi.org/10.1080/10407790190053806},
+  eprint    = {https://doi.org/10.1080/10407790190053806}
+}
+
+@article{Chen_2005,
+  author  = {Chen, J. K. and Latham, W. P. and Beraun, J. E.},
+  title   = {The role of electron-phonon coupling in ultrafast laser heating},
+  journal = {Journal of Laser Applications},
+  volume  = {17},
+  number  = {1},
+  pages   = {63-68},
+  year    = {2005},
+  month   = {02},
+  issn    = {1042-346X},
+  doi     = {10.2351/1.1848522},
+  url     = {https://doi.org/10.2351/1.1848522},
+  eprint  = {https://pubs.aip.org/lia/jla/article-pdf/17/1/63/16667439/63\_1\_online.pdf}
+}
+
+@article{Tzou_1995,
+  author   = {Tzou, D. Y.},
+  title    = {A Unified Field Approach for Heat Conduction From Macro- to Micro-Scales},
+  journal  = {Journal of Heat Transfer},
+  volume   = {117},
+  number   = {1},
+  pages    = {8-16},
+  year     = {1995},
+  month    = {02},
+  abstract = {A universal constitutive equation between the heat flux vector and the temperature gradient is proposed to cover the fundamental behaviors of diffusion (macroscopic in both space and time), wave (macroscopic in space but microscopic in time), phonon-electron interactions (microscopic in both space and time), and pure phonon scattering. The model is generalized from the dual-phase-lag concept accounting for the lagging behavior in the high-rate response. While the phase lag of the heat flux captures the small-scale response in time, the phase lag of the temperature gradient captures the small-scale response in space. The universal form of the energy equation facilitates identifications of the physical parameters governing the transition from one mechanism (such as diffusion or wave) to another (the phonon-electron interaction).},
+  issn     = {0022-1481},
+  doi      = {10.1115/1.2822329},
+  url      = {https://doi.org/10.1115/1.2822329},
+  eprint   = {https://asmedigitalcollection.asme.org/heattransfer/article-pdf/117/1/8/5790148/8_1.pdf}
+}
+
+@article{Chen_2006,
+  title    = {A semiclassical two-temperature model for ultrafast laser heating},
+  journal  = {International Journal of Heat and Mass Transfer},
+  volume   = {49},
+  number   = {1},
+  pages    = {307-316},
+  year     = {2006},
+  issn     = {0017-9310},
+  doi      = {https://doi.org/10.1016/j.ijheatmasstransfer.2005.06.022},
+  url      = {https://www.sciencedirect.com/science/article/pii/S001793100500445X},
+  author   = {J.K. Chen and D.Y. Tzou and J.E. Beraun},
+  keywords = {Ultrashort laser heating, Boltzmann transport equation, Semiclassical two-temperature model, Electron drift velocity, Electron kinetic pressure}
+}
+
+@article{Chen_2010,
+  title    = {Modeling of femtosecond laser damage threshold on the two-layer metal films},
+  journal  = {Applied Surface Science},
+  volume   = {257},
+  number   = {5},
+  pages    = {1678-1683},
+  year     = {2010},
+  issn     = {0169-4332},
+  doi      = {https://doi.org/10.1016/j.apsusc.2010.08.122},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0169433210012134},
+  author   = {A.M. Chen and H.F. Xu and Y.F. Jiang and L.Z. Sui and D.J. Ding and H. Liu and M.X. Jin},
+  keywords = {Two-layer film, Damage threshold, Laser heating, Electron temperature, Lattice temperature, Two-temperature model}
+}
+
+@article{Hopkins_2013,
+  author  = {Hopkins, Patrick E. and Duda, John C. and Kaehr, Bryan and Wang Zhou, Xiao and Peter Yang, C.-Y. and Jones, Reese E.},
+  title   = {Ultrafast and steady-state laser heating effects on electron relaxation and phonon coupling mechanisms in thin gold films},
+  journal = {Applied Physics Letters},
+  volume  = {103},
+  number  = {21},
+  pages   = {211910},
+  year    = {2013},
+  month   = {11},
+  issn    = {0003-6951},
+  doi     = {10.1063/1.4833415},
+  url     = {https://doi.org/10.1063/1.4833415},
+  eprint  = {https://pubs.aip.org/aip/apl/article-pdf/doi/10.1063/1.4833415/13557953/211910_1_online.pdf}
+}
+
+@article{AlMalkawi_2018,
+  author  = {Al-Malkawi, G. H. and Hassanein, A.},
+  title   = {Impact of the electron-phonon coupling factor and electron heat capacity on the thermal response of targets irradiated by femtosecond laser},
+  journal = {Journal of Laser Applications},
+  volume  = {30},
+  number  = {4},
+  pages   = {042004},
+  year    = {2018},
+  month   = {10},
+  issn    = {1042-346X},
+  doi     = {10.2351/1.5057709},
+  url     = {https://doi.org/10.2351/1.5057709},
+  eprint  = {https://pubs.aip.org/lia/jla/article-pdf/doi/10.2351/1.5057709/16104243/042004_1_online.pdf}
+}
+
+
+@article{Yamashita_2006,
+  title    = {Heat transport analysis for femtosecond laser ablation with molecular dynamics-two temperature model method},
+  journal  = {Fusion Engineering and Design},
+  volume   = {81},
+  number   = {8},
+  pages    = {1695-1700},
+  year     = {2006},
+  note     = {Proceedings of the Seventh International Symposium on Fusion Nuclear Technology},
+  issn     = {0920-3796},
+  doi      = {https://doi.org/10.1016/j.fusengdes.2005.09.011},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0920379605007179},
+  author   = {Yuichiro Yamashita and Takehiko Yokomine and Shinji Ebara and Akihiko Shimizu},
+  keywords = {Modified molecular dynamics, Two-temperature model, Laser ablation, Heat transport mechanism}
+}
+
+@article{Petrakakis_2019,
+  title     = {Modelling of the ultrafast dynamics and surface plasmon properties of silicon upon irradiation with mid-IR femtosecond laser pulses},
+  author    = {Petrakakis, E. and Tsibidis, G. D. and Stratakis, E.},
+  journal   = {Phys. Rev. B},
+  volume    = {99},
+  issue     = {19},
+  pages     = {195201},
+  numpages  = {11},
+  year      = {2019},
+  month     = {05},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.99.195201},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.99.195201}
+}
+
+@article{Lasagni_2005,
+  author   = {Lasagni, A. and Holzapfel, C. and Mücklich, F.},
+  title    = {Periodic Pattern Formation of Intermetallic Phases with Long Range Order by Laser Interference Metallurgy},
+  journal  = {Advanced Engineering Materials},
+  volume   = {7},
+  number   = {6},
+  pages    = {487-492},
+  keywords = {Intermetallics, Laser interference, Patterning},
+  doi      = {https://doi.org/10.1002/adem.200400206},
+  url      = {https://advanced.onlinelibrary.wiley.com/doi/abs/10.1002/adem.200400206},
+  eprint   = {https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/adem.200400206},
+  year     = {2005}
+}
+
+@article{Lasagni_2007,
+  title    = {Advanced design of periodical architectures in bulk metals by means of Laser Interference Metallurgy},
+  journal  = {Applied Surface Science},
+  volume   = {254},
+  number   = {4},
+  pages    = {930-936},
+  year     = {2007},
+  note     = {Laser synthesis and processing of advanced materials},
+  issn     = {0169-4332},
+  doi      = {https://doi.org/10.1016/j.apsusc.2007.08.010},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0169433207011762},
+  author   = {A. Lasagni and M. D’Alessandria and R. Giovanelli and F. Mücklich},
+  keywords = {Laser Interference Metallurgy, Metallurgical processes, Laser patterning}
+}
+
+@article{Lasagni_2016,
+  author  = {Andrés Fabián Lasagni and Tim Kunze and Teja Roch and Valentin Lang and Anne Gärtner and Andreas Rank and Denise Günther and Matthias Bieda},
+  title   = {Efficient high-resolution surface patterning for 2D and 3D parts},
+  journal = {SPIE Newsroom},
+  year    = {2016},
+  month   = {03},
+  doi     = {10.1117/2.1201602.006325},
+  url     = {https://spie.org/news/efficient-high-resolution-surface-patterning-for-2d-and-3d-parts-3-29-16}
+}
+
+@misc{Lasagni_2017,
+  title    = {Direct laser interference patterning, 20 years of development: From the basics to industrial applications},
+  url      = {https://publica.fraunhofer.de/handle/publica/395351},
+  doi      = {10.1117/12.2252595},
+  author   = {Lasagni, Andrés-Fabián and Gachot, Carsten and Trinh, Kim E. and Hans, Michael and Rosenkranz, Andreas and Roch, Teja and Eckhardt, Sebastian and Kunze, Tim and Bieda, Matthias and Günther, Denise and Lang, Valentin and Mücklich, Frank},
+  year     = {2017},
+  keywords = {lasers}
+}
+
+@article{Dyck_2017,
+  author  = {Dyck, Tobias},
+  title   = {Functional Surfaces by Laser Interference},
+  journal = {Laser Technik Journal},
+  volume  = {14},
+  number  = {2},
+  pages   = {16-19},
+  doi     = {https://doi.org/10.1002/latj.201700007},
+  url     = {https://onlinelibrary.wiley.com/doi/abs/10.1002/latj.201700007},
+  eprint  = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/latj.201700007},
+  year    = {2017}
+}
+
+@article{Wang_2013,
+  author  = {Wang, Dapeng and Wang, Zuobin and Zhang, Ziang and Yue, Yong and Li, Dayou and Maple, Carsten},
+  title   = {Effects of polarization on four-beam laser interference lithography},
+  journal = {Applied Physics Letters},
+  volume  = {102},
+  number  = {8},
+  pages   = {081903},
+  year    = {2013},
+  month   = {02},
+  issn    = {0003-6951},
+  doi     = {10.1063/1.4793752},
+  url     = {https://doi.org/10.1063/1.4793752},
+  eprint  = {https://pubs.aip.org/aip/apl/article-pdf/doi/10.1063/1.4793752/14278386/081903\_1\_online.pdf}
+}
+
+@article{Liu_2023,
+  author         = {Liu, Ri and Cao, Liang and Liu, Dongdong and Wang, Lu and Saeed, Sadaf and Wang, Zuobin},
+  title          = {Laser Interference Lithography—A Method for the Fabrication of Controlled Periodic Structures},
+  journal        = {Nanomaterials},
+  volume         = {13},
+  year           = {2023},
+  number         = {12},
+  article-number = {1818},
+  url            = {https://www.mdpi.com/2079-4991/13/12/1818},
+  pubmedid       = {37368248},
+  issn           = {2079-4991},
+  doi            = {10.3390/nano13121818}
+}
+
+@article{Rodriguez_2009,
+  title     = {Laser interference lithography for nanoscale structuring of materials: From laboratory to industry},
+  author    = {A. Rodriquez and M. Echeverria and M. Ellman and N. Perez and Y.K. Verevkin and C. Peng and T. Berthou and Z. Wang and I. Ayerdi and J. Savall and S.M. Olaizola},
+  year      = {2009},
+  doi       = {10.1016/j.mee.2008.12.043},
+  language  = {English},
+  volume    = {86},
+  pages     = {937--940},
+  journal   = {Microelectronic Engineering},
+  issn      = {0167-9317},
+  publisher = {Elsevier B.V.},
+  number    = {4-6}
+}
+
+@article{Sipe_1983,
+  title     = {Laser-induced periodic surface structure. I. Theory},
+  author    = {Sipe, J. E. and Young, Jeff F. and Preston, J. S. and van Driel, H. M.},
+  journal   = {Phys. Rev. B},
+  volume    = {27},
+  issue     = {2},
+  pages     = {1141--1154},
+  numpages  = {0},
+  year      = {1983},
+  month     = {01},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.27.1141},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.27.1141}
+}
+
+@article{Byskov_2011,
+  author  = {Byskov, Jeppe and Savolainen, Juha-Matti and Christensen, Martin and Balling, Peter},
+  year    = {2011},
+  month   = {05},
+  pages   = {447-453},
+  title   = {Ultra-short pulse laser ablation of copper, silver and tungsten: Experimental data and two-temperature model simulations},
+  volume  = {103},
+  journal = {Applied Physics A: Materials Science and Processing},
+  doi     = {10.1007/s00339-011-6363-7}
+}
+
+@article{Sedao_2016,
+  author  = {Sedao, Xxx and Shugaev, Maxim V. and Wu, Chengping and Douillard, Thierry and Esnouf, Claude and Maurice, Claire and Reynaud, St{\'e}phanie and Pigeon, Florent and Garrelie, Florence and Zhigilei, Leonid V. and Colombier, Jean-Philippe},
+  title   = {Growth Twinning and Generation of High-Frequency Surface Nanostructures in Ultrafast Laser-Induced Transient Melting and Resolidification},
+  journal = {ACS Nano},
+  volume  = {10},
+  number  = {7},
+  pages   = {6995-7007},
+  year    = {2016},
+  doi     = {10.1021/acsnano.6b02970},
+  note    = {PMID: 27386891},
+  url     = {https://doi.org/10.1021/acsnano.6b02970},
+  eprint  = {https://doi.org/10.1021/acsnano.6b02970}
+}
+
+@article{Alamri_2019,
+  author         = {Alamri, Sabri and Fraggelakis, Fotis and Kunze, Tim and Krupop, Benjamin and Mincuzzi, Girolamo and Kling, Rainer and Lasagni, Andrés Fabián},
+  title          = {On the Interplay of DLIP and LIPSS Upon Ultra-Short Laser Pulse Irradiation},
+  journal        = {Materials},
+  volume         = {12},
+  year           = {2019},
+  number         = {7},
+  article-number = {1018},
+  url            = {https://www.mdpi.com/1996-1944/12/7/1018},
+  pubmedid       = {30934782},
+  issn           = {1996-1944},
+  doi            = {10.3390/ma12071018}
+}
+
+@article{Burrow_2011,
+  author  = {Burrow, Guy M. and Gaylord, Thomas K.},
+  title   = {Multi-Beam Interference Advances and Applications: Nano-Electronics, Photonic Crystals, Metamaterials, Subwavelength Structures, Optical Trapping, and Biomedical Structures},
+  journal = {Micromachines},
+  volume  = {2},
+  year    = {2011},
+  number  = {2},
+  pages   = {221--257},
+  url     = {https://www.mdpi.com/2072-666X/2/2/221},
+  issn    = {2072-666X},
+  doi     = {10.3390/mi2020221}
+}
+
+@article{Corkum_1988,
+  title     = {Thermal Response of Metals to Ultrashort-Pulse Laser Excitation},
+  author    = {Corkum, P. B. and Brunel, F. and Sherman, N. K. and Srinivasan-Rao, T.},
+  journal   = {Phys. Rev. Lett.},
+  volume    = {61},
+  issue     = {25},
+  pages     = {2886--2889},
+  numpages  = {0},
+  year      = {1988},
+  month     = {12},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevLett.61.2886},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevLett.61.2886}
+}
+
+@article{Fujimoto_1984,
+  title     = {Femtosecond Laser Interaction with Metallic Tungsten and Nonequilibrium Electron and Lattice Temperatures},
+  author    = {Fujimoto, J. G. and Liu, J. M. and Ippen, E. P. and Bloembergen, N.},
+  journal   = {Phys. Rev. Lett.},
+  volume    = {53},
+  issue     = {19},
+  pages     = {1837--1840},
+  numpages  = {0},
+  year      = {1984},
+  month     = {10},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevLett.53.1837},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevLett.53.1837}
+}
+
+@article{Spellauge_2022,
+  author  = {Spellauge, Maximilian and Doñate-Buendía, Carlos and Barcikowski, Stephan and Gökce, Bilal and Huber, Heinz},
+  year    = {2022},
+  month   = {03},
+  pages   = {68},
+  title   = {Comparison of ultrashort pulse ablation of gold in air and water by time-resolved experiments},
+  volume  = {11},
+  journal = {Light: Science \& Applications},
+  doi     = {10.1038/s41377-022-00751-6}
+}
+
+@article{Bulgakova_2002,
+  title    = {Phase explosion under ultrashort pulsed laser ablation: modeling with analysis of metastable state of melt},
+  journal  = {Applied Surface Science},
+  volume   = {197-198},
+  pages    = {41-44},
+  year     = {2002},
+  note     = {COLA'01 SI},
+  issn     = {0169-4332},
+  doi      = {https://doi.org/10.1016/S0169-4332(02)00300-8},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0169433202003008},
+  author   = {Nadezhda M Bulgakova and Igor M Bourakov},
+  keywords = {Femtosecond laser ablation, Metastable state, Phase explosion}
+}
+
+@article{Rudenko_2016,
+  title     = {From random inhomogeneities to periodic nanostructures induced in bulk silica by ultrashort laser},
+  author    = {Rudenko, Anton and Colombier, Jean-Philippe and Itina, Tatiana E.},
+  journal   = {Phys. Rev. B},
+  volume    = {93},
+  issue     = {7},
+  pages     = {075427},
+  numpages  = {13},
+  year      = {2016},
+  month     = {02},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.93.075427},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.93.075427}
+}
+
+@article{Tsibidis_2016,
+  title     = {Convection roll-driven generation of supra-wavelength periodic surface structures on dielectrics upon irradiation with femtosecond pulsed lasers},
+  author    = {Tsibidis, George D. and Skoulas, Evangelos and Papadopoulos, Antonis and Stratakis, Emmanuel},
+  journal   = {Phys. Rev. B},
+  volume    = {94},
+  issue     = {8},
+  pages     = {081305},
+  numpages  = {5},
+  year      = {2016},
+  month     = {08},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevB.94.081305},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevB.94.081305}
+}
+
+
+@article{Colombier_2020,
+  title     = {Mixing periodic topographies and structural patterns on silicon surfaces mediated by ultrafast photoexcited charge carriers},
+  author    = {Colombier, Jean-Philippe and Rudenko, Anton and Silaeva, Elena and Zhang, Hao and Sedao, Xxx and B\'evillon, Emile and Reynaud, St\'ephanie and Maurice, Claire and Pigeon, Florent and Garrelie, Florence and Stoian, Razvan},
+  journal   = {Phys. Rev. Res.},
+  volume    = {2},
+  issue     = {4},
+  pages     = {043080},
+  numpages  = {15},
+  year      = {2020},
+  month     = {10},
+  publisher = {American Physical Society},
+  doi       = {10.1103/PhysRevResearch.2.043080},
+  url       = {https://link.aps.org/doi/10.1103/PhysRevResearch.2.043080}
+}
+
+@article{Rudenko_2019,
+  url         = {https://doi.org/10.1515/nanoph-2018-0206},
+  title       = {Self-organization of surfaces on the nanoscale by topography-mediated selection of quasi-cylindrical and plasmonic waves},
+  title       = {},
+  author      = {Anton Rudenko and Cyril Mauclair and Florence Garrelie and Razvan Stoian and Jean-Philippe Colombier},
+  pages       = {459--465},
+  volume      = {8},
+  number      = {3},
+  journal     = {Nanophotonics},
+  doi         = {doi:10.1515/nanoph-2018-0206},
+  year        = {2019},
+  lastchecked = {2025-07-19}
+}
+
+@inbook{Toro_2009,
+  author    = {Toro, Eleuterio F.},
+  title     = {The Equations of Fluid Dynamics},
+  booktitle = {Riemann Solvers and Numerical Methods for Fluid Dynamics: A Practical Introduction},
+  year      = {2009},
+  publisher = {Springer Berlin Heidelberg},
+  address   = {Berlin, Heidelberg},
+  pages     = {1--40},
+  isbn      = {978-3-540-49834-6},
+  doi       = {10.1007/b79761_1},
+  url       = {https://doi.org/10.1007/b79761_1}
+}
+
+@article{Cho_2009,
+  doi       = {10.1088/0022-3727/42/17/175502},
+  url       = {https://dx.doi.org/10.1088/0022-3727/42/17/175502},
+  year      = {2009},
+  month     = {08},
+  publisher = {},
+  volume    = {42},
+  number    = {17},
+  pages     = {175502},
+  author    = {Cho, Jung-Ho and Farson, Dave F and Milewski, John O and Hollis, Kendall J},
+  title     = {Weld pool flows during initial stages of keyhole formation in laser welding},
+  journal   = {Journal of Physics D: Applied Physics}
+}
+
+@article{Zhu_2020,
+  author         = {Zhu, Dongpo and Zhang, Peiyun and Tian, Zhixiang and Chen, Cheng and Hua, Xijun and Xu, Sheng and Xie, Xuan},
+  title          = {Numerical Study on the Evolution Mechanism of the Crater under a Millisecond Laser},
+  journal        = {Applied Sciences},
+  volume         = {10},
+  year           = {2020},
+  number         = {24},
+  article-number = {9054},
+  url            = {https://www.mdpi.com/2076-3417/10/24/9054},
+  issn           = {2076-3417},
+  doi            = {10.3390/app10249054}
+}
+
+@incollection{Xiao_2021,
+  author    = {Xianfeng Xiao and Cong Lu and Yanshu Fu and Xiaojun Ye and Lijun Song},
+  title     = {Progress on Experimental Study of Melt Pool Flow Dynamics in Laser Material Processing},
+  booktitle = {Liquid Metals},
+  publisher = {IntechOpen},
+  address   = {Rijeka},
+  year      = {2021},
+  editor    = {Samson Jerold Samuel Chelladurai and S. Gnanasekaran and Suresh Mayilswamy},
+  chapter   = {3},
+  doi       = {10.5772/intechopen.97205},
+  url       = {https://doi.org/10.5772/intechopen.97205}
+}
+
+@article{Zhao_2011,
+  author  = {{Zhao}, Haiyan and {Niu}, Wenchong and {Zhang}, Bin and {Lei}, Yongping and {Kodama}, Masaru and {Ishide}, Takashi},
+  title   = {{Modelling of keyhole dynamics and porosity formation considering the adaptive keyhole shape and three-phase coupling during deep-penetration laser welding}},
+  journal = {Journal of Physics D Applied Physics},
+  year    = {2011},
+  month   = {12},
+  volume  = {44},
+  number  = {48},
+  eid     = {485302},
+  pages   = {485302},
+  doi     = {10.1088/0022-3727/44/48/485302},
+  adsurl  = {https://ui.adsabs.harvard.edu/abs/2011JPhD...44V5302Z},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{Autrique_2013,
+  author  = {Autrique, D. and Clair, G. and L'Hermite, D. and Alexiades, V. and Bogaerts, A. and Rethfeld, B.},
+  title   = {The role of mass removal mechanisms in the onset of ns-laser induced plasma formation},
+  journal = {Journal of Applied Physics},
+  volume  = {114},
+  number  = {2},
+  pages   = {023301},
+  year    = {2013},
+  month   = {07},
+  issn    = {0021-8979},
+  doi     = {10.1063/1.4812577},
+  url     = {https://doi.org/10.1063/1.4812577},
+  eprint  = {https://pubs.aip.org/aip/jap/article-pdf/doi/10.1063/1.4812577/14931156/023301\_1\_online.pdf}
+}
+
+@article{Levashov_2007,
+  title     = {Itteos: 5.8 Software for Calculation of EOS for Metals},
+  author    = {Levashov, PR and Khishchenko, KV},
+  year      = {2007},
+  journal   = {},
+  publisher = {Institute for High Energy Densities, Moscow, Russia}
+}
+
+@article{Cheng_2013,
+  title    = {A review of ultrafast laser materials micromachining},
+  journal  = {Optics \& Laser Technology},
+  volume   = {46},
+  pages    = {88-102},
+  year     = {2013},
+  issn     = {0030-3992},
+  doi      = {https://doi.org/10.1016/j.optlastec.2012.06.037},
+  url      = {https://www.sciencedirect.com/science/article/pii/S0030399212003064},
+  author   = {Jian Cheng and Chang-sheng Liu and Shuo Shang and Dun Liu and Walter Perrie and Geoff Dearden and Ken Watkins},
+  keywords = {Ultrafast laser, Micromachining, Ablation mechanism}
+}
+
+@article{Jin_2002,
+  author  = {{Jin}, Xiangzhong and {Li}, Lijun and {Zhang}, Yi},
+  title   = {{A study on fresnel absorption and reflections in the keyhole in deep penetration laser welding}},
+  journal = {Journal of Physics D Applied Physics},
+  year    = 2002,
+  month   = sep,
+  volume  = {35},
+  number  = {18},
+  pages   = {2304-2310},
+  doi     = {10.1088/0022-3727/35/18/312},
+  adsurl  = {https://ui.adsabs.harvard.edu/abs/2002JPhD...35.2304J},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+@article{Ho_1996,
+  author  = {Ho, J. R. and Grigoropoulos, C. P. and Humphrey, J. A. C.},
+  title   = {Gas dynamics and radiation heat transfer in the vapor plume produced by pulsed laser irradiation of aluminum},
+  journal = {Journal of Applied Physics},
+  volume  = {79},
+  number  = {9},
+  pages   = {7205-7215},
+  year    = {1996},
+  month   = {05},
+  issn    = {0021-8979},
+  doi     = {10.1063/1.361436},
+  url     = {https://doi.org/10.1063/1.361436},
+  eprint  = {https://pubs.aip.org/aip/jap/article-pdf/79/9/7205/18685179/7205\_1\_online.pdf}
+}
+
+@article{Hu_2021,
+  title   = {Instabilities of thermocapillary liquid layers with two free surfaces},
+  journal = {International Journal of Heat and Mass Transfer},
+  volume  = {173},
+  pages   = {121217},
+  year    = {2021},
+  issn    = {0017-9310},
+  doi     = {https://doi.org/10.1016/j.ijheatmasstransfer.2021.121217},
+  url     = {https://www.sciencedirect.com/science/article/pii/S0017931021003203},
+  author  = {Kai-Xin Hu and Cheng-Zhuo Zhao and Shao-Neng Zhang and Qi-Sheng Chen}
+}
+
+@article{Louis_2023,
+  title    = {Optical properties, surface composition and desorption of Stainless Steel (316L) studied from ambient temperature to 1000 K in vacuum},
+  journal  = {Materials Today Communications},
+  volume   = {36},
+  pages    = {106865},
+  year     = {2023},
+  issn     = {2352-4928},
+  doi      = {https://doi.org/10.1016/j.mtcomm.2023.106865},
+  url      = {https://www.sciencedirect.com/science/article/pii/S2352492823015568},
+  author   = {Cyprien {Louis De Canonville} and Marco Minissale and Francisco Romero-Lairado and Eric Salomon and Gregory Giacometti and Thierry Angot and Régis Bisson and Laurent Gallais},
+  keywords = {Stainless steel, Optical properties, Surface composition, High temperature, Annealing}
+}
+
+@article{Trotter_2022,
+  author     = {Trotter, James D. and Cai, Xing and Funke, Simon W.},
+  title      = {On Memory Traffic and Optimisations for Low-order Finite Element Assembly Algorithms on Multi-core CPUs},
+  year       = {2022},
+  issue_date = {June 2022},
+  publisher  = {Association for Computing Machinery},
+  address    = {New York, NY, USA},
+  volume     = {48},
+  number     = {2},
+  issn       = {0098-3500},
+  url        = {https://doi.org/10.1145/3503925},
+  doi        = {10.1145/3503925},
+  journal    = {ACM Trans. Math. Softw.},
+  month      = may,
+  articleno  = {19},
+  numpages   = {31},
+  keywords   = {Cavium TX2, AMD Epyc, Intel Xeon, multi-core, assembly, Finite element methods}
+}
+
+@article{Harlow_1965,
+  title   = {Numerical calculation of time-dependent viscous incompressible flow of fluid with free surface},
+  author  = {Harlow, Francis H and Welch, J Eddie and others},
+  journal = {Physics of fluids},
+  volume  = {8},
+  number  = {12},
+  pages   = {2182},
+  year    = {1965}
+}
+
+@unknown{Ahmed_2018,
+  author = {Ahmed, Mohamed},
+  year   = {2018},
+  month  = {01},
+  pages  = {},
+  title  = {Report: Application of Projection Method and Staggered Grid to Incompressible Navier-Stokes Equations},
+  doi    = {10.13140/RG.2.2.19796.94083}
+} 
+
+@article{Oane_2021,
+  title     = {A State-of-the-Art Review on Integral Transform Technique in Laser-Material Interaction: Fourier and Non-Fourier Heat Equations},
+  volume    = {14},
+  issn      = {1996-1944},
+  url       = {http://dx.doi.org/10.3390/ma14164733},
+  doi       = {10.3390/ma14164733},
+  number    = {16},
+  journal   = {Materials},
+  publisher = {MDPI AG},
+  author    = {Oane, Mihai and Mahmood, Muhammad Arif and Popescu, Andrei C.},
+  year      = {2021},
+  month     = aug,
+  pages     = {4733}
+}
+
+@article{Bai_1995,
+  author   = {Bai, C. and Lavine, A. S.},
+  title    = {On Hyperbolic Heat Conduction and the Second Law of Thermodynamics},
+  journal  = {Journal of Heat Transfer},
+  volume   = {117},
+  number   = {2},
+  pages    = {256-263},
+  year     = {1995},
+  month    = {05},
+  abstract = {For situations in which the speed of thermal propagation cannot be considered infinite, a hyperbolic heat conduction equation is typically used to analyze the heat transfer. The conventional hyperbolic heat conduction equation is not consistent with the second law of thermodynamics, in the context of nonequilibrium rational thermodynamics. A modified hyperbolic type heat conduction equation, which is consistent with the second law of thermodynamics, is investigated in this paper. To solve this equation, we introduce a numerical scheme from the field of computational compressible flow. This scheme uses the characteristic properties of a hyperbolic equation and has no oscillation. By solving a model problem, we show that the conventional hyperbolic heat conduction equation can give physically wrong solutions (temperature less than absolute zero) under some conditions. The modified equation does not display these erroneous results. However, the difference between results of these two models is negligible except under extreme conditions.},
+  issn     = {0022-1481},
+  doi      = {10.1115/1.2822514},
+  url      = {https://doi.org/10.1115/1.2822514},
+  eprint   = {https://asmedigitalcollection.asme.org/heattransfer/article-pdf/117/2/256/5910570/256_1.pdf}
+}
+
+@article{Cattaneo_1948,
+  author   = {Cattaneo, Carlo},
+  title    = {Sulla conduzione del calore},
+  journal  = {Atti del Seminario Matematico e Fisico dell'Universit{\`a} di Modena},
+  year     = {1948},
+  volume   = {3},
+  pages    = {83--101},
+  language = {italian},
+  url      = {https://www.scirp.org/reference/referencespapers?referenceid=2713833}
+}
+
+@article{Chandrasekharaiah_1998,
+  author  = {Chandrasekharaiah, D. S.},
+  title   = {Hyperbolic Thermoelasticity: A Review of Recent Literature},
+  journal = {Applied Mechanics Reviews},
+  year    = {1998},
+  volume  = {51},
+  number  = {12},
+  pages   = {705--729},
+  doi     = {10.1115/1.3098984},
+  url     = {https://asmedigitalcollection.asme.org/appliedmechanicsreviews/article/51/12/705/401482/Hyperbolic-Thermoelasticity-A-Review-of-Recent}
+}
+
+@article{Maurer_1969,
+  author  = {Maurer, Michael J.},
+  title   = {Relaxation Model for Heat Conduction in Metals},
+  journal = {Journal of Applied Physics},
+  volume  = {40},
+  number  = {13},
+  pages   = {5123-5130},
+  year    = {1969},
+  month   = {12},
+  issn    = {0021-8979},
+  doi     = {10.1063/1.1657362},
+  url     = {https://doi.org/10.1063/1.1657362},
+  eprint  = {https://pubs.aip.org/aip/jap/article-pdf/40/13/5123/18352419/5123_1_online.pdf}
+}
+
+@article{Vernotte_1958,
+  author   = {Vernotte, Pierre},
+  title    = {Les paradoxes de la th{\'e}orie continue de l'{\'e}quation de la chaleur},
+  journal  = {Comptes Rendus de l'Acad{\'e}mie des Sciences},
+  year     = {1958},
+  volume   = {246},
+  pages    = {3154--3155},
+  language = {french},
+  url      = {https://www.scirp.org/reference/referencespapers?referenceid=3658964}
+}
+
+@inproceedings{Majchrzak_2012,
+  author    = {Majchrzak, Ewa},
+  title     = {Parabolic and Hyperbolic Two-Temperature Models of Microscopic Heat Transfer. Comparison of Numerical Solutions},
+  year      = {2012},
+  month     = {1},
+  volume    = {706},
+  pages     = {1454--1459},
+  booktitle = {THERMEC 2011},
+  series    = {Materials Science Forum},
+  publisher = {Trans Tech Publications Ltd},
+  doi       = {10.4028/www.scientific.net/MSF.706-709.1454},
+  keywords  = {Laser Pulse, Microscale Heat Transfer, Numerical Analysis, Two-Temperature Models}
+}
+
+@article{Mochnacki_2013,
+  doi       = {10.17512/jamcm.2013.4.12},
+  url       = {https://doi.org/10.17512/jamcm.2013.4.12},
+  year      = 2013,
+  publisher = {The Publishing Office of Czestochowa University of Technology},
+  volume    = {12},
+  number    = {4},
+  pages     = {97--102},
+  author    = {Bohdan Mochnacki and  Marek Paruch},
+  title     = {Cattaneo-Vernotte equation. Identification of relaxation time using evolutionary algorithms},
+  journal   = {Journal of Applied Mathematics and Computational Mechanics}
+}
+
+@article{Qiu_1993,
+  author   = {Qiu, T. Q. and Tien, C. L.},
+  title    = {Heat Transfer Mechanisms During Short-Pulse Laser Heating of Metals},
+  journal  = {Journal of Heat Transfer},
+  volume   = {115},
+  number   = {4},
+  pages    = {835-841},
+  year     = {1993},
+  month    = {11},
+  abstract = {This work studies heat transfer mechanisms during ultrafast laser heating of metals from a microscopic point of view. The heating process is composed of three processes: the deposition of radiation energy on electrons, the transport of energy by electrons, and the heating of the material lattice through electron-lattice interactions. The Boltzmann transport equation is used to model the transport of electrons and electron-lattice interactions. The scattering term of the Boltzmann equation is evaluated from quantum mechanical considerations, which shows the different contributions of the elastic and inelastic electron-lattice scattering processes on energy transport. By solving the Boltzmann equation, a hyperbolic two-step radiation heating model is rigorously established. It reveals the hyperbolic nature of energy flux carried by electrons and the nonequilibrium between electrons and the lattice during fast heating processes. Predictions from the current model agree with available experimental data during subpicosecond laser heating.},
+  issn     = {0022-1481},
+  doi      = {10.1115/1.2911377},
+  url      = {https://doi.org/10.1115/1.2911377},
+  eprint   = {https://asmedigitalcollection.asme.org/heattransfer/article-pdf/115/4/835/5698866/835_1.pdf}
+}
+
+@inbook{Tzou_2014ch1,
+  publisher = {John Wiley \& Sons, Ltd},
+  isbn      = {9781118818275},
+  title     = {Heat Transport by Phonons and Electrons},
+  booktitle = {Macro- to Microscale Heat Transfer},
+  chapter   = {1},
+  pages     = {1-59},
+  doi       = {https://doi.org/10.1002/9781118818275.ch1},
+  url       = {https://onlinelibrary.wiley.com/doi/abs/10.1002/9781118818275.ch1},
+  eprint    = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781118818275.ch1},
+  year      = {2014},
+  keywords  = {microscale heat transfer, phase lags, phonon radiative transfer model, phonon-electron interaction model, phonon-scattering model, thermal wave model},
+  abstract  = {Summary This chapter provides a brief summary of existing microscale heat-transfer models, including the microscopic two-step model (phonon-electron interaction (for metals) model), phonon-scattering (for semiconductors, dielectric crystals, and insulators) model, phonon radiative transfer model, and the thermal wave model. The first three models emphasize microscale effects in space, while the fourth, the thermal wave model, describes microscale effects in time. Phase lags are time constants characterizing the ultrafast transient process of heat transport in small scales. They are the pillars in support of thermal lagging, and are new thermophysical properties in micro/nanoscale heat transfer. The chapter describes the temperature dependence of the two phase lags, namely phase lag of the temperature gradient and phase lag of the heat flux vector in the dual-phase-lag model.}
+}
+
+@inbook{Tzou_2014ch2,
+  publisher = {John Wiley \& Sons, Ltd},
+  isbn      = {9781118818275},
+  title     = {Lagging Behavior},
+  booktitle = {Macro- to Microscale Heat Transfer},
+  chapter   = {2},
+  pages     = {61-124},
+  doi       = {https://doi.org/10.1002/9781118818275.ch2},
+  url       = {https://onlinelibrary.wiley.com/doi/abs/10.1002/9781118818275.ch2},
+  eprint    = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781118818275.ch2},
+  year      = {2014},
+  keywords  = {depth of thermal penetration, fast-transient process, heat flux formulation, microscale heat transfer, microstructural interactions, nanoscale heat transfer, phase-lag concept, temperature formulation},
+  abstract  = {Summary This chapter explains the physical foundation and mathematical methods describing the lagging response in times comparable to the phase lags characterizing the microstructural interactions. The chapter establishes the theoretical foundation for the lagging response in times comparable to the characteristic times in micro/nanoscale heat transfer. It results in a new type of energy equation in heat transport, capturing the classical theories of diffusion, thermal waves, phonon scattering, and phonon-electron interaction in the same framework of thermal lagging. The resulting model employing the two phase lags in describing the transient process is called the dual-phase-lag model. Universality of the dual-phase-lag model facilitates a consistent approach describing the intrinsic transition from one type of behavior (diffusion, for example) to another (phonon-electron interaction or phonon scattering) associated with shortening of the response time.}
+}
+
+@article{Zhai_2020,
+  title     = {Parabolic two-step model and accurate numerical scheme for nanoscale heat conduction induced by ultrashort-pulsed laser heating},
+  journal   = {Journal of Computational and Applied Mathematics},
+  volume    = {369},
+  pages     = {112591},
+  year      = {2020},
+  month     = may,
+  issn      = {0377-0427},
+  doi       = {10.1016/j.cam.2019.112591},
+  url       = {https://www.sciencedirect.com/science/article/pii/S0377042719305965},
+  publisher = {Elsevier BV},
+  author    = {Zhai, Shuying and Huang, Langyang and Weng, Zhifeng and Dai, Weizhong},
+  keywords  = {Nanoscale heat conduction, Ultrashort-pulsed laser heating, Compact finite difference scheme, Stability, Convergence}
+}
+
+@inbook{Tzou_2014ch5,
+  publisher = {John Wiley \& Sons, Ltd},
+  isbn      = {9781118818275},
+  title     = {Ultrafast Pulse-Laser Heating on Metal Films},
+  booktitle = {Macro- to Microscale Heat Transfer},
+  chapter   = {5},
+  pages     = {193-229},
+  doi       = {https://doi.org/10.1002/9781118818275.ch5},
+  url       = {https://onlinelibrary.wiley.com/doi/abs/10.1002/9781118818275.ch5},
+  eprint    = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/9781118818275.ch5},
+  year      = {2014},
+  keywords  = {lagging behavior, laser light intensity, microscopic phonon-electron interaction model, ultrafast pulse-laser heating}
+}
+
+@article{Niu_2009,
+  title    = {A hyperbolic two-step model based finite difference scheme for studying thermal deformation in a double-layered thin film exposed to ultrashort-pulsed lasers},
+  journal  = {International Journal of Thermal Sciences},
+  volume   = {48},
+  number   = {1},
+  pages    = {34-49},
+  year     = {2009},
+  issn     = {1290-0729},
+  doi      = {https://doi.org/10.1016/j.ijthermalsci.2008.02.001},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1290072908000367},
+  author   = {Tianchan Niu and Weizhong Dai},
+  keywords = {Hyperbolic two-step model, Finite difference scheme, Ultrashort-pulsed laser, Thermal deformation}
+} 
+@article{Huang_2019,
+  title   = {High-Order, Linearly Stable, Partitioned Solvers for General
+             Multiphysics Problems Based on Implicit--Explicit Runge--Kutta Schemes},
+  author  = {Huang, D.Z. and Persson, P.-O. and Zahr, M.J.},
+  year    = {2019},
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume  = {346},
+  pages   = {674--706},
+  doi     = {10.1016/j.cma.2018.09.015}
+}
+
+@article{Hubner_2004,
+  title   = {A monolithic approach to fluid-structure interaction using
+             space-time finite elements},
+  author  = {H{\"u}bner, Bj{\"o}rn and Walhorn, Elmar and Dinkler, Dieter},
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume  = {193},
+  number  = {23},
+  pages   = {2087--2104},
+  year    = {2004},
+  doi     = {10.1016/j.cma.2004.01.024}
+}
+
+@article{Michler_2004,
+  title   = {A monolithic approach to fluid-structure interaction},
+  author  = {Michler, C. and Hulshoff, S.J. and van Brummelen, E.H.
+             and de Borst, R.},
+  journal = {Computers \& Fluids},
+  volume  = {33},
+  number  = {5},
+  pages   = {839--848},
+  year    = {2004},
+  doi     = {10.1016/j.compfluid.2003.06.006}
+}
+
+@inproceedings{Hron_2006,
+  author    = {Hron, Jaroslav and Turek, Stefan},
+  title     = {A Monolithic {FEM}/Multigrid Solver for an {ALE} Formulation of
+               Fluid-Structure Interaction with Applications in Biomechanics},
+  booktitle = {Fluid-Structure Interaction},
+  year      = {2006},
+  publisher = {Springer Berlin Heidelberg},
+  pages     = {146--170},
+  doi       = {10.1007/3-540-34596-5_7}
+}
+
+@article{Farhat_2000,
+  title   = {Two efficient staggered algorithms for the serial and parallel
+             solution of three-dimensional nonlinear transient aeroelastic problems},
+  author  = {Farhat, C. and Lesoinne, M.},
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume  = {182},
+  number  = {3},
+  pages   = {499--515},
+  year    = {2000},
+  doi     = {10.1016/S0045-7825(99)00206-6}
+}
+
+@article{Piperno_2001,
+  title   = {Partitioned procedures for the transient solution of coupled
+             aeroelastic problems -- Part II: energy transfer analysis and
+             three-dimensional applications},
+  author  = {Piperno, Serge and Farhat, Charbel},
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume  = {190},
+  number  = {24},
+  pages   = {3147--3170},
+  year    = {2001},
+  doi     = {10.1016/S0045-7825(00)00386-8}
+}
+
+@article{Badia_2008,
+  title   = {Fluid-structure partitioned procedures based on Robin
+             transmission conditions},
+  author  = {Badia, Santiago and Nobile, Fabio and Vergara, Christian},
+  journal = {Journal of Computational Physics},
+  volume  = {227},
+  number  = {14},
+  pages   = {7027--7051},
+  year    = {2008},
+  doi     = {10.1016/j.jcp.2008.04.006}
+}
+
+@conference{Cyr_2016,
+  author       = {Cyr, Eric C and Shadid, John N. and Wildey, Timothy Michael
+                  and others},
+  title        = {Implicit-Explicit ({IMEX}) Time Integration for Multi-Physics:
+                  Application to {ALE} and Plasma Simulation},
+  year         = {2016},
+  organization = {Sandia National Laboratories}
+}
+
+@article{Kennedy_2003,
+  title   = {Additive Runge-Kutta Schemes for Convection-Diffusion-Reaction
+             Equations},
+  author  = {Kennedy, Christopher A. and Carpenter, Mark H.},
+  journal = {Applied Numerical Mathematics},
+  volume  = {44},
+  pages   = {139--181},
+  year    = {2003}
+}
+
+@article{Ascher_1997,
+  title   = {Implicit-explicit Runge-Kutta methods for time-dependent
+             partial differential equations},
+  author  = {Ascher, Uri M. and Ruuth, Steven J. and Spiteri, Raymond J.},
+  journal = {Applied Numerical Mathematics},
+  volume  = {25},
+  number  = {2},
+  pages   = {151--167},
+  year    = {1997},
+  doi     = {10.1016/S0168-9274(97)00056-1}
+}
+
+@misc{Huang_2018,
+  title         = {A high-order partitioned solver for general multiphysics problems
+                   and its applications in optimization},
+  author        = {Huang, Daniel Z. and Persson, Per-Olof and Zahr, Matthew J.},
+  year          = {2018},
+  eprint        = {1812.11853},
+  archiveprefix = {arXiv}
+}
+
+@article{Zhao_2025,
+  title   = {Staggered algorithms for coupled problems: Convergence analysis
+             and application to phase field modeling of thermal cracking},
+  author  = {Zhao, Yonghui and Jiang, Juhan and Lyu, Bing and Shen, Yongxing},
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume  = {446},
+  pages   = {118238},
+  year    = {2025},
+  doi     = {10.1016/j.cma.2025.118238}
+}
+
+@book{Teschl_2012,
+  title     = {Ordinary Differential Equations and Dynamical Systems},
+  author    = {Teschl, G.},
+  year      = {2012},
+  publisher = {American Mathematical Society},
+  series    = {Graduate Studies in Mathematics}
+}
+
+@book{Amann_1995,
+  author    = {Amann, Herbert},
+  title     = {Linear and Quasilinear Parabolic Problems. Vol.\ I},
+  publisher = {Birkh{\"a}user Boston Inc.},
+  year      = {1995},
+  volume    = {89},
+  doi       = {10.1007/978-3-0348-9221-6}
+}
+
+@book{Ladyzhenskaya_1968,
+  title     = {Linear and Quasi-linear Equations of Parabolic Type},
+  author    = {Ladyzhenskaya, O.A. and Solonnikov, V.A. and Ural'tseva, N.N.},
+  year      = {1968},
+  publisher = {American Mathematical Society},
+  volume    = {23},
+  series    = {Translations of Mathematical Monographs}
+}
+
+@book{Evans_2010,
+  author    = {Evans, Lawrence C.},
+  title     = {Partial Differential Equations},
+  edition   = {2},
+  year      = {2010},
+  publisher = {American Mathematical Society},
+  series    = {Graduate Studies in Mathematics},
+  volume    = {19},
+  isbn      = {978-0-8218-4974-3}
+}
+
+@book{Temam_1984,
+  author    = {Temam, Roger},
+  title     = {Navier--Stokes Equations: Theory and Numerical Analysis},
+  edition   = {3},
+  year      = {1984},
+  publisher = {North-Holland},
+  series    = {Studies in Mathematics and Its Applications},
+  volume    = {2}
+}
+
+@article{Gronwall_1919,
+  author       = {Gronwall, Thomas H.},
+  title        = {Note on the Derivatives with Respect to a Parameter of the Solutions of a System of Differential Equations},
+  journaltitle = {Annals of Mathematics},
+  series       = {Second Series},
+  volume       = {20},
+  number       = {4},
+  year         = {1919},
+  pages        = {292--296},
+  doi          = {10.2307/1967124}
+}
+
+@article{Alt_Luckhaus_1983,
+  author       = {Alt, Hans Wilhelm and Luckhaus, Stephan},
+  title        = {Quasilinear Elliptic-Parabolic Differential Equations},
+  journaltitle = {Mathematische Zeitschrift},
+  volume       = {183},
+  year         = {1983},
+  pages        = {311--341}
+}
+
+@misc{Pollock_2018,
+  title         = {Anderson-accelerated convergence of Picard iterations for
+                   incompressible {Navier-Stokes} equations},
+  author        = {Pollock, Sara and Rebholz, Leo G. and Xiao, Mengying},
+  year          = {2018},
+  eprint        = {1810.08494},
+  archiveprefix = {arXiv}
+}
+
+@techreport{Kadioglu_2008,
+  author      = {Kadioglu, Samet Y and Nourgaliev, Robert R and Mousseau, Vincent A},
+  title       = {A Comparative Study of the Harmonic and Arithmetic Averaging of
+                 Diffusion Coefficients for Non-linear Heat Conduction Problems},
+  institution = {Idaho National Laboratory},
+  year        = {2008},
+  doi         = {10.2172/928087}
+}
+
+@book{Taylor_2023,
+  author    = {Taylor, Michael E.},
+  title     = {Partial Differential Equations III: Nonlinear Equations},
+  series    = {Applied Mathematical Sciences},
+  volume    = {117},
+  publisher = {Springer},
+  year      = {2023},
+  edition   = {3},
+  doi       = {10.1007/978-3-031-33928-8},
+  note      = {Ch.~14 §B: Leray-Schauder fixed-point theory for nonlinear 
+               elliptic equations; Ch.~15 §4: reaction-diffusion equations
+               and quasilinear parabolic systems}
+}
+
+@article{Tsibidis_2018,
+  author  = {Zuhlke, Craig A. and Tsibidis, George D. and Anderson, Troy and Stratakis, Emmanuel and Gogos, George and Alexander, Dennis R.},
+  title   = {Investigation of femtosecond laser induced ripple formation on copper for varying incident angle},
+  journal = {AIP Advances},
+  volume  = {8},
+  number  = {1},
+  pages   = {015212},
+  year    = {2018},
+  doi     = {10.1063/1.5020029},
+  url     = {https://doi.org/10.1063/1.5020029}
+}
+
+@inproceedings{Hashida_2001,
+  author    = {Hashida, Masaki and Semerok, Alexandre F. and Gobert, Olivier and Petite, Guillaume and Wagner, J. F.},
+  title     = {Ablation thresholds of metals with femtosecond laser pulses},
+  booktitle = {Proceedings of SPIE - The International Society for Optical Engineering},
+  volume    = {4423},
+  pages     = {178--185},
+  year      = {2001},
+  doi       = {10.1117/12.431220},
+  url       = {https://doi.org/10.1117/12.431220}
+}
+
+@article{Gamaly_2002,
+  author  = {Gamaly, E. G. and Rode, A. V. and Luther-Davies, B. and Tikhonchuk, V. T.},
+  title   = {Ablation of solids by femtosecond lasers: Ablation mechanism and ablation thresholds for metals and dielectrics},
+  journal = {Physics of Plasmas},
+  volume  = {9},
+  number  = {3},
+  pages   = {949--957},
+  year    = {2002},
+  doi     = {10.1063/1.1447555},
+  url     = {https://doi.org/10.1063/1.1447555}
+}
+
+@article{Forster_2021,
+  author  = {F{\"o}rster, Daniel J. and J{\"a}ggi, Beat and Michalowski, Andreas and Neuenschwander, Beat},
+  title   = {Review on Experimental and Theoretical Investigations of Ultra-Short Pulsed Laser Ablation of Metals with Burst Pulses},
+  journal = {Materials},
+  volume  = {14},
+  number  = {12},
+  pages   = {3331},
+  year    = {2021},
+  doi     = {10.3390/ma14123331},
+  url     = {https://doi.org/10.3390/ma14123331}
+}
+
+@article{He_2024,
+  author  = {He, Zhicong and Lei, Lixiang and Lin, Shaojiang and Tian, Shaoan and Tian, Weilan and Yu, Zaiyuan and Li, Fang},
+  title   = {Metal Material Processing Using Femtosecond Lasers: Theories, Principles, and Applications},
+  journal = {Materials},
+  volume  = {17},
+  number  = {14},
+  pages   = {3386},
+  year    = {2024},
+  doi     = {10.3390/ma17143386},
+  url     = {https://doi.org/10.3390/ma17143386}
+}
+
+@article{Cheng_2016,
+  author  = {Cheng, C. W. and Wang, S. Y. and Chang, K. P. and Chen, J. K.},
+  title   = {Femtosecond laser ablation of copper at high laser fluence: Modeling and experimental comparison},
+  journal = {Applied Surface Science},
+  volume  = {361},
+  pages   = {41--48},
+  year    = {2016},
+  doi     = {10.1016/j.apsusc.2015.11.055},
+  url     = {https://doi.org/10.1016/j.apsusc.2015.11.055}
+}
+
+@article{Zhou_2022,
+  author  = {Zhou, Yu and Wu, Di and Luo, Guohu and Hu, Yongxiang and Qin, Yu},
+  title   = {Efficient modeling of metal ablation irradiated by femtosecond laser via simplified two-temperature model coupling molecular dynamics},
+  journal = {Journal of Manufacturing Processes},
+  volume  = {77},
+  pages   = {783--793},
+  year    = {2022},
+  doi     = {10.1016/j.jmapro.2022.03.048},
+  url     = {https://doi.org/10.1016/j.jmapro.2022.03.048}
+}
+
+@article{Wang_2024,
+  author  = {Wang, Chao and Cai, Yukui and Li, Jiahang and Tang, Kuanxin and Song, Qinghua and Wang, Bing and Liu, Zhanqiang},
+  title   = {Numerical simulation and experimental study of femtosecond laser ablation of copper: A two-temperature model with temperature-dependent properties and multiple phase transitions},
+  journal = {Optics \& Laser Technology},
+  volume  = {171},
+  pages   = {110335},
+  year    = {2024},
+  doi     = {10.1016/j.optlastec.2023.110335},
+  url     = {https://doi.org/10.1016/j.optlastec.2023.110335}
+}
+
+@article{Rusiniak_2000,
+  title    = {Dielectric properties and structure of water at room temperature. New experimental data in 5 Hz–13 Mhz frequency range},
+  journal  = {Physics and Chemistry of the Earth, Part A: Solid Earth and Geodesy},
+  volume   = {25},
+  number   = {2},
+  pages    = {201-207},
+  year     = {2000},
+  issn     = {1464-1895},
+  doi      = {https://doi.org/10.1016/S1464-1895(00)00032-6},
+  url      = {https://www.sciencedirect.com/science/article/pii/S1464189500000326},
+  author   = {L Rusiniak},
+  abstract = {The dielectric permittivity of destilled water was measured in the frequency range of 5 Hz to 13 MHz with different thicknesses of the sample and for various oscillator levels. The two electrode method was used with plate condenser. A simple model, composed of a dipole liquid with domain structure is described. Basing on the model, we show possible ways of polarization. The present conclusions relate dielectric properties of water which result from the model. We propose a new conductivity model for dipole liquid with domain structure. Measurements of dielectric permittivity are consistent with the model. It is shown that experimental dielectric permittivity curves are a superposition two Debye's curves with different relaxation times and two different values of static dielectric constant. Debye's resonance for lower frequency is associated with oxygen's domain structure and for higher frequency with hydrogen's domain structure. We observe an increase of dielectric permittivity with time associated with ordering of the structure after filling. For thin samples we can observe damping of the Debye's resonance and interaction of the domains' structures.}
+}
+
+@article{Beigel_1990,
+  author  = {Beigel, Richard},
+  title   = {Unbounded searching algorithms},
+  journal = {SIAM Journal on Computing},
+  volume  = {19},
+  number  = {3},
+  pages   = {522--537},
+  year    = {1990},
+  doi     = {10.1137/0219035},
+  url     = {https://doi.org/10.1137/0219035}
+}
+
+@article{Pan_1985,
+  author  = {Pan, Jiapu and Tompkins, Willis J.},
+  title   = {A Real-Time QRS Detection Algorithm},
+  journal = {IEEE Transactions on Biomedical Engineering},
+  volume  = {32},
+  number  = {3},
+  pages   = {230--236},
+  year    = {1985},
+  doi     = {10.1109/TBME.1985.325532},
+  url     = {https://doi.org/10.1109/TBME.1985.325532}
+}
+
+@article{Canny_1986,
+  author  = {Canny, John},
+  title   = {A Computational Approach to Edge Detection},
+  journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  volume  = {PAMI-8},
+  number  = {6},
+  pages   = {679--698},
+  year    = {1986},
+  doi     = {10.1109/TPAMI.1986.4767851},
+  url     = {https://doi.org/10.1109/TPAMI.1986.4767851}
+}
+
+@article{Savitzky_1964,
+  author  = {Savitzky, Abraham and Golay, M. J. E.},
+  title   = {Smoothing and Differentiation of Data by Simplified Least Squares Procedures},
+  journal = {Analytical Chemistry},
+  volume  = {36},
+  number  = {8},
+  pages   = {1627--1639},
+  year    = {1964},
+  doi     = {10.1021/ac60214a047},
+  url     = {https://doi.org/10.1021/ac60214a047}
+}
+
+@article{Box_1964,
+  author  = {Box, G. E. P. and Cox, D. R.},
+  title   = {An Analysis of Transformations},
+  journal = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  volume  = {26},
+  number  = {2},
+  pages   = {211-243},
+  doi     = {https://doi.org/10.1111/j.2517-6161.1964.tb00553.x},
+  url     = {https://rss.onlinelibrary.wiley.com/doi/abs/10.1111/j.2517-6161.1964.tb00553.x},
+  eprint  = {https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/j.2517-6161.1964.tb00553.x},
+  year    = {1964}
+}
+
+@article{Huber_1964,
+  author    = {Peter J. Huber},
+  title     = {{Robust Estimation of a Location Parameter}},
+  volume    = {35},
+  journal   = {The Annals of Mathematical Statistics},
+  number    = {1},
+  publisher = {Institute of Mathematical Statistics},
+  pages     = {73 -- 101},
+  year      = {1964},
+  doi       = {10.1214/aoms/1177703732},
+  url       = {https://doi.org/10.1214/aoms/1177703732}
+}
+
+@article{Koenker_1978,
+  issn      = {00129682, 14680262},
+  url       = {http://www.jstor.org/stable/1913643},
+  author    = {Roger Koenker and Gilbert Bassett},
+  journal   = {Econometrica},
+  number    = {1},
+  pages     = {33--50},
+  publisher = {[Wiley, Econometric Society]},
+  title     = {Regression Quantiles},
+  urldate   = {2026-04-17},
+  volume    = {46},
+  year      = {1978}
+}
+
+@article{Friedman_2001,
+  author    = {Jerome H. Friedman},
+  title     = {{Greedy function approximation: A gradient boosting machine.}},
+  volume    = {29},
+  journal   = {The Annals of Statistics},
+  number    = {5},
+  publisher = {Institute of Mathematical Statistics},
+  pages     = {1189 -- 1232},
+  keywords  = {boosting, decision trees, Function estimation, robust nonparametric regression},
+  year      = {2001},
+  doi       = {10.1214/aos/1013203451},
+  url       = {https://doi.org/10.1214/aos/1013203451}
+}
+
+@inproceedings{ke2017lightgbm,
+  author    = {Ke, Guolin and Meng, Qi and Finley, Thomas and Wang, Taifeng and Chen, Wei and Ma, Weidong and Ye, Qiwei and Liu, Tie-Yan},
+  title     = {LightGBM: A Highly Efficient Gradient Boosting Decision Tree},
+  booktitle = {Advances in Neural Information Processing Systems},
+  volume    = {30},
+  pages     = {3146--3154},
+  year      = {2017},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html}
+}
+
+@inproceedings{akiba2019optuna,
+  author    = {Akiba, Takuya and Sano, Shotaro and Yanase, Toshihiko and Ohta, Takeru and Koyama, Masanori},
+  title     = {Optuna: A Next-generation Hyperparameter Optimization Framework},
+  booktitle = {Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining},
+  pages     = {2623--2631},
+  year      = {2019},
+  publisher = {Association for Computing Machinery},
+  doi       = {10.1145/3292500.3330701}
+}
+
+@book{goodfellow2016deep,
+  author    = {Goodfellow, Ian and Bengio, Yoshua and Courville, Aaron},
+  title     = {Deep Learning},
+  publisher = {MIT Press},
+  year      = {2016},
+  url       = {https://www.deeplearningbook.org/}
+}
+
+@book{deboor1978splines,
+  author    = {de Boor, Carl},
+  title     = {A Practical Guide to Splines},
+  publisher = {Springer},
+  year      = {1978}
+}
+
+@article{cox1972numerical,
+  author  = {Cox, M. G.},
+  title   = {The Numerical Evaluation of B-Splines},
+  journal = {IMA Journal of Applied Mathematics},
+  volume  = {10},
+  number  = {2},
+  pages   = {134--149},
+  year    = {1972},
+  doi     = {10.1093/imamat/10.2.134}
+}
+
+@article{deboor1972calculating,
+  author  = {de Boor, Carl},
+  title   = {On Calculating with B-Splines},
+  journal = {Journal of Approximation Theory},
+  volume  = {6},
+  number  = {1},
+  pages   = {50--62},
+  year    = {1972}
+}
+
+@article{greville1964numerical,
+  author  = {Greville, T. N. E.},
+  title   = {Numerical Procedures for Interpolation by Spline Functions},
+  journal = {SIAM Journal on Numerical Analysis, Series B},
+  volume  = {1},
+  number  = {1},
+  pages   = {53--68},
+  year    = {1964}
+}
+
+@inproceedings{Blanz_1996,
+  author    = {Volker Blanz and Bernhard Sch{\"o}lkopf and Heinrich H. B{\"u}lthoff and Chris Burges and Vladimir Vapnik and Thomas Vetter},
+  title     = {Comparison of View-Based Object Recognition Algorithms Using Realistic {3D} Models},
+  booktitle = {Artificial Neural Networks - {ICANN} 96, 1996 International Conference, Bochum, Germany, July 16-19, 1996, Proceedings},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {1112},
+  pages     = {251--256},
+  publisher = {Springer},
+  year      = {1996},
+  editor    = {Christoph von der Malsburg and Werner von Seelen and Jan C. Vorbr{\"u}ggen and Bernhard Sendhoff},
+  doi       = {10.1007/3-540-61510-5\_45},
+  isbn      = {3-540-61510-5}
+}
+
+@article{Ali_Kalla_1999,
+  author  = {Ali, I. and Kalla, S. L.},
+  title   = {A Generalized Hankel Transform and Its Use for Solving Certain Partial Differential Equations},
+  journal = {The ANZIAM Journal},
+  volume  = {41},
+  number  = {1},
+  pages   = {105--117},
+  year    = {1999},
+  doi     = {10.1017/S0334270000011061}
+}
+
+@article{Różański_2021,
+  author    = {R{\'o}{\.z}a{\'n}ski, Micha{\l} and Sikora, Beata and Smuda, Adrian and Witu{\l}a, Roman},
+  volume    = {31},
+  number    = {4},
+  journal   = {Archives of Control Sciences},
+  pages     = {815--847},
+  year      = {2021},
+  publisher = {Committee of Automatic Control and Robotics PAS},
+  type      = {Article},
+  title     = {On theoretical and practical aspects of Duhamel's integral},
+  url       = {http://journals.pan.pl/Content/121918/PDF/art04.pdf},
+  doi       = {10.24425/acs.2021.139732},
+  keywords  = {Duhamel's integral, Duhamel's principle, Duhamel's formula, Laplace transformation, semigroup of operators, Leibniz integral rule, Volterra integral equation, Caputo fractional derivative}
+}
+
+@article{Tuteja_Jaloree_Goyal_2014,
+  author  = {Tuteja, Reema and Jaloree, Shailesh and Goyal, Anil},
+  title   = {Application of Hankel Transform of I-function of One Variable for Solving Axisymmetric Dirichlet Potential Problem},
+  journal = {Global Journal of Science Frontier Research: F Mathematics and Decision Sciences},
+  volume  = {14},
+  number  = {4},
+  pages   = {11--16},
+  year    = {2014},
+  url     = {https://globaljournals.org/GJSFR_Volume14/2-Application-of-Hankel-Transform.pdf}
+}
+
+@article{Mahato_Pasawan_2021,
+  author  = {Mahato, Kanailal and Pasawan, Durgesh},
+  title   = {Pseudo-differential Operator Related to Hankel Transform on Gelfand--Shilov Spaces of Type W},
+  journal = {Advances in Operator Theory},
+  volume  = {6},
+  number  = {3},
+  pages   = {46},
+  year    = {2021},
+  doi     = {10.1007/s43036-021-00142-5}
+}
+
+@incollection{Davies_2002_Hankel,
+  author    = {Davies, Brian},
+  title     = {Hankel Transforms},
+  booktitle = {Integral Transforms and Their Applications},
+  publisher = {Springer},
+  address   = {New York},
+  series    = {Texts in Applied Mathematics},
+  volume    = {41},
+  edition   = {3},
+  pages     = {227--248},
+  year      = {2002},
+  doi       = {10.1007/978-1-4684-9283-5_14}
+}
+
+@article{Rogers_2012,
+  author  = {Li, Rui and Li, Yuhang and Zhong, Y. and Lu, Chaofeng and Song, Jizhou and Huang, Yonggang},
+  title   = {Axisymmetric Thermo-Mechanical Analysis of Laser-Driven Non-Contact Transfer Printing},
+  journal = {International Journal of Fracture},
+  volume  = {176},
+  pages   = {189--194},
+  year    = {2012},
+  doi     = {10.1007/s10704-012-9744-9}
+}
+
+@article{Kunga_2021,
+  author  = {Kung, K. Y. and Gong, Man-Feng and Srivastava, H. M. and Lin, Shy-Der},
+  title   = {Analytic Transient Solutions of a Cylindrical Heat Equation},
+  journal = {Filomat},
+  volume  = {35},
+  number  = {8},
+  pages   = {2617--2628},
+  year    = {2021},
+  doi     = {10.2298/FIL2108617K}
+}
+
+@article{Cinelli_1965,
+  author  = {Cinelli, G.},
+  title   = {An Extension of the Finite Hankel Transform and Applications},
+  journal = {International Journal of Engineering Science},
+  volume  = {3},
+  pages   = {539--559},
+  year    = {1965}
+}
+
+@article{Tsibidis_Mansour_Stratakis_2022,
+  author      = {Tsibidis, G. D. and Mansour, D. and Stratakis, E.},
+  title       = {Damage threshold evaluation of thin metallic films exposed to femtosecond laser pulses: The role of material thickness},
+  journal     = {Optics \& Laser Technology},
+  volume      = {156},
+  pages       = {108484},
+  year        = {2022},
+  doi         = {10.1016/j.optlastec.2022.108484},
+  eprint      = {2205.05342},
+  eprinttype  = {arxiv},
+  eprintclass = {physics.app-ph}
+}

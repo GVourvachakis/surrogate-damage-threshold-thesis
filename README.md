@@ -2,17 +2,18 @@
 
 ## Overview
 
-This repository will provide public-safe LaTeX source for an extended MSc
-thesis, a compact thesis variant, and its presentation. Its initial objective
-is reliable source compilation. It does not claim full simulation, dataset, or
-figure-level reproducibility.
+This repository provides public-safe LaTeX source for an extended MSc thesis.
+The compact thesis variant and presentation source will be added after separate
+public-safety checks. Its current objective is reliable thesis-source
+compilation; it does not claim full simulation, dataset, or figure-level
+reproducibility.
 
 ## Repository structure
 
-- thesis/ will contain the public thesis source and selected public-safe
+- thesis/ contains the public extended-thesis source and selected public-safe
   compile inputs.
-- presentation/ will contain the public presentation source and selected
-  public-safe compile inputs.
+- presentation/ is reserved for public presentation source after its separate
+  import and verification.
 - docs/ records build, branch, release, reproducibility, provenance, and
   public-source policies.
 - LICENSES/ and NOTICE.md describe separately licensed template and build-tool
@@ -29,10 +30,9 @@ contain PDFs, and no release-pdfs branch is used.
 
 ## Build requirements
 
-The future source build requires a current TeX Live installation with
-pdfLaTeX, Biber, BibLaTeX, and the packages recorded in docs/BUILD.md. Build
-commands are deliberately inactive until the public-safe source roots are
-imported.
+The thesis build requires a current TeX Live installation with pdfLaTeX,
+Biber, BibLaTeX, and the packages recorded in docs/BUILD.md. The presentation
+target remains inactive until its public-safe source is imported.
 
 ## Build commands
 
@@ -42,8 +42,8 @@ imported.
     make clean
     make verify
 
-Each command currently checks whether the expected public root exists and
-prints a clear instruction if source import has not yet occurred.
+The thesis target is active. Commands for components not yet imported print a
+clear instruction instead.
 
 ## Release PDFs
 

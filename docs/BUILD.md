@@ -2,9 +2,9 @@
 
 ## Status
 
-The public source roots have not yet been imported. The Makefile and scripts
-are intentionally guarded scaffolds: they report the missing root clearly
-until import is complete.
+The public-safe extended-thesis root is available at `thesis/thesis.tex`.
+The presentation root has not yet been imported; its guarded target reports
+the missing root clearly until that separate import is complete.
 
 ## Intended commands
 
@@ -14,13 +14,12 @@ until import is complete.
     make clean
     make verify
 
-The future thesis root is thesis/thesis.tex. The future presentation root is
-presentation/main.tex.
+The active thesis root is `thesis/thesis.tex`. The future presentation root is
+`presentation/main.tex`.
 
 ## Intended thesis sequence
 
-Once the thesis source exists, the thesis script will use latexmk with
-pdfLaTeX and Biber where available. The equivalent explicit sequence is:
+The thesis script uses the portable pdfLaTeX and Biber sequence:
 
     cd thesis
     pdflatex -interaction=nonstopmode thesis.tex
@@ -30,8 +29,8 @@ pdfLaTeX and Biber where available. The equivalent explicit sequence is:
 
 ## Intended presentation sequence
 
-Once the presentation source exists, the presentation script will use latexmk
-where available. The equivalent explicit sequence is:
+Once the presentation source is imported, the presentation script will use
+latexmk. The equivalent explicit sequence is:
 
     cd presentation
     pdflatex -interaction=nonstopmode main.tex

@@ -1,0 +1,1215 @@
+\chapter{Theoretical Background}
+\label{ch:theoretical-background}
+
+\section{Ultrashort-pulse laser--matter interaction}
+\label{sec:ch1-ultrashort}
+
+Laser processing regimes are distinguished primarily by the pulse duration relative to the intrinsic relaxation times of the irradiated metal. In continuous-wave irradiation the delivered power is effectively steady in time, whereas in pulsed irradiation the energy arrives in discrete temporal packets. The ultrashort-pulse regime is reached when the pulse duration falls from the picosecond range into the femtosecond range, so that the laser excites the conduction electrons before the lattice can equilibrate with them \cite{Alexopoulou_2023,Zhang_2015}. Under these conditions the thermal response is no longer described adequately by a single Fourier temperature field, because the electron subsystem and the lattice subsystem evolve on distinct time scales during the early stages of irradiation \cite{Alexopoulou_2023,Zhang_2015}.
+
+\begin{figure}[htbp]
+  \centering
+  \PublicFigureOmitted[0.85\linewidth]
+  \caption{Long-pulse and ULP interaction with target material.\cite{Hamad_2016}}
+  \label{fig:ch1-long-short-pulse}
+\end{figure}
+
+The two-temperature description follows from this temporal separation. The laser field is first absorbed by conduction-band electrons, which thermalise rapidly and then transfer energy to the lattice through electron--phonon coupling.
+The resulting nonequilibrium state is the physical basis of the two-temperature model family reviewed in the literature \cite{Forsman_1998, ByskovNielsen_2011, Zhao_2014, Zhang_2015,Petrov_2021, Bulgakova_2021, Alexopoulou_2023, Takabe_2024, Shim_2026}.
+In the present thesis, the governing formulation is referred to as the dual-parabolic two-temperature model (pTTM)\footnote{The thesis implements the pTTM variant throughout; see \S~1.7 for a discussion of model selection.}. The nomenclature emphasises that both subsystems are described with Fourier-type conduction, while the electron and lattice temperatures remain distinct.
+
+The parabolic two-step model (PTS) provides the starting point for this construction \cite{Alexopoulou_2023}. In the notation adopted throughout the chapter, it may be written as
+\begin{subequations}\label{eq:ch1-pts}
+  \begin{align}
+    C_e(T_e)\frac{\partial T_e}{\partial t} & = - \nabla \cdot \mathbf{q}_e - G(T_e - T_l) + S \, , \label{eq:ch1-pts-e} \\
+    C_l\frac{\partial T_l}{\partial t}      & = G(T_e - T_l) \, , \label{eq:ch1-pts-l}                                   \\
+    \mathbf{q}_e                            & = - k_e \nabla T_e \, . \label{eq:ch1-pts-q}
+  \end{align}
+\end{subequations}
+The studied model extends \eqref{eq:ch1-pts} by retaining Fourier heat conduction on the lattice subsystem as well, following the model implemented in Tsibidis et al. \cite{Fraggelakis_2021}.
+In the axisymmetric setting used later in the monograph, the pTTM therefore takes the form
+\begin{subequations}\label{eq:ch1-pttm}
+  \begin{align}
+    C_e \frac{\partial T_e}{\partial t}                                         & = \frac{1}{\varrho}\frac{\partial}{\partial \varrho}\left(\varrho \left[k_e \frac{\partial T_e}{\partial \varrho}\right]\right) + \frac{\partial}{\partial z}\left(k_e \frac{\partial T_e}{\partial z}\right) - G(T_e - T_l) + S(\varrho,z,t) \, , \label{eq:ch1-pttm-e} \\
+    \left(C_l + H_m \, \delta[T_l - T_m]\right) \frac{\partial T_l}{\partial t} & = \frac{1}{\varrho}\frac{\partial}{\partial \varrho}\left(\varrho \left[k_l \frac{\partial T_l}{\partial \varrho}\right]\right) + \frac{\partial}{\partial z}\left(k_l \frac{\partial T_l}{\partial z}\right) + G(T_e - T_l) \, . \label{eq:ch1-pttm-l}
+  \end{align}
+\end{subequations}
+Here \(C_e\) and \(C_l\) denote the electron and lattice heat capacities, \(k_e\) and \(k_l\) are the corresponding thermal conductivities, \(G\) is the electron--phonon coupling factor, \(H_m\) is the latent heat of melting, and \(S\) is the volumetric laser source term. The cylindrical coordinate \(\varrho\) is reserved for the radial coordinate, while \(z\) denotes the depth coordinate.
+Equation \eqref{eq:ch1-pttm} is the canonical pTTM used in this thesis with the simplification \(H_m \rightarrow 0\) in the sub-ablation regime.
+
+\begin{figure}[htbp]
+  \centering
+  \PublicFigureOmitted[0.85\linewidth]
+  \caption{Schematic diagram of Ultra-short pulse laser interaction with metal. \(T_e\) and \(T_l\) are the electron and lattice temperatures, and \(T_0\) denotes the room temperature. \cite{Vaghasiya_2023}}
+  \label{fig:ch1-ulp-metals}
+\end{figure}
+
+The subsequent simulations adopt the physical assumptions stated below. The geometry is taken to be axisymmetric, the azimuthal dependence is neglected, and the baseline simulations remain in the sub-ablation regime so that macroscopic material removal, moving boundaries, and vapour recoil are not part of the base pTTM.
+Sublimation\footnote{Phase transition of the solid to the gaseous phase.} occurs when the lattice temperature for the
+evaporation reaches sufficient energy to overcome the latent heat of fusion. The following temperature-dependent function should apply for a smoother
+transition between the solid and liquid phases\cite{Grigoropoulos_1986}: (eq. 5 in Tsibidis et al. \cite{Tsibidis_2012})
+\begin{equation}
+  \delta [T_l - T_m] = \frac{1}{\sqrt{2\pi \Delta^2}} \exp \left\{ - \frac{(T_l - T_m)^2}{2 \Delta^2} \right\} \equiv G(T_l - T_m ; \mu = 0, \sigma^2 = \Delta^2) \ ,
+\end{equation}
+where the standard deviation, $\Delta$, is of the range $[10, 100]$ K, depending on the temperature gradient.
+$T_m$ is the material's melting temperature. We focus on the solid-to-liquid transition (melting).
+In solidification process, there is a sign change (i.e., $\delta[T] \coloneqq - G(T; \mu=0, \sigma^2=\Delta^2)$).
+During the ultrafast heating of the material, the temperature of electrons and lattice rises so that temperature-dependent materials properties have a pivotal role
+during the simulation \cite{Vaghasiya_2023}.
+
+At the beginning of the (sub-)ablation process, the laser focus is on the initial surface of the material
+($z_s = 0$), and the centre of the spot at $\varrho = 0$.
+Material is removed as the ablation process progresses,
+forming a new material surface, and the laser focus moves downward over time. Therefore, the
+laser beam propagation equation can be expressed as follows (see Fig.~\ref{fig:ch1-rayleigh-sub} for concreteness):
+\begin{equation}
+  w(z,t) \coloneqq w_0 \sqrt{1 + \left(\frac{z - v t}{z_R}\right)^2},
+  \label{eq:ch1-beam_propagation}
+\end{equation}
+where $w_0$ is the focus radius, $z_R$ is the Rayleigh length\footnote{The Rayleigh length is the distance along a laser beam's axis from the beam waist to the point where its cross-sectional area doubles due to diffraction.}, and $v$ is the downward focus speed.
+The energy distributed inside the material is affected by the optical
+penetration depth $\delta_s$ of the material and the electronic ballistic length $\delta_b$.\\
+
+\noindent
+Furthermore, the Rayleigh length can be calculated by the relation
+\begin{equation}
+  z_R = \frac{\pi  \cdot w_0^2}{\lambda \cdot M^2} \ ,
+\end{equation}
+where $w_0$ is the focused beam spot radius, $\lambda$ is the wavelength of the laser beam in vacuum, and $M^2$ is the laser beam quality factor.
+
+\begin{figure}[htbp]
+  \centering
+  % Subfigure (a)
+  \subfloat[Schematic representation of the Rayleigh length ($z_R$) and Rayleigh's criterion as applied to Gaussian beams. \cite{Penchev_2016}]{
+    \PublicFigureOmitted[0.42\linewidth]
+    \label{fig:ch1-rayleigh-sub}
+  }
+  \hfill
+  % Subfigure (b)
+  \subfloat[Conceptual diagram of the laser--material interaction mechanism. \cite{Dong_2019}]{
+    \PublicFigureOmitted[0.42\linewidth]
+    \label{fig:ch1-interaction-sub}
+  }
+  \caption{Overview of laser beam propagation characteristics and interaction regimes.}
+  \label{fig:ch1-rayleigh_length_axisymmetric_laser}
+\end{figure}
+
+In the sub-ablation regime we investigate, the latent-heat term is
+suppressed (i.e., $H_m \delta [T_l - T_m] \rightarrow 0$) and the model is interpreted as a conduction-dominated description of electron
+heating and subsequent lattice equilibration.
+
+\begin{figure}[H]
+  \centering
+  \PublicFigureOmitted[0.85\linewidth]
+  \caption{The physical interaction process between ultrashort pulse laser and metal, including vaporisation, phase explosion, and supercritical-fluid trajectories. \cite{Song_2023}}
+  \label{fig:ch1-laser-induced-trajectories}
+\end{figure}
+
+Figure~\ref{fig:ch1-laser-induced-trajectories} places this conduction-dominated model in the wider sequence of ultrashort laser--matter interaction. Absorption is followed by rapid electron heating, delayed lattice heating, and, at sufficiently high fluence, melting, ablation, and hydrodynamic reorganisation. In the present chapter this sequence is developed progressively: the optical response is established in \S\ref{sec:ch1-absorption}, the volumetric heat source is defined in \S\ref{sec:ch1-heat-source}, the interference structure of the source is introduced in \S\ref{sec:ch1-dlip}, and the melt flow and ablation mechanisms are discussed in \S\S\ref{sec:ch1-hydrodynamics}--\ref{sec:ch1-ablation}.
+In the direct laser interference patterning (DLIP) setting used throughout the thesis, the source term additionally carries the spatial modulation imposed by the interference field.
+
+\section{Optical properties, ballistic \& finite--thickness corrections}
+\label{sec:ch1-absorption}
+
+The laser source term in \eqref{eq:ch1-pttm} depends on the optical response of the irradiated metal.
+Rethfeld et al. demonstrated that the ultrashort laser--metal interactions can be well described by laser--plasma ones \cite{Rethfeld_2002}. According to the Drude model for free electrons, $\epsilon$, the electrical permittivity (dielectric function) of metals modeled as a plasma, is expressed as
+\begin{align*}
+  \epsilon_{\text{(D)}}(t,\varrho,z) & =
+  \epsilon_{\infty} - \frac{\omega_p^2}{\omega (\omega + i\gamma_D)} = \epsilon_1(t,\varrho,z)  + i \epsilon_2(t,\varrho,z)                                                                                                                                 \\
+                                     & = \biggl( 1 - \frac{\omega_p^2(n_e) \tau_e^2(t,\varrho,z)}{1 + \omega^2 \tau_e^2(t,\varrho,z)} \biggr) + i \biggl(\frac{\omega_p^2(n_e) \tau_e(t,\varrho,z)}{\omega(1 + \omega^2 \tau_e^2(t,\varrho,z))} \biggr) \ ,
+\end{align*}
+where $\epsilon_\infty$ is the dc (zero frequency) dielectric function (in simple Drude model: $\epsilon_\infty = 1$), $\gamma_D\equiv 1/\tau_e$ the damping coefficient and
+$\omega_p \equiv \sqrt{n_e e^2/ m_e \epsilon_0}$ the plasma frequency. The relationship between the refractive index, $n \in \mathbb{C}$, and the electrical permittivity, $\epsilon \in \mathbb{C}$, is given by\footnote{
+  For corrections on the refractive index accounting for the nonlinear Kerr effect and its contributions on ultrafast dynamics, consult the study of Petrakakis et al. \cite{Petrakakis_2019}.
+}
+\begin{equation}
+  \frac{c}{v} \equiv n = n_1 + i n_2 = \sqrt{\epsilon} = \sqrt{\epsilon_1 + \epsilon_2} \ ,
+\end{equation}
+where $c$ is the speed of light in vacuum; $v$ is the speed of light propagating through the material; $n_1$ is the normal refractive index;
+and $n_2$ is the extinction coefficient.
+
+\noindent
+Thus, the $n_1$ and $n_2$ functions can be expressed as ($\| \epsilon \| \equiv \sqrt{\epsilon_1^2 + \epsilon_2^2}$)
+\begin{subequations} \label{eq:ch1-coeffs_refractive_index}
+  \begin{align}
+    n_1(t,\varrho,z) & = \sqrt{\frac{1}{2} ( \epsilon_1 (t, \varrho, z) + \| \epsilon \| )}  \\
+    n_2(t,\varrho,z) & = \sqrt{\frac{1}{2} ( -\epsilon_1 (t, \varrho, z) + \| \epsilon \| )}
+  \end{align}
+\end{subequations}
+% [NOTE: report3 writes the refractive-index components as f_1 and f_2; Chapter 1 relabels them as n_1 and n_2 under the binding notation decision.]
+
+The reflectivity and the absorption coefficient of the metal are determined by the following Fresnel expression
+(FCA: free-carrier absorption)\footnote{
+  The expressions in \ref{eq:ch1-fresnel} follow equations 6 in the work by Tsibidis et al. \cite{Tsibidis_2019} after reassigning $\omega \mapsto \omega_L$, $(n_1,n_2) \mapsto (n,k)$ and $z=z_s \mapsto z=0$.
+}
+\begin{subequations}\label{eq:ch1-fresnel}
+  \begin{align}
+    R(t,\varrho, z=z_s)                  & = \frac{(n_1(t, \varrho, z_s) - 1)^2 + n_2^2(t, \varrho, z_s)}{(n_1(t, \varrho, z_s) + 1)^2 + n_2^2(t, \varrho, z_s)}
+    \label{eq:reflectivity_FCA}                                                                                                                                  \\
+    \alpha_{(\text{FCA})}(t, \varrho, z) & = \frac{2 \omega}{c} n_2(t, \varrho, z), \qquad \delta_{opt} = \alpha^{-1}
+    \label{eq:absorption_FCA}
+  \end{align}
+\end{subequations}
+% [NOTE: report1 writes the free-carrier absorption coefficient as \(2\omega n_2/c\), whereas report3 rewrites the same quantity as \(4\pi n_2/\lambda\); the chapter keeps both equivalent forms explicit.]
+
+However, the Drude model for metals, does not consider the inter-band transition and the Fermi distribution (e.g., d-band transitions in Au \cite{Schoenlein_1987}).
+
+Vial et al. \cite{Vial_2005} pointed out that the Lorentz--Drude model \cite{Powell_1969} with five Lorentzian terms \cite{Rakic_1998} cannot match well experimental data around 2 eV for gold
+(the energy for inter-band transition from d-band to Fermi level in gold is $\mathcal{E}_F - \mathcal{E}_d = 2.38$ eV).
+
+They proposed an extended Drude model as follows:
+\begin{equation}
+  \epsilon_{\text{DL}} = \epsilon_\infty - \frac{\omega_p^2}{\omega (\omega + i \gamma_D)} - \frac{f\Omega_L^2}{(\omega^2 - \Omega_L^2) + i \Gamma_L \omega} \ ,
+\end{equation}
+where $\Omega_L$ and $\Gamma_L$ stand for the oscillator strength and the spectral width of the Lorentz oscillators, respectively, and $f$
+is a weighting factor. With the values optimized for gold;
+$\epsilon_\infty = 5.9673$, $\omega_p = 13.28$ THz, $\Omega_L = 4.085$ THz, $\Gamma_L= 0.659$ THz, and $f = 1.09$, their model fitted experimental data quite well in the range of 1.24--2.48 eV \cite{Vial_2005}.
+
+Subfigures \ref{fig:ch1-R_vs_wavelength} and \ref{fig:ch1-alpha_vs_wavelength} compare $R$ and $\alpha$ for gold at room temperature (RT), respectively, among four optical models.
+The extended Drude model performs best above $500$ nm, while the Lorentz-Drude model fits best at $\sim 250-500$ nm.
+
+\begin{figure*}
+  \centering
+  \subfloat[Reflectivity at RT calculated by\\different optical models.]{
+    \label{fig:ch1-R_vs_wavelength}
+    \PublicFigureOmitted[0.30\textwidth]
+  }
+  \subfloat[Absorption coefficient at RT\\under different optical models.]{
+    \label{fig:ch1-alpha_vs_wavelength}
+    \PublicFigureOmitted[0.30\textwidth]
+  }
+  \subfloat[Time‑resolved evolution of reflectivity and absorption coefficient during pulsed laser irradiation.]{
+    \label{fig:ch1-R_alpha_vs_t}
+    \PublicFigureOmitted[0.30\textwidth]
+  }
+  \caption{Comparison of different optical models, adopted from Y. Ren et al. \cite{Ren_2011}.} % Add a main caption
+  \label{fig:reflectivity-plots} % Label must come AFTER or INSIDE caption
+\end{figure*}
+
+In our work, the optical model is similarly extended by considering higher order Lorentz oscillations (5--6th order),
+\begin{align}
+  \epsilon(\omega)              & = \epsilon_{\mathrm{D}}(\omega) + \epsilon_{\mathrm{L}}(\omega) \, , \nonumber        \\
+  \epsilon_{\mathrm{D}}(\omega) & = \epsilon_\infty -  \frac{f_0 \omega_p^2}{\omega^2 - i \Gamma_0(T_e, T_l) \omega}    \\
+  \epsilon_{\mathrm{L}}(\omega) & = \sum_{k=1}^{K} \frac{f_k \omega_p^2}{\omega_k^2 + \omega^2 + i\Gamma_k \omega} \, ,
+  \label{eq:ch1-lorentz-drude}
+\end{align}
+providing greater robustness across the spectral range of interest.
+The Drude damping rate is defined as
+\begin{equation}
+  \Gamma_0(T_e, T_l)
+  \coloneqq
+  \Gamma_{\mathrm{base}}
+  +
+  B_L\!\left(
+  \frac{A_e}{B_L} T_e^2 + T_l
+  \right),
+  \label{eq:ch1-drude-damping}
+\end{equation}
+where the quadratic term \(A_e T_e^2\) accounts for electron--electron
+scattering, the linear term \(B_L T_l\) represents electron--phonon
+scattering \cite[\S~II.C]{Lin_2008}.
+For gold, the values adopted in the present study are
+\(\Gamma_\mathrm{base} = \num{0.053}\,\si{\eV}\),
+\((A_e/B_L)_{\mathrm{Au}} = \num{9.44e-5}\,\si{\per\kelvin}\) and
+\(B_L|_{\mathrm{Au}} = \num{1.25e11}\,\si{\per\second\per\kelvin}\).
+
+% [NOTE: report1 writes the interband correction as a single Lorentz term following Vial et al., whereas report3 gives the more explicit multi-oscillator Lorentz--Drude form.]
+
+\begin{figure}[htbp]
+  \centering
+  \PublicFigureOmitted[0.60\linewidth]
+  \caption{Three distinguished relaxation phases of optically excited electrons in metals.
+    (a) Photon absorption within the optical penetration depth generates at $t=0$ nonequilibrium electrons which move with ballistic velocities into deeper parts of the sample.
+    (b) At $t = \tau_\text{ph}$ electrons have equilibrated by electron-electron collisions forming a Fermi distribution with a well defined electron temperature $T_e$, and diffusive energy transport starts within the electron gas.
+    (c) Through electron-phonon coupling the electrons come into equilibrium with the lattice at $t = \tau_\text{e-ph}$, energy transport now proceeds by lattice thermal diffusion. \cite{Hohlfeld_2000}}
+  \label{fig:ch1-ballistic-electrons}
+\end{figure}
+
+The optical response also controls the characteristic penetration depth of deposited energy. In ultrashort irradiation this depth is not determined solely by \(\delta_{opt}\), because hot electrons can travel ballistically before complete thermalisation \cite{Hohlfeld_2000, Zhang_2015}.
+The three-stage sequence shown in Figure~\ref{fig:ch1-ballistic-electrons} motivates the effective (ballistic) attenuation
+\begin{equation}
+  \alpha' = \frac{1}{\delta_{opt} + \delta_b} = \frac{\alpha}{1 + \alpha \delta_b} \, ,
+  \label{eq:ch1-alpha-prime}
+\end{equation}
+where \(\delta_b\) denotes the ballistic length. The correction reduces the local deposition rate while preserving the correct local limit \(\alpha' \to \alpha\) when \(\delta_b \to 0\).
+The finite film thickness \(L_z\) is incorporated through the multiplicative factor
+\begin{equation}
+  b(L_z;\alpha') = \frac{1}{1 - e^{-\alpha' L_z}} \, .
+  \label{eq:ch1-thickness-factor}
+\end{equation}
+following the finite-thickness correction introduced by Chen et al. \cite{Chen_2001}.
+The latter correction represents the sum of a geometric series:
+$b(x; q) = \sum_{n=0}^{\infty} e^{-nqx}$ for $x \equiv L_z > 0$.\\
+\noindent As $L_z \to 0$ (very thin film): $b \to \infty$ (diverges).\\
+\noindent As $L_z \to \infty$ (thick film): $b \to 1$ (approaches unity).\\
+\noindent The factor accounts for multiple reflections (or scattering events) within the finite thickness, which are enhanced in thinner films.
+It becomes significant when the film thickness becomes comparable to the mean free path or ballistic length.
+
+\paragraph{An optical-based estimate of $\delta_b$.}
+The direct microscopic ballistic length depends on electron mean free path and scattering rates
+(Fermi velocity $\times$ thermalisation time). If direct transport parameters are not available,
+a pragmatic proxy is the optical penetration depth $\delta_{opt}(\lambda) = \alpha^{-1}(\lambda)$ at room temperature ($T_e = T_l = T_R =$ 300K). It sets the depth scale where photons create carriers.
+For many metals and in the wavelength range of interest (200--1200nm) $\delta_{opt}(\lambda)$ varies relatively slowly, so taking its spectral mean at $T_R$ yields a practical estimate
+\begin{equation}
+  \hat{\delta}_b =  \left\langle \alpha^{-1}(\lambda) \right\rangle{_\lambda} \approx \frac{1}{|\{\lambda_i\}|} \sum_i \alpha^{-1}(\lambda)\vert_{\lambda=\lambda_i}
+  \label{eq:ch1-estimate_ballistic_length}
+\end{equation}
+to use as $\delta_b$ in the approximate formula above.
+The angle brackets $\left\langle \cdot \right\rangle{_\lambda}$ denote the spectral mean, an average over the wavelength range of interest.
+
+In the case of Titanium (Ti), we computed the $\hat{\delta}_b (\approx \delta_b)$ since no experimentally measured ballistic length was available.
+
+\begin{table}[ht]
+  \centering
+  \caption{Ballistic lengths for various materials.}
+  \begin{tabular}{lc}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Material} & \textbf{Ballistic Length $\delta_b$ (nm)} \\
+    \hline
+    Ag                & 142                                       \\
+    Al                & 46                                        \\
+    Au                & 100                                       \\
+    Cr                & 14                                        \\
+    Cu                & 70                                        \\
+    Ni                & 11                                        \\
+    Ti                & 17.04\textsuperscript{*}                  \\
+    Steel (100Cr6)    & 0\textsuperscript{**}                     \\
+    \hline
+  \end{tabular}
+
+  \vspace{0.1cm}
+  \begin{minipage}{0.8\textwidth} % Keeps notes aligned with table width
+    \small
+    \textbf{Notes:}\\
+    (*) Computed from optical penetration depth $\hat{\delta}_b$.\\
+    (**) Set to 0 because no information is available about optical properties ($\alpha$, oscillators, plasma frequency, etc.).
+  \end{minipage}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/ch1/optical_au_spectrum_comparison_10_1200_RT.png}
+  \caption{Spectrum comparison of optical models with optical parameters in the wavelength range of 10 to 1200 nm for Au. Both electron and lattice temperatures are set to 300 K.}
+  \label{fig:ch1-au-spectrum-comparison}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{figures/ch1/optical_ni_spectrum_comparison_10_1200_RT.png}
+  \caption{Spectrum comparison of optical models with optical parameters in the wavelength range of 10 to 1200 nm for Ni. Both electron and lattice temperatures are set to 300 K.}
+  \label{fig:ch1-ni-spectrum-comparison}
+\end{figure}
+
+Figures~\ref{fig:ch1-au-spectrum-comparison} and~\ref{fig:ch1-ni-spectrum-comparison} show the spectral consequences of this modelling choice. For Au the Lorentz--Drude correction is required to reproduce the interband response above the visible range, while for Ni the discrepancy between Drude-only and Lorentz--Drude fits is even more pronounced near the operating wavelength.
+In the general case therefore we treat \(R\), \(\alpha\), and \(\delta_{opt}\) as wavelength- and temperature-dependent optical quantities rather than fixed room-temperature constants.
+
+\section{Temperature dependent thermophysical parameters}
+\label{sec:ch1-thermophysical-parameters}
+
+A theoretical estimation of the $G$ factor was first proposed by Kaganov et al. \cite{Kaganov_1956} and further analysed by Qui \& Tien \cite{Qiu_1992}
+\begin{equation}
+  G(T_e) = \frac{\pi^2m_en_ec_s^2}{6\tau_e(T_e)T_e(t, \varrho, z)} \ ,
+\end{equation}
+where $m_e$ is the electron mass, $n_e$ the free electron density, and $c_s=\sqrt{B/\rho_m}$ the speed of sound in bulk material ($B$: bulk modulus, $\rho_m$: mass density).
+This form emerges from treating electron--phonon scattering as the dominant thermalization channel in the TTM.
+A more thorough investigation of the electron-phonon coupling in metals was conducted by Lin et al. \cite{Lin_2008} (e.g., eq.8 therein).
+
+The heat capacity can be determined by the established formula \cite{Jiang_2005}
+\begin{equation}
+  C_e(T_e) = n_e \frac{\partial \langle \epsilon \rangle }{\partial T_e}\Biggl \vert_V = \int_\mathbb{R} \frac{\partial f(\epsilon, \mu, T_e)}{\partial T_e} g(\epsilon) \epsilon d\epsilon \ ,
+\end{equation}
+where V is the bulk material's volume and $\langle \epsilon \rangle$ is the energy ensemble average over the Fermi-Dirac distribution $f(\epsilon, \mu, T_e) \coloneqq [\exp\{(\epsilon - \mu)/k_BT_e\} +1]^{-1}$,
+$\mu$ is the chemical potential and $g(\epsilon)$ denotes the electron density-of-states (DoS) at the energy level $\epsilon$.
+
+The free electron heat conductivity is expressed by the Drude theory of metals as
+\begin{equation}
+  k_e(T_e) = \frac{1}{3} \langle v_e^2\rangle(T_e) \tau_e(T_e) C_e(T_e) \ ,
+\end{equation}
+where $\langle v_e^2 \rangle$ is the mean square of electron speed.\footnote{A more thorough theoretical description is provided by Jian and Tsai \cite{Jiang_2007}.}
+
+To induce ablation in solid targets, a sufficiently high laser fluence is required. In such regimes, the $T_e$ could be $\sim T_F$ ($T_F^{\text{Au}} = 64.2 \times 10^3 K$), thus the Anisimov-Rethfeld formula is employed for the thermal conductivity\cite{Anisimov_1997}
+\begin{equation}
+  k_e(T_e, T_l) = \chi \frac{(\theta_e^2 + 0.16)^{5/4} (\theta_e^2 + 0.44) \theta_e}{(\theta_e^2 + 0.092)^{1/2}(\theta_e^2 + \eta \theta_l)} \ ,
+\end{equation}
+where $\theta_{e.l} = k_B T_{e,l}/ \epsilon_F$. The two constants are $\chi^{\text{Au}} = 353 \ Wm^{-1}K^{-1}$ and $\eta^{\text{Au}} = 0.16$ for gold. The asymptotic behavior of the heat conductivity is as follows:
+\begin{itemize}
+  \item $k_e(T_e ; \theta_e \gg 1) \sim T_e^{5/2}$, characteristic for low-density plasma.
+  \item $k_e(T_e; \theta_e \ll 1) \sim T_e/ T_l$ (eq.14 in \cite{Chen_2001}).
+\end{itemize}
+
+As noted in  \cite{Jiang_2007}, at room temperature or higher, for Au phonons, the molar phonon heat capacity predicted by the quantum treatment (the Debye model) is similar to that predicted by the classical estimation (the Law of Dulong and Petit). Hence, the lattice heat capacity of gold in the calculation is reasonably considered as a constant (i.e., $C_l = const.$). Similarly, one could extend this approximation for other transition metals.
+
+The electron heat conductivity can be expressed in a rational form, introduced by Yamashita \cite{Yamashita_2006}
+\begin{equation}
+  k_e(T_e,T_l) = k_{e0}\frac{B_L T_e}{A_e T_e^2 + B_L T_l}
+  \label{eq:ch1-heat_conductivity_approx}
+\end{equation}
+where $k_{e0}$ is the electron heat conductivity at 300K, and $A_e$ and $B_L$ denote the electron-electron and electron-phonon scattering coefficients, respectively\footnote{$A_e$ and $B_L$ are estimated from variable angle spectral ellipsometry measurements of the refractive index and the extinction coefficient (e.g., describing absorption based on Forouhi-Bloomer dispersion relations \cite{Forouhi_1986}) in \cite{Fraggelakis_2021}.}.
+
+The latter rational form approximates the Eidmann Model \cite{Eidmann_2000} and Matthiessen's rule \cite{Matthiessen_1864},
+which combines two terms: the electron-ion (or electron-phonon, $k_{e-ph}$)
+and the electron-electron ($k_{e-e}$) scattering contributions (reciprocal of conductivities $\propto$ collision rates)
+\begin{equation}
+  1/k_{tot} = 1/k_{e-ph} + 1/k_{e-e}.
+  \label{eq:ch1-heat_conductivity_Matthiessen}
+\end{equation}
+
+In most cases, $k_e$ dominates $k_{(eq)}$ because free electrons contribute to the majority part of heat conduction.
+For most metals, $k_l$ is usually taken to be 1\% of $k_e$ (i.e., $k_l \sim 0.01 k_e$).
+
+Many of the ultrafast laser heating analyses have been carried out with a constant $G$ \cite{Kaganov_1956, Anisimov_1974, Hopkins_2013}.
+However, due to the significant changes in the electron and lattice temperatures caused by high-power laser heating, $G$ should
+be temperature dependent \cite{AlMalkawi_2018}.
+
+Lin's group \cite{Lin_2008} in section II.C, defined the total electron scattering rate by
+\begin{equation}
+  \tau_e^{-1}(T_e, T_l) = A_eT_e^2 + B_LT_l.
+  \label{eq:ch1-electron_scattering_rate}
+\end{equation}
+Chen et al. \cite{Chen_2005}, combining Lin et al.'s \cite{Lin_2008} scattering rate with equilibrium coupling at room temperature, $G_{RT}$,
+showed that under the approximation of a temperature-independent DoS and a linearised energy exchange term, one obtains
+\begin{equation}
+  G(T_e,T_l) = G_{RT} \Bigl[\frac{A_e}{B_l}(T_e + T_l) + 1\Bigr]
+  \label{eq:ch1-G_closed_formula}
+\end{equation}
+This closed-form is valid when
+\begin{enumerate}[label=(\roman*)]
+  \item the electronic DoS near the Fermi level is approximately constant,
+  \item the two-temperature model remains in the linear-response regime, and
+  \item higher-order inelastic processes are negligible.
+\end{enumerate}
+
+The heat capacity of electron proposed in a later work by Chen et al. \cite{Chen_2006}, is estimated as
+\begin{equation}
+  C_e = \left\{
+  \begin{array}{ll}
+    B_eT_e             & T_e < T_F/\pi^2                    \\
+    2B_eT_e/3 + C_e'/3 & T_F/\pi^2 \leq T_e \leq 3T_F/\pi^2 \\
+    Nk_B + C_e'/3      & 3T_F/\pi^2 \leq T_e \leq T_F       \\
+    3Nk_B/2            & T_e \geq T_F
+  \end{array}
+  \right.
+\end{equation}
+where $B_e$ the coefficient for electron heat capacity ($Jm^{-3}K^{-2}$), $N$ the (conduction) electron number density ($m^{-3}$) and
+\[
+  C_e' = B_e T_F/\pi^2 + \frac{3Nk_B/2 - B_e T_F/\pi^2}{T_F - T_F/\pi^2}(T_e - T_F/\pi^2) \ .
+\]
+
+The temperature dependence of $C_e$ and $G$ is further investigated by Lin et al. \cite{Lin_2008} for representative metals (Al, Cu, Ag, Au, Ni, Pt, W, Ti) in the range of electron
+temperatures typically realized in the ultrafast laser processing applications following the electron DoS and free-electron gas (FEG) model for comparison (e.g., figs.1,2 for Al in \cite{Lin_2008}).
+
+At sufficiently low electron temperatures the Sommerfeld approximation of the electron heat capacity holds, \(C_e \approx \gamma T_e\),
+but for temperature ranges of $\mathcal{O}(10^3-10^4)$K piecewise closures obtained from DoS data are employed:
+\begin{subequations}\label{eq:ch1-ceg-piecewise}
+  \begin{align}
+    C_e(T_e) & =
+    \begin{cases}
+      p_{\mathrm{low}}(T_e),  & T_e \leq T_{\mathrm{th}} \, , \\
+      p_{\mathrm{high}}(T_e), & T_e > T_{\mathrm{th}} \, ,
+    \end{cases} \label{eq:ch1-ce-piecewise} \\
+    G(T_e)   & =
+    \begin{cases}
+      q_{\mathrm{low}}(T_e),  & T_e \leq T_{\mathrm{th}} \, , \\
+      q_{\mathrm{high}}(T_e), & T_e > T_{\mathrm{th}} \, ,
+    \end{cases} \label{eq:ch1-g-piecewise}
+  \end{align}
+\end{subequations}
+given empirical threshold temperatures ($T_{\mathrm{th}}$) for each metal in our database.
+This choice preserves the low-temperature linear trend in Au while retaining the stronger nonlinear response required for materials such as Ni.
+
+While our piecewise-polynomial fits of $G(T_e)$ capture the full nonlinearity present in the data (especially for Ni and Ti),
+equation \ref{eq:ch1-G_closed_formula} provides a compact alternative that may be used in place of the high-order fits,
+provided the above approximations hold and one uses the measured or computed $G_{RT}$ from DoS methods (as $G_{RT} \equiv G(T_e = T_\text{RT})$).
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.80\linewidth]{figures/ch1/ceg_au_Ce_G_curves.png}
+%   \caption{Piecewise polynomial fitting of electronic heat capacity (\(C_e\)) and electron-phonon coupling (\(G\)) for gold (Au) based on ab-initio density-of-states calculations.}
+%   \label{fig:ch1-au-ce-g-curves}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \includegraphics[width=0.80\linewidth]{figures/ch1/ceg_ni_Ce_G_curves.png}
+%   \caption{Piecewise polynomial fitting of electronic heat capacity (\(C_e\)) and electron-phonon coupling (\(G\)) for nickel (Ni) based on ab-initio density-of-states calculations.}
+%   \label{fig:ch1-ni-ce-g-curves}
+% \end{figure}
+
+The effect of the electron DoS on the $G$ factor, which describes how the ab-intio temperature measurements were acquired using \href{https://www.vasp.at/}{VASP} is elaborated in the work by Fang et al. \cite{Fang_2012}.
+In their first figure, which is included for completeness (Fig.\ref{fig:ch1-ce-g-literature}),
+they highlight the linear dependence of $C_e(T_e)$ at low temperatures.
+
+\begin{figure}[H]
+  \centering
+  \PublicFigureOmitted[0.85\linewidth]
+  \caption{Electron temperature dependence of the electron heat capacity (left) and electron-phonon coupling factor (right) of Au. Solid lines show the results of the calculations performed with DoS obtained from VASP. Dashed lines show the commonly used approximations of the thermophysical material properties. \cite{Fang_2012}}
+  \label{fig:ch1-ce-g-literature}
+\end{figure}
+
+\section{Laser power density \& volumetric heat source}
+\label{sec:ch1-heat-source}
+
+The expression for the time-dependent intensity distribution, inside the bulk material for both non-linear and linear
+absorptions is provided by Jiang et al. \cite{Jiang_2004}, considering a gaussian laser beam with focus point being at the material surface,
+\begin{equation}
+  I(t, \mathbf{r}) = \sqrt{\frac{\beta_G}{\pi}} \frac{F}{\tau_p} (1 - R(t, \mathbf{r}; z=z_s))\times \exp \biggl\{ - \frac{x^2 + y^2}{R_0^2} - \beta_G \biggr(\frac{t}{\tau_p}\biggl)^2 - \int_{z_s}^z \alpha(t, \mathbf{r})dz \biggr\},
+  \label{eq:ch1-intensity_distribution}
+\end{equation}
+where $\beta_G = 4\ln2$, $F$ is the laser fluence\footnote{
+  Throughout the thesis we assume that the fluence, $F$,
+  accounts accordingly for the number of constituent pulses
+  (e.g., the total DLIP discussed in \S~\ref{sec:ch1-dlip}
+  fluence doubles in the double pulse regime).
+}, $\tau_p$ the pulse duration, $R$ the (surface) reflectivity,
+$R_0$ the FWHM of the laser beam and
+$\alpha$ the (free-carrier) absorption coefficient\footnote{
+  The beam attenuation includes additionally two-photon and three-photon absorption yielding quadratic and cubic nonlinearities respectively (eq.3 in \cite{Tsibidis_2019} or eq.15 in \cite{Driel_1987}).
+}. Notice that the reflectivity is fixed at $z=z_s(\varrho)$.
+
+Differentiating with respect to the depth coordinate, $z$, and mapping to cylindrical coordinates ($\varrho^2 = x^2 + y^2, \tan(\phi) = y/x$) utilizing the intensity's azimuthal isotropy we obtain the laser energy propagation loss
+\begin{equation}
+  \frac{\partial I(t,\varrho,z)}{\partial z}
+  = \sqrt{\frac{\beta_G}{\pi}} \frac{F}{\tau_p} (1 - R(t,\varrho, z=z_s))
+  e^{-\frac{\varrho^2}{R_0^2}}e^{-\beta_G \bigl(\frac{t}{\tau_p}\bigr)^2}e^{-\int_{z_s}^z\alpha dz}(-\alpha(t,\varrho,z))
+  \label{eq:ch1-energy_propagation_loss_cylindrical}
+\end{equation}
+or
+\begin{equation}
+  \frac{\partial I(t,\varrho,z)}{\partial z} = -\alpha(t,\varrho,z) I(t,\varrho,z).
+  \label{eq:ch1-energy_propagation_loss}
+\end{equation}
+
+Note that the attenuation of the laser beam along the propagation direction $z$ is more generally defined by the 1D ordinary differential equation:\cite{Driel_1987, Jiang_2007, Vaghasiya_2022}
+\begin{equation}
+  \frac{\partial I(t, \mathbf{r})}{\partial z} = - (\alpha_\text{BG} + \beta_\text{TPA} I(t, \mathbf{r}) + \Theta n) I(t, \mathbf{r}),
+  \label{eq:ch1-energy_propagation_loss_general}
+\end{equation}
+where $\alpha_\text{BG}$ and $\beta_\text{TPA}$ denote the interband (BG: band-gap) and two-photon absorption coefficients, respectively.
+$\Theta$ is the free-carrier absorption cross-section.
+In metals, there is only the latter absorption, thereby we set $\alpha_\text{BG} = \beta_\text{TPA} = 0$ and define $\alpha \coloneqq \Theta n$ as the absorption coefficient, stemming from the Lorentz-Drude optical model
+(eq.~\eqref{eq:absorption_FCA} with the ballistic correction in eq.~\eqref{eq:ch1-alpha-prime}).
+
+Jiang \& Tsai show this is consistent with starting from the local energy loss of an incident beam to define the laser irradiation (heat source term in eq.~\eqref{eq:ch1-pttm}):\cite{Jiang_2007}
+\begin{equation}
+  S(t,\varrho,z) = - \frac{\partial I(t,\varrho,z)}{\partial z}.
+  \label{eq:heat_source}
+\end{equation}
+
+As temporal envelopes, we enable selection of Gaussian (FWHM$=\tau_p$) and Lorentzian (HWHM$=\eta_L=\tau_p/2$),
+with support for single-pulse (SP) or double-pulse (DP) modes.
+\begin{equation}
+  G(t; t_0) \equiv G\left(t; \mu = t_0, \sigma_t^2 = \tau_p^2/(2\beta_G) \right) \coloneqq \frac{1}{\tau_p}\sqrt{\frac{\beta_G}{\pi}} \exp\biggl\{ - \beta_G \Bigr(\frac{t - t_0}{\tau_p}\Bigl)^2 \biggr\} \ , \ \forall t_0 \in \mathbb{R} \ ,
+  \label{eq:ch1-gaussian}
+\end{equation}
+
+\begin{equation}
+  L(t; t_0) \equiv L(t; \mu = t_0, \eta_L = \tau_p/2) \coloneqq \frac{2}{\pi \tau_p} \biggl[ 1 + 4 \Bigr(\frac{t - t_0}{\tau_p}\Bigl)^2  \biggr]^{-1} \ , \ \forall t_0 \in \mathbb{R} \ .
+  \label{eq:ch1-lorentzian}
+\end{equation}
+
+It is common in the literature to introduce artificial propagation lags; offsets place the Gaussian envelope inside the simulation time window.
+For instance, $G(t; t_0=t_c)$ is the temporal distribution of a reference Gaussian envelope centred at $t_c = n\tau_p$ with variance $\sigma^2 \coloneqq \tau_p^2/(2\beta_G)$ and FWHM$\coloneqq 2 \sqrt{2\ln(2)} \sigma = \tau_p$,
+such as $\tau_pG(0) \sim \exp\{-\beta_G n^2\}$ which is effectively zero for $n=3$ ($\approx 10^{-11}$).
+For any dimensionality of the heat source (1--D, 2--D, 3--D) we use $n=3$, although in the 1--D case Chen et al. \cite{Chen_2010} follow the convention $n=2$.
+
+\noindent
+Then, the intensity of a constituent laser beam is defined as
+\begin{equation}
+  I_1(t,\varrho,z) \coloneqq F E_\text{tot}(t) \exp\Bigl\{ -\frac{\varrho^2}{R_0^2} \Bigr\} \exp\Bigl\{ - \int_{z_s}^z \alpha(t,\varrho,z)dz \Bigr\},
+  \label{eq:ch1-intensity_laser_beam}
+\end{equation}
+where $E_\text{tot}$ is a sum of one (or two) Gaussian or Lorentzian pulses,
+centred at $t_c$ for a single pulse and $t_c + t_d$ under double-pulse mode.
+
+\noindent
+Accounting for the surface reflectivity we obtain
+%
+\begin{equation}
+  I_\text{(ULP)}(t,\varrho,z) = (1 - R(t,\varrho,z_s)) I_1(t,\varrho,z).
+  \label{eq:ch1-intensity_reflect_I_1}
+\end{equation}
+%
+Assuming the optical penetration depth is much smaller than the target's thickness, i.e. $\delta_{opt} \ll L_z$, we can assert depth-independent absorption (Beer-Lambert attenuation).
+Under this condition, we obtain an expression for the laser heat source (under ULP regime)
+\begin{equation}
+  S_\text{(ULP)}(t,\varrho,z) \equiv \alpha I_\text{(ULP)}(t,\varrho,z) \approx \alpha F (1 - R(t,\varrho,z_s)) E_\text{tot}(t) f(\varrho; R_0) \exp\{- \alpha (z - z_s)\},
+  \label{eq:ch1-volumetric_heat_source}
+\end{equation}
+where $f(\varrho; R_0)$ is the transverse beam profile with constant spot radius $w = R_0$,
+assuming infinite depth of focus or, equivalently, infinite Rayleigh length ($z_R \rightarrow \infty$ in eq.~\eqref{eq:ch1-beam_propagation}):
+\begin{equation}
+  f(\varrho; w(z,t)= R_0) = \left. \exp\Bigl\{ - \frac{\varrho^2}{w^2(z,t)} \Bigr\} \right|_{w=R_0}.
+  \label{eq:ch1-beam_profile}
+\end{equation}
+
+Considering the effects of ballistic motion and hot electron diffusion which extend the absorbed energy into greater depth of the electrons, drastically for metals, Wellershoff et al. \cite{Wellershoff_1999} and Hohlfeld et al. \cite{Hohlfeld_2000} introduced these contributions into the laser heat source by adding the ballistic range to the optical penetration path.
+This results in the axisymmetric volumetric heat source
+(with $\alpha'$ from eq.~\eqref{eq:ch1-alpha-prime} and $b(L_z; \alpha')$ from eq.~\eqref{eq:ch1-thickness-factor})
+\begin{equation}
+  S(t, \varrho, z) \coloneqq \alpha' b(L_z; \alpha') [1 - R] I_1(t,\varrho,z; \alpha'),
+  \label{eq:ch1-ulp_heat_source}
+\end{equation}
+with $R=R(\varrho, z=z_s; T_e, T_l)$ being the surface reflectivity, which inherits the axisymmetry of the laser beam.
+
+\subsection{Dimensionality Reductions - Slicing vs Integrating}
+
+There are two consistent ways to reduce 3D to lower dimensions, integrate over the suppressed coordinate
+(gives a surface/line source) or slice (evaluate at a representative value, typically the beam centre).
+The appropriate approach depends on the solver's state variables (volumetric vs surface parameters).
+In this part of the thesis, we reconcile both in the axisymmetric context.
+
+\subsubsection{From 3D to 2D under axial symmetry}
+
+Let the transverse profile be factorable $I_\text{total}(t,\varrho,z) = F E_\text{tot}f(\varrho)e^{-\alpha(z-z_s)}\mathds{1}\{z \geq z_s\}$
+for simplicity (Gaussian radial profile $f(\varrho) = \exp\{ -\varrho^2/(2\sigma_r^2) \}$, where $\sigma_r \coloneqq w_0/\sqrt{2}$).
+
+\paragraph{(A) Integrate over one suppressed coordinate (surface/line source).}
+If we collapse the $\phi$ coordinate we form a 2D source per unit length in $\varrho-z$ (units W$\cdot$m$^{-2}$):
+\begin{equation}
+  \widetilde{S}_\text{2D} = \int_{0}^{2\pi} S_\text{3D}(t, \varrho, \phi, z) \varrho d\phi = 2\pi \; \varrho \; \alpha' \; b(\alpha') \; (1-R) \; F \; E_\text{tot}(t) \; f(\varrho) \; e^{-\alpha'(z-z_s)} \; \mathds{1}\{z \geq z_s\}\ .
+\end{equation}
+This object is the power per unit length in $z$ per radial distance $\varrho$. Note the $2\pi\varrho$ prefactor from converting from Cartesian to cylindrical integration).
+It is the appropriate form when the solver uses line/surface capacities that already incorporate the radial Jacobian.
+\vspace{10pt}
+
+\paragraph{(B) Slice / representative volumetric source (volumetric 2D).}
+If the solver expects a volumetric source in the 2D ($x=\varrho,z$) plane (units W$\cdot$m$^{-3}$),
+a widely used practical choice is to evaluate the 3D source at the representative azimuth (e.g., $\phi=0$)
+and not integrate (this is analogous to the Cartesian slice at $y=0$):
+\begin{equation}
+  S_\text{2D}(t,\varrho,z) \equiv S_\text{3D}(t,\varrho,z) = \alpha' \; b(\alpha') \; (1-R) \; F \; E_\text{tot}(t) \; f(\varrho) \; e^{-\alpha'(z-z_s)} \; \mathds{1}\{z \geq z_s\} \ .
+\end{equation}
+The $2\pi\varrho$ extra factor is not absent here as we integrate over the angle variable, keeping pointwise volumetric units.\\
+Namely, $S_\text{2D}$ is the volumetric power density in the slice/meridian plane and is suitable when the solver retains volumetric capacities $C_v$ (J$\cdot$m$^{-3}$$\cdot$K$^{-1}$).
+
+  \subsubsection{From 2D to 1D (depth-only)}
+
+  \begin{enumerate}
+    \item Integrated power per unit depth (units: W$\cdot$m$^{-1}$):
+          \begin{equation}
+            \widetilde{S}_\text{1D}(t,z) = \int_\text{transverse} S_\text{3D} (t, \mathbf{r}) dA =  A_\text{eff}\;\alpha'\;b(\alpha')\;(1-R)\;F\;E_\text{tot}(t)\;e^{-\alpha'(z-z_s)} \; \mathds{1}\{z \geq z_s\} \ ,
+          \end{equation}
+          where $A_\text{eff} \coloneqq \iint f(x,y)dxdy$ is the effective beam area.
+    \item Area-averaged volumetric source for a 1D depth model (units: W$\cdot$m$^{-3}$):
+          \begin{equation}
+            S_\text{1D}(t,z) = \frac{\widetilde{S}_\text{1D}(t,z)}{A_\text{eff}} = \alpha'\;b(\alpha')\;(1-R)\;F\;E_\text{tot}(t)\;e^{-\alpha'(z-z_s)} \; \mathds{1}\{z \geq z_s\} \ .
+          \end{equation}
+          This is identical in form to the usual depth-only exponential source in many TTM implementations (c.f. Ren et al. (2011) \cite{Ren_2011}).
+  \end{enumerate}
+  Therefore, we follow the slicing approach since we are supplied with volumetric capacities ($C_e(T_e)$ and $C_l \coloneqq \rho_l \cdot c_l$).
+
+  Below are shown comparative figures adopted from Chen et al. \cite{Chen_2002}
+  simulating with the dual-hyperbolic 1D and 3D TTM (eqs.6-12 therein) using a fourth-order finite-difference scheme with regular grid mesh.
+
+  \begin{figure}[H]
+    \centering
+    % Subfigure (a)
+    \subfloat[Electron temperature profile across the thickness ($z$-axis) at $\varrho=0$ for a 100-nm gold film\\($\tau_p=100$~fs, $F=4107$~J/m$^2$, $w_0=500$~nm). \cite{Chen_2002}]{
+      \PublicFigureOmitted[0.44\linewidth]
+      \label{fig:ttm-Te-profile}
+    }
+    \hfill
+    % Subfigure (b)
+    \subfloat[Temporal evolution of electron ($T_e$) and lattice ($T_l$) temperatures at the front surface centre ($\varrho=0, z=0$) for a 100-nm gold film ($\tau_p=100$~fs, $F=4107$~J/m$^2$, $w_0=2.0$~$\mu$m). \cite{Chen_2002}]{
+      \PublicFigureOmitted[0.44\linewidth]
+      \label{fig:ttm-temp-history}
+    }
+    \caption{Comparison of spatial and temporal temperature distributions in a 100-nm gold film predicted by the Two-Temperature Model (TTM).}
+    \label{fig:ttm_1d_vs_3d}
+  \end{figure}
+
+  \section{Direct laser interference patterning}
+  \label{sec:ch1-dlip}
+
+  Direct laser interference patterning (DLIP) enables periodic surface structuring without masks
+  by superimposing coherent sub-beams directly on the target surface. In the ultrashort-pulse
+  regime, this approach is especially attractive for surface engineering and nano-machining
+  because the interference period is governed by beam geometry rather than by serial scanning\footnote{
+    Serial scanning (e.g., direct laser writing) creates features sequentially via mechanical or galvanometer-based movement of a single spot.
+    In contrast, DLIP is a parallel process where the interference pattern is projected over the entire irradiated area simultaneously.
+  }, and sub-micrometre features can be generated on metals when $\tau_p < 10$~ps \cite{Lasagni_2007, Lasagni_2017, Dyck_2017, M_ller_2020}.
+
+  The theoretical treatment of multi-beam laser interference necessitates the coherent superposition of the electric field vectors associated with the constituent beams\footnote{
+    See, e.g., eq.~1 in Tsibidis et al.~\cite{Fraggelakis_2021},
+    following the interference theory notation established by Lasagni et al.~\cite{Lasagni_2005}.
+  },
+  where in the most general setting, $\text{span}\{\mathbf{E}_i\}_{i \in [N]} \subseteq \mathbb{R}^3 \times \mathbb{R}^N$.
+  The $m$th (real) vector element can be expressed as \cite{Wang_2013}
+  \begin{equation}
+    \mathcal{R}[\tilde{E}_m] = \mathbf{E}_m = E_{0m} \mathbf{p}_m \cos(\mathbf{k}_m \cdot \mathbf{r} - \omega \cdot t + \Phi_m) \ ,
+    \label{eq:ch1-single_beam}
+  \end{equation}
+  where $E_{0m}$ is the amplitude, $\mathbf{p}_m$ is the unit polarisation vector, $\mathbf{k}_m$ is the vector in the propagation direction,
+$\mathbf{r}$ is the position vector from a reference frame $\mathcal{O}$ such that $\mathbf{r} = (x,y,z)_{\mathcal{O}} \in \mathbb{R}^3$, $\omega$ is the (angular) frequency (under monochromatic condition),
+  and $\Phi_m$ is the initial phase of the $m$th beam,
+  which is ignored in our implementation.
+
+  The unit polarisation vector and wave-vector of the $m$th beam's electric field are described by the spherical coordinate system:
+  \begin{align*}
+    \mathbf{k}_m & = k(\sin(\theta_m)\cos(\phi_m), \sin(\theta_m)\sin(\phi_m), -\cos(\theta_m)), \\
+    \mathbf{p}_m & = -(\cos(\theta_m)\cos(\phi_m)\cos(\psi_m) - \sin(\phi_m)\sin(\psi_m),        \\&\quad \ \quad \cos(\theta_m)\sin(\phi_m)\cos(\psi_m) + \cos(\phi_m)\sin(\psi_m),\\& \quad \ \quad \sin(\theta_m)\cos(\psi_m)) \ ,
+    \label{eq:ch1-single_wavevector_polarisation}
+  \end{align*}
+  where $k = 2\pi/\lambda$, $\theta_m$ is the incident angle, $\phi_m$ is the azimuthal angle, and $\psi_m$ is the polarisation angle.
+
+  In the interference field, the time-averaged (or cycle-averaged) intensity is proportional to (excluding the initial phase)
+  \begin{subequations}
+    \begin{align}
+      I_\text{interf}(\mathbf{r}) & \propto \langle \tilde{E}_{\text{tot}} \tilde{E}_{\text{tot}}^* \rangle_t = \Bigl \langle \sum_{m,n} E_{m0} E_{n0} e^{i(\mathbf{k}_m - \mathbf{k}_n)\cdot \mathbf{r}} (\mathbf{p}_m \cdot \mathbf{p}_n) \Bigr \rangle_t \\
+                                  & = \sum_m E_{m0}^2 + \sum_{m,n \  : \  m\neq n} E_{m0} E_{n0} e^{i(\mathbf{k}_m - \mathbf{k}_n)\cdot \mathbf{r}} (\mathbf{p}_m \cdot \mathbf{p}_n)                                                                       \\
+                                  & = \sum_m E_{m0}^2 + 2 \sum_{1\leq m < n \leq N} E_{m0} E_{n0} (\mathbf{p}_m \cdot \mathbf{p}_n) \cos[(\mathbf{k}_m - \mathbf{k}_n) \cdot \mathbf{r}],
+    \end{align}
+    \label{eq:ch1-interference_intensity}
+  \end{subequations}
+  where in the second equality we split the diagonal and cross terms, and used the normalisation of the polarisation vector.
+  Then, we converted the off-diagonal exponentials to cosines by the Euler's identity\footnote{In particular, it holds $e^{i{\Delta \mathbf{k} \cdot \mathbf{r}}} + c.c. = 2 \cos(\Delta \mathbf{k} \cdot \mathbf{r})$.}, and  noted that the double sum over $m \neq n$ can be reorganized as twice the sum over $m < n$.\\
+  Recognizing $|\mathbf{E}_m| = E_{m0}$, and $\cos(\langle \mathbf{E_n} \cdot \mathbf{E}_m \rangle) = (\mathbf{p}_m \cdot \mathbf{p}_n) \cos[(\mathbf{k}_m - \mathbf{k}_n) \cdot \mathbf{r}]$ we derive the eq.5 in Wang et al. \cite{Wang_2013}, establishing equivalence between the real and phasor forms for the spatial intensity distribution estimates
+  \begin{equation}
+    I_\text{interf}(\mathbf{r}) \propto \sum_{m,n} |\mathbf{E}_m||\mathbf{E}_n| \cos(\langle \mathbf{E}_n \cdot \mathbf{E}_m \rangle).
+    \label{eq:ch1-interference_intensity_distribution}
+  \end{equation}
+  As shown in Fig.\ref{fig:ch1-interference-patterns}, the four incident beams follow a symmetrical configuration with the azimuthal angles of $\phi_m = (m-1)\pi/2$ for $m \in [4]$.
+  The incident angles of the four beams can be set as $\theta_m \vert_{m \in [4]} = \theta$. However, if any of the incident angles is misaligned, or is unequal to the others, there will be a modulation in the pattern. Similarly, for the simpler cases of two and three laser beams.
+
+  \begin{figure}[H]
+    \centering
+    \PublicFigureOmitted[0.50\linewidth]
+    \caption{Calculated intensity distribution for (a) two--beam, (b) three--beam, and (c) four--beam interference patterning. The geometrical configurations of the beams necessary to achieve the displayed geometries are also shown. \cite{Lasagni_2016}}
+    \label{fig:ch1-interference-patterns}
+  \end{figure}
+
+  In the special case in Tsibidis et al. \cite{Fraggelakis_2021}, leading to the two-- and four--beam formulae in their eq.2, the four incident plane-waves (excluding the temporal envelope) are chosen exactly so that only identically polarised pairs interfere,
+  and all cross-terms between the x-- and y--pairs vanish.
+
+  \noindent
+  Concretely, the following specifications are imposed:
+  \begin{enumerate}
+    \item Polarisation angles of the beams are set to $\psi_m = \pi/2$ (TE mode), i.e. pure s--polarisation for every beam (so that beams in orthogonal incidence planes do not mix, no vectorial cross--coupling).\footnote{Wang et al.\cite{Wang_2013} investigate the polarisation modes: TE-TE-TE-TE, TE-TE-TE-TM and TE-TE-TM-TM.}
+
+    \item Azimuth (in--plane) angles are indexed by the cyclic group $\mathbb{Z}/N\mathbb{Z}$. Let $q_{(N)} = e^{2\pi i/N}$ be a primitive $N$th root of unity. Then the $m$th beam has azimuthal angle\footnote{Strictly speaking, the group homomorphism is
+            \[
+              \chi : \mathbb{Z}/N\mathbb{Z} \to U(1), \qquad \chi([k]) = q_{(N)}^{\,k}.
+            \]
+            Identifying the beam index set $[N]=\{1,\dots,N\}$ with $\mathbb{Z}/N\mathbb{Z}$ via $m \mapsto [m-1]$, this gives
+            \[
+              e^{i\phi_m} = q_{(N)}^{\,m-1}.
+            \]}
+          \begin{equation}
+            \phi_m^{N} = \text{Arg}\!\bigl(q_{(N)}^{\,m-1}\bigr) = \frac{2\pi(m-1)}{N} \mod(2\pi).
+            \label{eq:ch1-azimuthal_selection}
+          \end{equation}
+
+    \item Incidence angles (the tilt from the surface normal) are all equal to half the total beam separation angle:
+          \[
+            \theta_m = (-1)^m \frac{\theta}{2},
+          \]
+          so that each opposing pair has opening angle $\theta$ between its two beams. Experimentally, the incident angle considered is $|\theta_m| = 19 \pm 0.5^{\circ}$, from the femtosecond DLIP irradiation of stainless steel in \cite{Fraggelakis_2021}.
+  \end{enumerate}
+
+  \subsection{Two--beam interference configuration}
+  \label{sec:ch1-dlip-twobeam}
+
+  Assume two identical plane waves (phasor form)
+  \[
+    \tilde{E}_{1,2}(t, \mathbf{r}) = \hat{e} E_0 e^{i[k(\pm x\sin(\theta/2) + z \cos(\theta/2)) - \omega t]}
+  \]
+  with the same polarisation unit vector $\hat{e} \equiv \mathbf{p}_{1,2}$.
+  Their phasor sum is
+  \begin{equation}
+    \tilde{E} = \hat{e} E_0 e^{ikz\cos(\theta/2)}\bigl[ e^{ikx\sin(\theta/2)} + c.c. \bigr] = \hat{e} 2E_0 \cos(kx \sin(\theta/2))e^{ikz\cos(\theta/2)}
+  \end{equation}
+  and from eq.~\eqref{eq:ch1-interference_intensity},
+  \begin{equation}
+    I_\text{interf}^{(2)}(x) \propto 4E_0^2\cos^2\Bigl(\frac{2\pi}{\lambda}x\sin\Bigl(\frac{\theta}{2}\Bigr)\Bigr) = 2E_0^2 \Bigl[1 + \cos\Bigl(\frac{4\pi}{\lambda}x\sin\Bigl(\frac{\theta}{2}\Bigr)\Bigr)\Bigr]
+  \end{equation}
+
+  Defining the intensity of each of the constituent laser beams of the DLIP as $I_1 \equiv 2 E_0^2$ and
+$\lambda_L \equiv \lambda$ we obtain (eq.2.1 in \cite{Fraggelakis_2021})\footnote{$z_s(\varrho)$ denotes the position of the surface in the (vertical) z-axis with flat surface imposed on $z_s = 0$.}:
+  \begin{equation}
+    I_\text{interf}^{(2)}(x; z =z_s) \sim I_1 \Bigl[1 + \cos\Bigl(\frac{4\pi}{\lambda_L}x\sin\Bigl(\frac{\theta}{2}\Bigr) \Bigr)\Bigr]
+    \label{eq:ch1-equation_2_1_Tsimbidis}
+  \end{equation}
+
+  \subsection{Four--beam interference configuration}
+  \label{sec:ch1-dlip-fourbeam}
+
+  In the full s--polarisation regime, the electric field vectors can be
+  written as (from eq.~\eqref{eq:ch1-azimuthal_selection}, $\phi_m^{N=4} = (m-1)\pi/2$)
+  \begin{align*}
+    \mathbf{E}_1 & = E_0 (0, -y\cos[k(\sin(\theta)\cdot x - \cos(\theta)\cdot z) - \omega t], 0) \ , \\
+    \mathbf{E}_2 & = E_0 (x\cos[k(\sin(\theta)\cdot y - \cos(\theta)\cdot z) - \omega t], 0, 0) \ ,  \\
+    \mathbf{E}_3 & = E_0 (0, y\cos[k(-\sin(\theta)\cdot x - \cos(\theta)\cdot z) - \omega t], 0) \ , \\
+    \mathbf{E}_4 & = E_0 (-x\cos[k(-\sin(\theta)\cdot y - \cos(\theta)\cdot z) - \omega t], 0, 0) .
+  \end{align*}
+
+  Note that only $\mathbf{E}_1$/$\mathbf{E}_3$ and $\mathbf{E}_2$/$\mathbf{E}_4$ interfere with each other (same polarisation), since  $\hat{e}_{x-\text{plane}} \perp \hat{e}_{y-\text{plane}}$.
+
+  Each pair yields the two--beam result along its axis.
+  Summing their intensities (no cross-interference) gives
+  \begin{align}
+    I_\text{interf}^{(4)}(x,y;z=z_s) & \propto 2E_0^2 \Bigl[1+ \cos\Bigl(2kx\sin\Bigl(\frac{\theta}{2}\Bigr) \Bigr)\Bigr] + 2E_0^2 \Bigl[1 + \cos\Bigl(2ky\sin\Bigl(\frac{\theta}{2}\Bigr) \Bigr)\Bigr]           \\
+                                     & = I_1 \Bigl[\cos\Bigl(\frac{4\pi}{\lambda_L}x\sin\Bigl(\frac{\theta}{2}\Bigr) \Bigr) + \cos\Bigl(\frac{4\pi}{\lambda_L}y\sin\Bigl(\frac{\theta}{2}\Bigr) \Bigr) + 2\Bigr],
+  \end{align}
+  with the same identifications $I_1 \equiv 2E_0^2$, and $\lambda_L \equiv \lambda$. This matches the four--beam formula in \cite{Fraggelakis_2021} (eq.2.2 therein) once we drop the temporal Gaussian envelope.
+
+  \begin{figure}[H]
+    \centering
+    \PublicFigureOmitted[0.50\linewidth]
+    \caption{Two-beam interference geometry and fringe periodicity. \cite{Burrow_2011}}
+    \label{fig:ch1-two-beam}
+  \end{figure}
+
+  The periodicity of two-- and four--beam lithography can be further generalized.
+  The adjacent-beam wave-vector difference in a symmetric arrangement around a cone of half-angle $\theta$ produces a spatial frequency
+  \begin{equation}
+    \Delta k = 2k\sin(\theta) \sin(\pi/N),
+  \end{equation}
+  where $k = 2\pi/\lambda$.
+  The resulting period is\footnote{The interference period is referred as spatial period, $P$, by some authors, e.g. in \cite{Lasagni_2007}, \cite{Rodriguez_2009}, and \cite{Liu_2023}.}
+  \begin{equation}
+    \Lambda_N = \frac{2\pi}{\Delta k} = \frac{\lambda}{2 \sin(\theta)\sin(\pi/N)} \ , \forall N \in \mathbb{N} \setminus \{1\} .
+  \end{equation}
+
+  Despite the simplicity of the derivation, most works in the literature apply it only to specific $N$, thus not providing the above general multi--beam DLIP periodicity expression.
+  \footnote{
+    For a derivation of the N--beam interference factor in eq.~\eqref{eq:ch1-interference_intensity} and its reduction for 2-- and 4--beam interference, see Appendix~\ref{app:interference-derivation}.
+  }
+
+  Within the DLIP setting, the single-beam intensity $I_1$ in \eqref{eq:ch1-intensity_laser_beam} is replaced by the interference field $I_\text{interf}$ in \eqref{eq:ch1-interference_intensity}.
+  Specifically, letting all the beams having the same amplitude ($E_{m0} = E_0, \forall m \in [N]$) we can define the total intensity as
+  \begin{equation}
+    I_\text{total} \coloneqq I_\text{ULP} \times \mathcal{I}_\text{DLIP},
+    \label{eq:ch1-total_intensity}
+  \end{equation}
+  where $I_\text{ULP}$ corresponds to \eqref{eq:ch1-intensity_reflect_I_1} and
+  \begin{equation}
+    \mathcal{I}_\text{DLIP} \coloneqq I_\text{interf}/E_0^2 = N + 2 \sum_{m<n} (\mathbf{p}_m \cdot \mathbf{p}_n) \cos[(\mathbf{k}_m - \mathbf{k}_n) \cdot \mathbf{r}].
+    \label{eq:dimensionless_interference}
+  \end{equation}
+
+  Therefore, the (non-regime-specific) volumetric heat source is defined as (cf. the heat source under ULP regime in eq.~\eqref{eq:ch1-ulp_heat_source})
+  \begin{equation}
+    S_\text{(total)}(t, \varrho, z; T_e, T_l) \coloneqq \alpha' b(L_z; \alpha') I_\text{total}(t, \varrho, z; \lambda, \{\theta_m\}),
+    \label{eq:ch1-total_source}
+  \end{equation}
+  where we made explicit the wavelength and incident angle dependence. The  temperature-dependence is embedded into the optical properties, $\alpha'(\lambda; T_e, T_l)$ and $R(\lambda; T_e, T_l)$.
+
+  Consequently, the pairwise coherence term is carried directly into the volumetric source \eqref{eq:ch1-ulp_heat_source},
+  so the same absorption and ballistic-correction framework of the previous sections remains valid while the deposited energy acquires the imposed spatial periodicity.
+  Particularly, this yields the mechanism through which the thermal model inherits the imposed DLIP wavelength $\Lambda_N$, while ultrashort-pulse operation allows LIPSS to appear as secondary sub-patterns at the interference maxima
+  on metallic substrates.\cite{M_ller_2020}
+
+  The following figure depicts the simulated laser interference patterns,
+  providing information on the pattern dependency to the free parameters
+  (e.g., incident and azimuthal angles, and number of (gaussian) beams).
+
+  \begin{figure}[H]
+    \centering
+    \PublicFigureOmitted[0.60\linewidth]
+    \caption{MATLAB/Octave simulations of interfering light fields: (A,B) stripe arrays obtained from double-beam laser DLIP at different incidence angles. (C–E) Dot/hole arrays obtained from triple-beam DLIP at different azimuthal angles. (F,G) Dot/hole arrays obtained from quadruple-beam DLIP at different incidence angles. (H–J) Dot/hole arrays produced by quadruple-beam DLIP at different azimuthal angles. Reproduced from A. Rodriguez et al. \cite{Rodriguez_2009}.}
+    \label{fig:ch1-matlab-patterns}
+  \end{figure}
+
+  % \begin{figure}[htbp]
+  %   \centering
+  %   \includegraphics[width=0.85\linewidth]{figures/ch1/dlip_interference_modes_theta_20.png}
+  %   \caption{Interference modes for incident angle $\theta = 20^\circ$ for different numbers of beams and polarisation sequences.}
+  %   \label{fig:ch1-interference-modes}
+  % \end{figure}
+
+  % \begin{figure}[htbp]
+  %   \centering
+  %   \includegraphics[width=0.85\linewidth]{figures/ch1/dlip_total_intensity_SP_and_DP.png}
+  %   \caption{SP (top row) and DP (bottom row) mode intensity profiles for variable number of beams, depicted at the moment of the first pulse peak ($t = 3\tau_p$).}
+  %   \label{fig:ch1-sp-dp-intensity}
+  % \end{figure}
+
+  \section{Laser-induced periodic surface structures}
+  \label{sec:ch1-lipss}
+
+  Laser-induced periodic surface structures (LIPSS) are sub-wavelength or near-wavelength surface modulations that emerge after pulsed irradiation and often coexist with the broader interference pattern imposed by DLIP. % [REFINEMENT: from Bonse2020 — authoritative LSFL/HSFL taxonomy and plasmonic classification refine the brief phenomenology in report1/1-DLIP.tex]
+  Bonse and Gräf classify the dominant families on metals as low-spatial-frequency LIPSS (LSFL) and high-spatial-frequency LIPSS (HSFL), with LSFL-I denoting near-$\lambda$ ripples oriented perpendicular to the laser polarisation and commonly associated with plasmonic coupling, LSFL-II denoting near-$\lambda$ structures aligned parallel to the polarisation, and HSFL-I and HSFL-II denoting sub-$\lambda$ features produced under more restrictive irradiation conditions.\cite{Bonse_2020}
+
+  \begin{figure}[htbp]
+    \centering
+    \PublicFigureOmitted[0.60\linewidth]
+    \caption{Timeline of laser-induced periodic surface structure (LIPSS) development. \cite{Song_2023}}
+    \label{fig:ch1-lipss-timeline}
+  \end{figure}
+
+  The electromagnetic picture starts from roughness-mediated scattering of the incident field. For metals satisfying $\mathrm{Re}(\epsilon_m) < -1$, surface plasmon polaritons (SPPs) can be excited, and the interference between the incident radiation and the SPP field generates a laterally modulated fluence distribution that seeds the ripple pattern \cite{Bonse_2020}. For near-normal incidence, the LSFL period is therefore approximated by
+  \begin{equation}
+    \Lambda_{\rm LSFL} \approx \frac{\lambda}{\mathrm{Re}(n_{\rm SPP})} \ ,
+    \label{eq:ch1-lsfl-period}
+  \end{equation}
+  which links the observable spacing to the effective plasmonic propagation index \cite{Bonse_2020}. In the efficacy-factor formulation of Sipe and co-workers, the rough surface selects the spatial frequencies for which the modulated absorption response is largest, so the seed grating follows the maxima of the absorbed electromagnetic energy rather than an arbitrary topographic perturbation \cite{Sipe_1983}.
+
+  % [REFINEMENT: from Bonse2020 — hydrodynamic matter reorganisation is presented as a complementary relaxation stage rather than as an alternative to electromagnetic seeding.]
+  The matter-reorganisation picture addresses the subsequent hydrodynamic stage. Once the absorption pattern has produced a non-uniform melt layer, thermocapillary transport and Rayleigh--Taylor-type instabilities can redistribute the liquid phase before resolidification \cite{Byskov_2011, Sedao_2016, Bonse_2020}. This interpretation is consistent with the hydrodynamic trajectories already introduced in Fig.~\ref{fig:ch1-laser-induced-trajectories} and motivates the Navier--Stokes treatment elaborated later in \S~1.5.
+
+  Both pictures are now treated as co-operating rather than mutually exclusive. Electromagnetic interference establishes the initial modulation in deposited energy, whereas hydrodynamic relaxation controls the final relief amplitude, sharpness, and depth after melting and resolidification \cite{Bonse_2020}.
+
+  In the DLIP context, this two-stage view is particularly useful because LIPSS can emerge as sub-patterns inside the interference maxima of the imposed macro-period $\Lambda_N$. Ultrashort-pulse DLIP on metals has been shown to generate hierarchical textures in which the DLIP wavelength remains at the micrometre scale while the superposed LIPSS remain sub-micrometric and oriented predominantly perpendicular to the laser polarisation \cite{M_ller_2020}. This interplay is central to functional nano-machining because the large-scale periodicity controls the gross morphology while the LIPSS layer modifies optical, wetting, and tribological response \cite{Alamri_2019}.
+
+  \section{Melt hydrodynamics and capillary response}
+  \label{sec:ch1-hydrodynamics}
+
+  Beyond the electron-heating and conduction-dominated regime introduced in \S~\ref{sec:ch1-ultrashort}, sufficiently high absorbed fluence drives phase transitions, melt flow, and material ejection. Under femtosecond irradiation these processes determine how the thermal state evolves into hydrodynamic relief formation and eventual surface restructuring \cite{Tsibidis_2012,Bulgakova_2002}.
+
+  The hydrodynamic mechanism links absorbed surface energy to melt transport, resolidification, and the regularity of periodic nanostructures, which is why the final morphology remains sensitive to capillary flow, evaporation, and subsurface redistribution \cite{Byskov_2011, Tsibidis_2016, Sedao_2016}. Fluid-mechanical descriptions coupled to optical or electromagnetic solvers have therefore been used to track melt-pool evolution in sub-ablation and near-ablation femtosecond regimes \cite{Rudenko_2016, Colombier_2020, Rudenko_2019}.
+
+  To place these transitions in context,
+  Fig.~\ref{fig:ch1-phase-diagram} shows the phase-diagram projection relevant to ultrafast melting and ablation. The metastable-liquid region lies between the binodal and spinodal boundaries, so rapid heating can drive the material away from equilibrium and towards the spinodal limit, where phase explosion becomes possible \cite{Autrique_2013, Levashov_2007}. This thermodynamic picture complements the latent-heat regularisation already built into \eqref{eq:ch1-pttm-l} and clarifies how the thermal model connects to the onset of fluid motion.\footnote{For more detailed $T$--$\rho$ and $p$--$T$ diagrams, see fig.~18 in \cite{Cheng_2013}.}
+
+  \begin{figure}[htbp]
+    \centering
+    \PublicFigureOmitted[0.40\linewidth]
+    \caption{Projection of phase diagram showing four states of matter (solid, liquid, gas, and plasma), the metastable liquid phase, and the two-phase region. The normal melting temperature ($T_m = 1360\,\mathrm{K}$), critical temperature ($T_c = 7800\,\mathrm{K}$), and critical point (CP) are indicated. Phase boundaries are shown as the melting and sublimation curves, binodal (thick line), and spinodal (thin line). \cite{Autrique_2013,Levashov_2007}}
+    \label{fig:ch1-phase-diagram}
+  \end{figure}
+
+  The governing equations for incompressible Newtonian melt flow are written in convective form. Here $\rho$ denotes the fluid mass density, distinct from the radial coordinate $\varrho$ used in the pTTM above.
+  The continuity equation is
+  \begin{equation}
+    \frac{D\rho}{Dt} + \rho \nabla \cdot \mathbf{u} = 0 \implies \nabla \cdot \mathbf{u} = 0 \ ,
+    \label{eq:ch1-continuity}
+  \end{equation}
+  % [NOTATION: changed \vec{u} \rightarrow \mathbf{u} per AGENTS.md]
+  and the momentum balance becomes
+  \begin{equation}
+    \rho\frac{D\mathbf{u}}{Dt} = - \nabla (P\mathds{1} + \mu \nabla \cdot \mathbf{u}+\mu(\nabla \cdot \mathbf{u})^\top) + \mathbf{g}_z[1 - \beta(T_l -T_m)] \ ,
+    \label{eq:ch1-nse}
+  \end{equation}
+  % [NOTATION: changed T \rightarrow T_l per AGENTS.md]
+  where $D/Dt \equiv \partial_t + \mathbf{u} \cdot \nabla$ is the material derivative, $\mathds{1}$ is the unit tensor, $P$ is the pressure field, $\mu$ is the temperature-dependent dynamic viscosity, $\mathbf{u}$ is the velocity field, $\beta$ is the volume thermal-expansion coefficient, $\mathbf{g}_z$ is the gravitational acceleration in the $z$ direction, and $T_m$ is the melting temperature \cite{Cho_2009, Toro_2009}. The final term in \eqref{eq:ch1-nse} represents the buoyant acceleration due to thermal expansion, while the incompressibility condition in \eqref{eq:ch1-continuity} is preserved by the Boussinesq approximation because the density variation is assumed to remain small in the volume-conservation equation \cite{Cho_2009, Toro_2009}. Neglecting external forces by setting $\mathbf{g}_z=\mathbf{0}$ recovers eq.~8 in \cite{Fraggelakis_2021}.
+
+  In the keyhole cavity, several pressure contributions compete to determine whether the molten depression deepens or collapses. The recoil pressure $P_r$, hydrostatic pressure $P_g$, and hydrodynamic pressure $P_h$ promote keyhole opening, whereas the surface-tension term $P_\sigma$ opposes it; the radiation pressure is neglected because its magnitude is comparatively small \cite{Zhao_2011}. The resulting balance is written as
+  \begin{equation*}
+    P = P_\sigma + P_r + P_g + P_h.
+  \end{equation*}
+
+  Specifically, vapour ejection creates a recoil pressure on the liquid-free surface, which pushes the melt away from the hottest zone in the radial direction. The recoil pressure and the surface temperature are related by\footnote{This expression corresponds to eq.~9 in \cite{Fraggelakis_2021} via the reassignments $T_l \rightarrow T_L^{(s)}$, $\Delta H_{\text{lg}} \rightarrow L_v$, $R \rightarrow R_G$, and $T_{\text{lg}} \rightarrow T_{\text{boiling}}$.}
+  \begin{equation*}
+    P_r = 0.54 P_0 \exp \biggl\{ \Delta H_{\text{lg}}\frac{T_l - T_{\text{lg}}}{RT_lT_{\text{lg}}} \biggr\} \ ,
+  \end{equation*}
+  % [NOTATION: changed T \rightarrow T_l per AGENTS.md]
+  where $P_0$ is the atmospheric pressure, $\Delta H_{\text{lg}}$ is the latent heat of evaporation, $T_{\text{lg}}$ is the liquid--vapour equilibrium temperature, $T_l$ is the surface temperature, and $R$ is the universal gas constant.\cite{Zhao_2011,Jin_2002}
+
+  \begin{figure}[htbp]
+    \centering
+    \PublicFigureOmitted[0.30\linewidth]
+    \caption{Fluid forces acting on the weld pool. \cite{Xiao_2021}}
+    \label{fig:ch1-recoil-pressure}
+  \end{figure}
+
+  The surface-tension contribution is determined by the free-surface curvature,
+  \begin{equation*}
+    P_\sigma = K\sigma \ ,
+  \end{equation*}
+  % [NOTATION: \sigma = surface tension here, not Stefan-Boltzmann]
+  where $K$ is the free-surface curvature \cite{Zhao_2011}. The temperature dependence of the surface tension coefficient is given by \cite{Ho_1996}
+  \begin{align*}
+    \sigma(T_l) & = 1.943 - 4.3 \cdot 10^{-4} (T_l-1723) - 1.3 \cdot 10^{-8} RT_l                                        \\
+                & \quad \ \times \ln\biggl[1 + 0.00318f^a \exp \biggr\{ \frac{1.66 \cdot 10^8}{RT_l}\biggl\} \biggr] \ .
+  \end{align*}
+  % [NOTATION: changed \gamma \rightarrow \sigma per AGENTS.md]
+  % [NOTATION: changed T \rightarrow T_l per AGENTS.md]
+  This temperature sensitivity couples the capillary pressure directly to the thermal field, while the density change in the melt pool remains small enough for the Boussinesq approximation to remain valid.\cite{Zhao_2011,Ho_1996}
+
+  Lastly, the thermocapillary boundary conditions imposed at the liquid free surface are
+  \begin{equation*}
+    \tau_{13} + \frac{\sigma}{\mu}\frac{\partial T_l}{\partial x} = 0 , \qquad \tau_{23} + \frac{\sigma}{\mu}\frac{\partial T_l}{\partial y} = 0 \ ,
+  \end{equation*}
+  % [NOTATION: changed T \rightarrow T_l per AGENTS.md]
+  where $\tau_{ij} \coloneqq (\nabla \mathbf{u} + (\nabla \mathbf{u})^\top)_{ij}$ denotes the corresponding covariant stress tensor or equivalently twice the strain-rate tensor for Newtonian fluid, $\tau = 2\epsilon \equiv 2 (\nabla \mathbf{u})_\text{sym}$ \cite{Hu_2021}. Writing $\mathbf{u}=(u,v,w)$ gives $\tau_{13} = \partial u/\partial z$ and $\tau_{23} = \partial v/\partial y$, which recovers eq.~10 in \cite{Fraggelakis_2021}.
+
+  \begin{figure}[htbp]
+    \centering
+    \PublicFigureOmitted[0.50\linewidth]
+    \caption{Resolidification of the molten pool after laser ablation. Theoretical model of Zhu et al.\ . \cite{Zhu_2020}}
+    \label{fig:ch1-solid-liquid}
+  \end{figure}
+
+  After laser irradiation terminates, the molten pool cools,
+  the free surface relaxes,
+  and the liquid phase resolidifies \cite{Zhu_2020}. Figure~\ref{fig:ch1-solid-liquid} summarises this terminal stage,
+  while Fig.~\ref{fig:ch1-laser-induced-trajectories} provides the wider ablation-trajectory setting in which the melt pool forms.
+  The final surface morphology is set by the competition between the resolidification rate and the hydrodynamic relief amplitude generated during the molten stage,
+  which is why the present section connects naturally to the ablation mechanisms of \S~\ref{sec:ch1-ablation}.
+  %%% NOTE: THERE IS NO MORPHOLOGY ANALYSIS IN CHAPTER 4 
+  % and to the morphology analysis developed later in Chapter~4.
+
+  \section{Ablation, thresholding, and morphology formation}
+  \label{sec:ch1-ablation}
+
+  Under femtosecond irradiation, three principal ablation trajectories are typically distinguished: vapourisation, phase explosion through the metastable-liquid region, and supercritical-fluid ejection. These pathways are summarised in Fig.~\ref{fig:ch1-laser-induced-trajectories}, and the phase-explosion branch is consistent with the thermodynamic route indicated by Fig.~\ref{fig:ch1-phase-diagram}.\cite{Song_2023,Autrique_2013}
+
+  The threshold fluence $F_{\text{th}}$ is the minimum incident fluence that produces measurable material removal. In qualitative terms, $F_{\text{th}}$ scales as $\tau_p^{1/2}$ in the thermal regime $(\tau_p \gg \tau_{e-ph})$ and becomes approximately constant in the non-thermal regime $(\tau_p \ll \tau_{e-ph})$ \cite{Zhang_2015}.
+
+  The base pTTM simulations considered in this thesis are intentionally restricted to the sub-ablation regime.
+  In this setting the lattice temperature $T_l$ remains below or near $T_m$,
+  macroscopic material removal is suppressed,
+  and the latent-heat contribution introduced in \S~\ref{sec:ch1-ultrashort} through \eqref{eq:ch1-pttm-l} is taken to vanish for the baseline model.
+  This regime choice follows the physical assumptions adopted for ultrashort-pulse DLIP in \cite{Fraggelakis_2021},
+  while surrogate-assisted threshold estimation is deferred to Chapter~4, where thresholds are inferred by inverting learned \(T_{l,\max}(F)\) curves.
+
+  \section{Two-temperature model variants and model selection}
+  \label{sec:ch1-ttm-variants}
+
+  Classical Fourier heat conduction remains adequate when the laser pulse duration exceeds both the electron and lattice relaxation times, so the irradiated metal may be treated as a single equilibrium medium. Under ultrafast illumination, however, the two subsystems decouple temporally and a two-step description becomes necessary. Anisimov et al.\ first established the parabolic two-step framework for this regime \cite{Anisimov_1974} which was advanced further by Fujimoto et al.\ \cite{Fujimoto_1984},
+  while later work introduced hyperbolic heat-flux corrections for finite-speed thermal transport and dual-subsystem relaxation effects \cite{Qiu_1992, Bai_1995, Chen_2001}.
+
+  The parabolic one-step model (POS) therefore represents the classical laser-heating limit:
+  \begin{equation*}
+    \rho_m c_p \frac{\partial T}{\partial t} = \nabla \cdot (k \nabla T) + S \, .
+  \end{equation*}
+  % [NOTATION: changed \rho \rightarrow \rho_m per chapter convention outside §1.5]
+  Here \(\rho_m\) denotes the material density and \(c_p\) the isobaric specific heat capacity. The POS assumes instantaneous Fourier transport and remains appropriate when the pulse duration exceeds substantially the values of electron and lattice relaxation times, i.e., \(\tau_p \gg \tau_e\) and \(\tau_p \gg \tau_l\), which corresponds to the long-pulse or continuous-wave heating limit \cite{Tzou_2014ch1}.
+
+  The parabolic two-step model (PTS) separates the electron and lattice temperatures while retaining Fourier conduction in the electron subsystem. In the notation of this thesis, the coupled PTS system has already been introduced in \eqref{eq:ch1-pts}. This model is appropriate when \(\tau_p > \tau_e\) but \(\tau_p < \tau_l\), so the electrons thermalise during the pulse whereas the lattice responds on a delayed timescale \cite{Anisimov_1974,Qiu_1992}. The pTTM adopted in \S\ref{sec:ch1-ultrashort} starts from this structure and extends it by retaining Fourier conduction in the lattice subsystem.
+
+  The hyperbolic one-step model (HOS) or Maurer's model \cite{Maurer_1969} replaces Fourier's law by the Maxwell--Cattaneo--Vernotte relation,\cite{Vernotte_1958,Majchrzak_2012}\footnote{
+    Cattaneo introduced the thermal relaxation characteristic time $\tau_0$ \cite{Cattaneo_1948}, which is interpreted by Chandrasekharaiah as \emph{the
+      time lag required to establish steady heat conduction in a volume element once a
+      temperature gradient has been imposed across it} \cite{Chandrasekharaiah_1998},
+    i.e., the time needed to reach thermodynamic stability.
+  }
+  \begin{align*}
+    \rho_m c_p \frac{\partial T}{\partial t}                   & = -\nabla \cdot \mathbf{q} + S \, , \\
+    \mathbf{q} + \tau_e \frac{\partial \mathbf{q}}{\partial t} & = -k_{eq}\nabla T \, ,
+  \end{align*}
+  % [NOTATION: changed \rho \rightarrow \rho_m per chapter convention outside §1.5]
+  which leads to the finite thermal-wave speed \(c_T = \sqrt{k_{eq}/(\rho_m c_p \tau_e)}\). In the single-temperature setting this correction becomes relevant once the effective relaxation time is no longer negligible over the pulse timescale, which is commonly associated with \(\tau_p \sim \tau_l\) in lattice-dominated heating problems \cite{Majchrzak_2012, Mochnacki_2013}.
+
+  The hyperbolic two-step model (HTS) then introduces the electron heat-flux relaxation explicitly:\cite{Qiu_1993}
+  \begin{align*}
+    C_e \frac{\partial T_e}{\partial t}                            & = -\nabla \cdot \mathbf{q}_e - G(T_e - T_l) + S \, , \\
+    \mathbf{q}_e + \tau_e \frac{\partial \mathbf{q}_e}{\partial t} & = -k_e \nabla T_e \, ,                               \\
+    C_l \frac{\partial T_l}{\partial t}                            & = G(T_e - T_l) \, .
+  \end{align*}
+  It accounts for the finite electron relaxation time and reduces to the PTS in the limit \(\tau_e \to 0\).
+  The HTS is therefore the appropriate extension when \(\tau_p \sim \tau_e\).
+
+  The dual-hyperbolic two-step model (DHTS) extends the HTS by retaining a separate lattice heat flux,
+  \begin{align*}
+    C_e \frac{\partial T_e}{\partial t}                            & = -\nabla \cdot \mathbf{q}_e - G(T_e - T_l) + S \, , \\
+    \mathbf{q}_e + \tau_e \frac{\partial \mathbf{q}_e}{\partial t} & = -k_e \nabla T_e \, ,                               \\
+    C_l \frac{\partial T_l}{\partial t}                            & = -\nabla \cdot \mathbf{q}_l + G(T_e - T_l) \, ,     \\
+    \mathbf{q}_l + \tau_l \frac{\partial \mathbf{q}_l}{\partial t} & = -k_l \nabla T_l \, .
+  \end{align*}
+  The DHTS assigns finite wave speeds to both subsystems and is therefore the most general TTM variant before drift-velocity corrections are introduced. It becomes necessary when both electron and lattice relaxation effects are comparable with the pulse timescale \cite{Chen_2001}.
+
+  The semiclassical two-step model (STS) goes one step further by incorporating the electron drift velocity generated by the combined action of the electric field and the hot-electron kinetic pressure. Chen et al.\ introduced this extension for very short, high-intensity pulses, where drift transport becomes comparable with diffusion and therefore cannot be neglected in the electron energy balance \cite{Chen_2006}.
+
+  Table~\ref{tab:ch1-ttm-taxonomy} summarises the governing structure, wave-speed characteristics, and validity range of the principal TTM variants discussed above, following the Qiu--Tien taxonomy in \cite{Qiu_1992} and the later classification of Alexopoulou et al. Figure~\ref{fig:ch1-ttm-taxonomy} shows the corresponding model interrelationship.
+
+  % =========================================================
+  % TTM taxonomy table
+  % =========================================================
+  \begin{table}[htbp]
+    \centering
+    \small
+    \caption{Summary of one- and two-temperature model variants for ultrashort-pulse laser heating of metals. The table follows the taxonomy introduced by Qiu and Tien and the later literature classification adopted in the field.}
+    \label{tab:ch1-ttm-taxonomy}
+    \renewcommand{\arraystretch}{1.35}
+    \setlength{\tabcolsep}{5pt}
+
+    \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}>{\centering\arraybackslash}m{1.5cm}
+        >{\raggedright\arraybackslash}m{5.7cm}
+        >{\centering\arraybackslash}m{3.4cm}
+        >{\centering\arraybackslash}m{4.4cm}
+        >{\centering\arraybackslash}m{2.5cm}@{}}
+        \toprule
+        \rowcolor{gray!20}
+        \textbf{Model} & \textbf{Governing equations}                                       & \textbf{Thermal-wave speed} & \textbf{Validity regime}                  & \textbf{References} \\
+        \midrule
+        POS            & \(\rho_m c_p \dot{T} = \nabla \cdot (k \nabla T) + S\)             & Infinite                    & \(\tau_p \gg \tau_e,\ \tau_p \gg \tau_l\) & \cite{Tzou_2014ch1} \\
+        \midrule
+        PTS            & \makecell[l]{Two coupled energy equations                                                                                                                          \\ for \(T_e\) and \(T_l\);\\ Fourier conduction retained in\\ the electron subsystem} & Infinite & \(\tau_p > \tau_e,\ \tau_p < \tau_l\) & \cite{Anisimov_1974,Fujimoto_1984,Qiu_1992} \\
+        \midrule
+        HOS            & \makecell[l]{\(\rho_m c_p \dot{T} = -\nabla \cdot \mathbf{q} + S\)                                                                                                 \\ \(\mathbf{q} + \tau_e \dot{\mathbf{q}} = -k_{eq}\nabla T\)} & \(\displaystyle c=\sqrt{\frac{k_{eq}}{\rho_m c_p \tau_e}}\) & \makecell[c]{Single-temperature setting;\\ effective relaxation\\ not negligible, often \(\tau_p \sim \tau_l\)} & \cite{Maurer_1969,Vernotte_1958,Majchrzak_2012,Mochnacki_2013} \\
+        \midrule
+        HTS            & \makecell[l]{Electron energy balance with                                                                                                                          \\ hyperbolic flux +\\ lattice source balance\\ without lattice flux} & \(\displaystyle c_e=\sqrt{\frac{k_e}{C_e\tau_e}}\) & \(\tau_p \sim \tau_e\) & \cite{Qiu_1992,Qiu_1993} \\
+        \midrule
+        DHTS           & \makecell[l]{Electron and lattice both with                                                                                                                        \\ hyperbolic heat-flux relations} & \makecell[c]{\(\displaystyle c_e=\sqrt{\frac{k_e}{C_e\tau_e}}\)\\[0.6em] \(\displaystyle c_l=\sqrt{\frac{k_l}{C_l\tau_l}}\)} & \makecell[c]{\(\tau_p \sim \tau_e,\)\\ \(\tau_p \sim \tau_l\)} & \cite{Chen_2001} \\
+        \midrule
+        STS            & \makecell[l]{DHTS augmented by electron                                                                                                                            \\ drift velocity and\\ hot-electron pressure /\\ electric-field effects} & \makecell[c]{Finite in both\\ subsystems} & \makecell[c]{Very short,\\ high-intensity pulses\\ where drift transport\\ is non-negligible} & \cite{Chen_2006} \\
+        \bottomrule
+      \end{tabular}%
+    }
+  \end{table}
+
+  % =========================================================
+  % Relaxation times used in hyperbolic TTM / DHTM
+  % =========================================================
+
+  \begin{table}[htbp]
+    \centering
+    \small
+    \caption{Reported relaxation times used in Maxwell--Cattaneo--Vernotte-type electron and lattice heat-flux relations in hyperbolic one-step, hyperbolic two-step, and dual-hyperbolic two-temperature models.}
+    \label{tab:ch1-relaxation-times-hyperbolic-ttm}
+    \renewcommand{\arraystretch}{1.35}
+    \setlength{\tabcolsep}{5pt}
+
+    \resizebox{\linewidth}{!}{%
+      \begin{tabular}{@{}>{\raggedright\arraybackslash}m{2.8cm}
+        >{\raggedright\arraybackslash}m{4.7cm}
+        >{\centering\arraybackslash}m{2.2cm}
+        >{\centering\arraybackslash}m{2.2cm}
+        >{\raggedright\arraybackslash}m{3.8cm}
+        >{\centering\arraybackslash}m{2.1cm}@{}}
+        \toprule
+        \rowcolor{gray!20}
+        \makecell[l]{\textbf{Material /}            \\ \textbf{system}} &
+        \textbf{Model context}      &
+        \textbf{\(\tau_e\) (ps)}    &
+        \textbf{\(\tau_l\) (ps)}    &
+        \textbf{Method / basis}     &
+        \textbf{Reference}                          \\
+        \midrule
+
+        Au thin film                &
+        \makecell[l]{Hyperbolic two-step / electron \\ MCV flux} &
+        \(0.04\)                    &
+        ---                         &
+        \makecell[l]{Adopted as electron            \\ heat-flux relaxation time} &
+        \cite{Qiu_1992,Qiu_1993}                    \\
+        \midrule
+
+        Au thin film                &
+        \makecell[l]{Dual-hyperbolic two-step       \\ model} &
+        \(0.04\)                    &
+        \(0.8\)                     &
+        \makecell[l]{Canonical DHTS input           \\ values for Au} &
+        \cite{Chen_2001}                            \\
+        \midrule
+
+        Au thin film                &
+        \makecell[l]{Later DHTS / hyperbolic-       \\ TTM reuse} &
+        \(0.04\)                    &
+        \(0.8\)                     &
+        \makecell[l]{Reused from Chen--Beraun       \\ gold-film model} &
+        \cite{Majchrzak_2012}                       \\
+        \midrule
+
+        Cr thin film                &
+        \makecell[l]{Dual-hyperbolic two-step       \\ model for bilayers} &
+        \(6.8\times10^{-3}\)        &
+        \(0.136\)                   &
+        \makecell[l]{Reported as model-input        \\ values for Cr} &
+        \cite{Niu_2009}                             \\
+        \midrule
+
+        \makecell[l]{Au/Cr bilayer} &
+        \makecell[l]{Bilayer hyperbolic two-step    \\ model} &
+        \makecell[c]{Au: \(0.04\)                   \\ Cr: \(6.8\times10^{-3}\)} &
+        \makecell[c]{Au: ---                        \\ Cr: \(0.136\)} &
+        \makecell[l]{Layerwise hyperbolic           \\ model inputs} &
+        \cite{Niu_2009}                             \\
+        \bottomrule
+      \end{tabular}%
+    }
+  \end{table}
+
+  \begin{figure}[htbp]
+    \centering
+    \PublicFigureOmitted[0.60\linewidth]
+    \caption{Taxonomy and interrelationship between laser heating models, adapted from Qiu and Tien \cite{Qiu_1992}.}
+    \label{fig:ch1-ttm-taxonomy}
+  \end{figure}
+
+  The present thesis focuses on femtosecond laser-matter interaction in metals,
+  with pulse durations of $\mathcal{O}(10^4)$ fs ($\tau_p \sim 10$ ps) and representative materials including Au, Ni, Ti, Cu, and 100Cr6 steel.
+  In this regime the electron relaxation time is typically of $\mathcal{O}(10)$ fs,
+  whereas the lattice relaxation time remains on the picosecond-to-nanosecond scale (see table~\ref{tab:ch1-ttm-taxonomy} for more details).
+  Consequently, \(\tau_p > \tau_e\) but \(\tau_p < \tau_l\), which places the simulations in the domain where the PTS family is physically appropriate. Hyperbolic corrections become central once \(\tau_p \sim \tau_e\), but that is not the primary operating regime of the present work \cite{Tzou_2014ch5, Alexopoulou_2023, Zhang_2015}.
+
+  The baseline model adopted in this thesis is therefore the pTTM written in \eqref{eq:ch1-pttm} under sub-ablation conditions ($H_m \rightarrow 0$). This system can be interpreted as the PTS augmented by Fourier conduction in the lattice subsystem, so it is the parabolic counterpart of the DHTS hierarchy rather than a fully hyperbolic model. Compared with a full DHTS implementation, this choice preserves the physically essential electron--lattice nonequilibrium and the temperature-dependent electron transport closures discussed in \S\ref{sec:ch1-absorption}, while avoiding additional wave-front dynamics that are not required for the present metal-processing regime \cite{Fraggelakis_2021}.
+
+  \section{Fourier and non-Fourier heat transfer}
+  \label{sec:ch1-fourier-nonfourier}
+
+  % [REFINEMENT: from Oane2021 — clarifies the applicability limits of Fourier transport and introduces the MCV and DPL macroscopic corrections for ultrafast heating.]
+  The classical Fourier law assumes instantaneous propagation of heat and is therefore appropriate only when the observation timescale is much longer than the underlying carrier relaxation time. Under femtosecond irradiation this assumption becomes questionable, and the Maxwell--Cattaneo--Vernotte (MCV) modification is introduced to enforce a finite thermal-wave speed \cite{Cattaneo_1948,Vernotte_1958}.
+
+  In the one-step setting, Fourier conduction is written as
+  \begin{equation*}
+    \rho_m c_p \frac{\partial T}{\partial t} = \nabla \cdot (k \nabla T) + S \, .
+  \end{equation*}
+  % [NOTATION: changed \rho \rightarrow \rho_m per chapter convention outside §1.5]
+  This is the parabolic one-step limit already discussed in \S\ref{sec:ch1-ttm-variants}.
+  Because the Fourier equation is parabolic,
+  it implies infinite propagation speed and is therefore best suited to continuous-wave irradiation and long-pulse laser heating,
+  where \(\tau_p \gg \tau_e\)
+  and the Knudsen number defined as $K_n = l_f/L_c$, where $l_f$ and $L_c$ are the phonon mean free path length and the characteristic length, respectively,
+remains small, \(K_n \ll 1\), signifying a continuum flow regime \cite{Zhai_2020, Oane_2021}.
+
+The MCV relation replaces Fourier's law by
+\begin{equation*}
+  \mathbf{q} + \tau_q \frac{\partial \mathbf{q}}{\partial t} = -k \nabla T \, ,
+\end{equation*}
+where \(\tau_q\) is the heat-flux relaxation time. Combining this constitutive law with the local energy balance
+\begin{equation*}
+  \rho_m c_p \frac{\partial T}{\partial t} = -\nabla \cdot \mathbf{q} + S
+\end{equation*}
+yields, in the constant-property limit,
+\begin{equation*}
+  \tau_q \frac{\partial^2 T}{\partial t^2}
+  + \frac{\partial T}{\partial t}
+  = \frac{k}{\rho_m c_p}\Delta T
+  + \frac{S}{\rho_m c_p}
+  + \frac{\tau_q}{\rho_m c_p}\frac{\partial S}{\partial t},
+\end{equation*}
+with thermal-wave speed \(c_T = \sqrt{k/(\rho_m c_p \tau_q)}\).
+For metals one typically has \(\tau_q \sim \tau_e \sim 10\) fs,
+so the wave-speed correction becomes significant when \(\tau_p \sim \tau_q\).
+At the TTM level, this same non-Fourier correction underlies the HOS and HTS formulations introduced in \S\ref{sec:ch1-ttm-variants} \cite{Oane_2021,Alexopoulou_2023}.
+
+The dual phase lag (DPL) model generalises the MCV relation by allowing separate phase lags for the heat flux and the temperature gradient,\cite{Tzou_1995, Tzou_2014ch2}
+\begin{equation*}
+  \mathbf{q}(\mathbf{r}, t + \tau_q) = -k \nabla T(\mathbf{r}, t + \tau_T) \, .
+\end{equation*}
+Rather than re-deriving the expanded DPL evolution equation here, it is sufficient to note that the DPL can be interpreted as the macroscopic continuation of the TTM hierarchy \cite{Alexopoulou_2023}.
+In particular, the limits \(\tau_T \to C_l/G\) and \(\tau_q \to \tau_e\) connect the phase-lag description back to the PTS framework introduced in \eqref{eq:ch1-pts}, thereby linking the macroscopic lag parameters to the microscopic electron and lattice relaxation processes \cite{Tzou_2014ch2, Alexopoulou_2023}.
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Comparison between Fourier and non-Fourier heat-conduction models under ultrashort-pulse laser irradiation, following Oane et al.\ \cite{Oane_2021}.}
+  \label{tab:ch1-fourier-nonfourier}
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{5pt}
+
+  \resizebox{\linewidth}{!}{%
+    \begin{tabular}{@{}>{\centering\arraybackslash}m{2.5cm}
+      >{\raggedright\arraybackslash}m{5.5cm}
+      >{\centering\arraybackslash}m{3.5cm}
+      >{\centering\arraybackslash}m{5.0cm}@{}}
+      \toprule
+      \rowcolor{gray!20}
+      \textbf{Model}                                                                                                         & \textbf{Heat equation form} & \textbf{Wave speed} & \textbf{Applicable regime} \\
+      \midrule
+      Fourier (parabolic)                                                                                                    &
+      \(\rho_m c_p \dot{T} = \nabla \cdot (k \nabla T) + S\)                                                                 &
+      Infinite                                                                                                               &
+      \makecell[c]{\(\tau_p \gg \tau_q\)                                                                                                                                                                      \\ \(K_n \ll 1\)} \\
+      \midrule
+      MCV (hyperbolic)                                                                                                       &
+      \(\tau_q \ddot{T} + \dot{T} = \frac{k}{\rho_m c_p}\Delta T + \frac{S}{\rho_m c_p} + \frac{\tau_q}{\rho_m c_p}\dot{S}\) &
+      \(\displaystyle c_T = \sqrt{\frac{k}{\rho_m c_p \tau_q}}\)                                                             &
+      \(\tau_p \sim \tau_q\)                                                                                                                                                                                  \\
+      \midrule
+      DPL                                                                                                                    &
+      \(\mathbf{q}(\mathbf{r}, t+\tau_q) = -k \nabla T(\mathbf{r}, t+\tau_T)\)                                               &
+      \makecell[c]{Finite,                                                                                                                                                                                    \\ lag-dependent} &
+      \makecell[c]{Distinct flux and                                                                                                                                                                          \\
+      gradient lags in the                                                                                                                                                                                    \\
+      ultrafast nonequilibrium regime}                                                                                                                                                                        \\
+      \bottomrule
+    \end{tabular}%
+  }
+\end{table}
+
+For the femtosecond regime on metals addressed in this thesis,
+the dual-parabolic two-step model (abbreviated as pTTM) remains the computationally tractable and physically justified choice, as established in \S\ref{sec:ch1-ttm-variants}; the non-Fourier corrections are retained in spirit through the explicit resolution of the electron and lattice subsystems and the temperature-dependent constitutive closures.

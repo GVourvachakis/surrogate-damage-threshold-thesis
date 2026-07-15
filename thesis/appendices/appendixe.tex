@@ -1,0 +1,1371 @@
+\chapter{Axisymmetric Hankel--Transform Formulation for the Linear pTTM}
+\label{app:axisym-hankel-linear-pttm}
+
+This appendix develops a transform-based formulation for the axisymmetric
+constant-coefficient pTTM, written in the solver-unit notation of Chapter~\ref{ch:numerical-methods}.
+The construction is motivated by the generalized Hankel-transform framework of
+Ali and Kalla \cite{Ali_Kalla_1999}, by the classical Hankel-transform
+treatment of boundary-value problems in cylindrical geometry
+\cite{Davies_2002_Hankel}, and by transform-based analyses of axisymmetric
+Dirichlet and heat-conduction problems
+\cite{Rogers_2012,Tuteja_Jaloree_Goyal_2014,Kunga_2021}.
+The role of the weighted Gelfand--Shilov spaces of type \(W\) developed by
+Mahato and Pasawan \cite{Mahato_Pasawan_2021} is auxiliary here: they provide
+a convenient transform-invariant test-function setting, but the well-posedness
+and convergence arguments below are carried out in the natural weighted
+\(L^2\) framework.
+
+\section{Axisymmetric linear pTTM in solver units}
+\label{sec:appE-axisym-model}
+
+Let
+\begin{equation}
+    \xi \coloneqq \frac{\varrho}{L_{\mathrm{ref}}},
+    \qquad
+    \zeta \coloneqq \frac{z}{L_{\mathrm{ref}}},
+    \qquad
+    \tau \coloneqq \frac{t_{\mathrm{phys}}}{t_{\mathrm{ref}}},
+    \label{eq:appE-scaled-variables}
+\end{equation}
+where \(L_{\mathrm{ref}}\) and \(t_{\mathrm{ref}}\) are the solver-space
+reference scales used in Chapter~\ref{ch:numerical-methods}.
+Throughout this appendix, \(\xi\in[0,\infty)\) is the dimensionless radial
+    coordinate and \(\zeta\in[0,1]\) is the dimensionless depth coordinate.
+
+    We consider the linear axisymmetric pTTM obtained from the general pTTM of
+    Chapter~\ref{ch:theoretical-background} after fixing the material coefficients
+    at constant values, suppressing phase-change effects, and subtracting any
+    reference or lifting function needed to impose homogeneous boundary data in the
+    depth coordinate. The unknowns are denoted by
+    \[
+        u(\tau,\xi,\zeta), \qquad v(\tau,\xi,\zeta),
+    \]
+    representing the scaled electron and lattice temperature fields, respectively.
+    They satisfy
+    \begin{subequations}\label{eq:appE-linear-axisym-pttm}
+        \begin{align}
+            \partial_\tau u
+             & =
+            D_e
+            \left(
+            \partial_{\xi\xi}u + \frac{1}{\xi}\partial_\xi u + \partial_{\zeta\zeta}u
+            \right)
+            - c_e (u-v)
+            + s(\tau,\xi,\zeta),
+            \label{eq:appE-linear-axisym-pttm-e}
+            \\
+            \partial_\tau v
+             & =
+            D_l
+            \left(
+            \partial_{\xi\xi}v + \frac{1}{\xi}\partial_\xi v + \partial_{\zeta\zeta}v
+            \right)
+            + c_l (u-v),
+            \label{eq:appE-linear-axisym-pttm-l}
+        \end{align}
+    \end{subequations}
+    for \((\tau,\xi,\zeta)\in(0,\tau_f]\times(0,\infty)\times(0,1)\), where
+\(D_e,D_l>0\) are constant diffusivities and
+\(c_e,c_l>0\) are constant coupling parameters.
+
+The radial operator is written in self-adjoint axisymmetric form as
+\begin{equation}
+    \mathcal{L}_\xi w
+    \coloneqq
+    \partial_{\xi\xi}w + \frac{1}{\xi}\partial_\xi w
+    =
+    \frac{1}{\xi}\partial_\xi\!\bigl(\xi\,\partial_\xi w\bigr).
+    \label{eq:appE-radial-operator}
+\end{equation}
+
+At the symmetry axis \(\xi=0\) we impose the regularity conditions
+\begin{equation}
+    \partial_\xi u(\tau,0,\zeta)=0,
+    \qquad
+    \partial_\xi v(\tau,0,\zeta)=0,
+    \label{eq:appE-axis-regularity}
+\end{equation}
+and as \(\xi\to\infty\) we assume sufficient decay so that the Hankel
+integrals and integration-by-parts identities below are valid.
+
+For definiteness, this appendix is written for homogeneous Dirichlet conditions
+in the depth variable,
+\begin{equation}
+    u(\tau,\xi,0)=u(\tau,\xi,1)=0,
+    \qquad
+    v(\tau,\xi,0)=v(\tau,\xi,1)=0.
+    \label{eq:appE-depth-dirichlet}
+\end{equation}
+The homogeneous Neumann case is stated separately in
+Remark~\ref{rem:appE-neumann-case}; in that case the depth basis becomes the
+cosine basis, which is the setting closest to a discrete cosine transform (DCT) implementation
+\cite{Rogers_2012}.
+
+The initial conditions are
+\begin{equation}
+    u(0,\xi,\zeta)=u_0(\xi,\zeta),
+    \qquad
+    v(0,\xi,\zeta)=v_0(\xi,\zeta).
+    \label{eq:appE-initial-data}
+\end{equation}
+
+\section{Generalized Hankel transform and specialisation to the axisymmetric kernel}
+\label{sec:appE-generalized-hankel}
+
+Ali and Kalla \cite{Ali_Kalla_1999} introduce the generalized Hankel transform
+\begin{equation}
+    \mathscr{H}_{\nu}^{a,c}[f](s)
+    \coloneqq
+    \int_{0}^{\infty}
+    \xi^{a} J_{\nu}(s\xi^{c})\, f(\xi)\, d\xi,
+    \qquad c>0,
+    \label{eq:appE-generalized-hankel}
+\end{equation}
+with kernel
+\begin{equation}
+    K_{\nu}^{a,c}(s,\xi)\coloneqq \xi^{a}J_{\nu}(s\xi^{c}),
+    \label{eq:appE-generalized-hankel-kernel}
+\end{equation}
+and corresponding inversion
+\begin{equation}
+    f(\xi)
+    =
+    c\,\xi^{2c-a-1}
+    \int_{0}^{\infty}
+    s\, \mathscr{H}_{\nu}^{a,c}[f](s)\,
+    J_{\nu}(s\xi^{c})\, ds.
+    \label{eq:appE-generalized-hankel-inverse}
+\end{equation}
+The classical Hankel transform of order \(\nu\) is recovered by setting
+\(a=c=1\) \cite{Ali_Kalla_1999,Davies_2002_Hankel}.
+
+For the axisymmetric linear pTTM, the relevant specialisation is the
+order-zero classical transform
+\begin{equation}
+    \mathscr{H}_0[f](\eta)
+    \coloneqq
+    \int_{0}^{\infty}
+    \xi f(\xi) J_0(\eta\xi)\, d\xi,
+    \qquad \eta\ge 0,
+    \label{eq:appE-hankel-order-zero}
+\end{equation}
+which corresponds to the parameter choice
+\((\nu,a,c)=(0,1,1)\) in \eqref{eq:appE-generalized-hankel}.
+Its inverse is
+\begin{equation}
+    f(\xi)
+    =
+    \int_{0}^{\infty}
+    \eta\, \mathscr{H}_0[f](\eta)\, J_0(\eta\xi)\, d\eta,
+    \label{eq:appE-hankel-order-zero-inverse}
+\end{equation}
+and Parseval's identity takes the form
+\begin{equation}
+    \int_{0}^{\infty}\xi f(\xi)g(\xi)\, d\xi
+    =
+    \int_{0}^{\infty}\eta\, \mathscr{H}_0[f](\eta)\, \mathscr{H}_0[g](\eta)\, d\eta.
+    \label{eq:appE-hankel-parseval}
+\end{equation}
+
+The central operational identity is the diagonalisation of the radial operator.
+
+\begin{proposition}
+    \label{prop:appE-hankel-diagonalisation}
+    Let $f \in C^2((0,\infty))$
+    and let $\mathcal{L}_\xi$ denote the radial part of the Laplacian operator defined in \eqref{eq:appE-radial-operator}.
+    Assume that $f, f', f''$ are such that the Hankel transform of order zero of \eqref{eq:appE-hankel-order-zero}
+    exists and converges absolutely for $\eta > 0$. If $f$ satisfies the following asymptotic kernel-weighted boundary conditions:
+    \begin{enumerate}
+        \item $\lim_{\xi \to \{0, \infty\}} \xi f_\xi(\xi) J_0(\eta\xi) = 0$
+        \item $\lim_{\xi \to \{0, \infty\}} \eta \xi f(\xi) J_1(\eta\xi) = 0$
+    \end{enumerate}
+    then the operator $\mathcal{L}_\xi$ is diagonalised by $\mathscr{H}_0$ such that:
+    \begin{equation}
+        \mathscr{H}_0[\mathcal{L}_\xi f](\eta) = -\eta^2 \mathscr{H}_0[f](\eta).
+        \label{eq:appE-hankel-radial-diag}
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    Using the divergence form \eqref{eq:appE-radial-operator},
+    \[
+        \mathscr{H}_0[\mathcal{L}_\xi f](\eta)
+        =
+        \int_0^\infty
+        \partial_\xi(\xi f_\xi)\, J_0(\eta\xi)\, d\xi.
+    \]
+    Integrating by parts once yields
+    \[
+        \mathscr{H}_0[\mathcal{L}_\xi f](\eta)
+        =
+        -\int_0^\infty
+        \xi f_\xi(\xi)\, \partial_\xi J_0(\eta\xi)\, d\xi.
+    \]
+    Integrating by parts again gives
+    \[
+        \mathscr{H}_0[\mathcal{L}_\xi f](\eta)
+        =
+        \int_0^\infty
+        f(\xi)\,
+        \partial_\xi\!\bigl(\xi\,\partial_\xi J_0(\eta\xi)\bigr)\, d\xi.
+    \]
+    The Bessel equation for \(J_0\) implies
+    \[
+        \partial_{\xi\xi}J_0(\eta\xi) + \frac{1}{\xi}\partial_\xi J_0(\eta\xi)
+        + \eta^2 J_0(\eta\xi)=0,
+    \]
+    hence
+    \[
+        \partial_\xi\!\bigl(\xi\,\partial_\xi J_0(\eta\xi)\bigr)
+        =
+        -\eta^2 \xi J_0(\eta\xi).
+    \]
+    Substituting this identity proves \eqref{eq:appE-hankel-radial-diag}.
+\end{proof}
+
+\begin{remark}
+    The generalized transform of Ali and Kalla \cite{Ali_Kalla_1999} is useful for
+    placing the construction in a broader kernel framework, but for the
+    axisymmetric linear pTTM the order-zero classical Hankel transform already
+    diagonalises the radial Bessel operator. This is the basic reason that
+    the axisymmetric transform machinery is especially natural in this setting
+    \cite{Davies_2002_Hankel,Rogers_2012}.
+\end{remark}
+
+\section{Depth expansion and modal reduction}
+\label{sec:appE-depth-expansion}
+
+Under the homogeneous Dirichlet conditions
+\eqref{eq:appE-depth-dirichlet}, the natural depth eigenfunctions are
+\begin{equation}
+    \phi_n(\zeta)\coloneqq \sqrt{2}\sin(n\pi\zeta),
+    \qquad
+    \mu_n\coloneqq n\pi,
+    \qquad
+    n\in\mathbb{N},
+    \label{eq:appE-depth-basis}
+\end{equation}
+which satisfy
+\[
+    -\phi_n''=\mu_n^2\phi_n,
+    \qquad
+    \phi_n(0)=\phi_n(1)=0,
+    \qquad
+    \int_0^1 \phi_n(\zeta)\phi_m(\zeta)\, d\zeta=\delta_{nm}.
+\]
+
+We expand
+\begin{equation}
+    u(\tau,\xi,\zeta)
+    =
+    \sum_{n=1}^{\infty} u_n(\tau,\xi)\phi_n(\zeta),
+    \qquad
+    v(\tau,\xi,\zeta)
+    =
+    \sum_{n=1}^{\infty} v_n(\tau,\xi)\phi_n(\zeta),
+    \label{eq:appE-depth-expansion}
+\end{equation}
+with modal source coefficients
+\begin{equation}
+    s_n(\tau,\xi)
+    \coloneqq
+    \int_0^1 s(\tau,\xi,\zeta)\phi_n(\zeta)\, d\zeta.
+    \label{eq:appE-source-depth-coeff}
+\end{equation}
+
+Applying the order-zero Hankel transform in \(\xi\), define
+\begin{equation}
+    \widehat{u}_n(\tau,\eta)
+    \coloneqq
+    \int_0^\infty \xi u_n(\tau,\xi)J_0(\eta\xi)\, d\xi,
+    \qquad
+    \widehat{v}_n(\tau,\eta)
+    \coloneqq
+    \int_0^\infty \xi v_n(\tau,\xi)J_0(\eta\xi)\, d\xi,
+    \label{eq:appE-modal-hankel-coeffs}
+\end{equation}
+and
+\begin{equation}
+    \widehat{s}_n(\tau,\eta)
+    \coloneqq
+    \int_0^\infty \xi s_n(\tau,\xi)J_0(\eta\xi)\, d\xi.
+    \label{eq:appE-modal-source-hankel}
+\end{equation}
+
+By Proposition~\ref{prop:appE-hankel-diagonalisation},
+each transformed mode satisfies a \(2\times 2\) linear ODE:
+\begin{equation}
+    \partial_\tau
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \mathbf{A}_n(\eta)\widehat{\mathbf{w}}_n(\tau,\eta)
+    +
+    \widehat{s}_n(\tau,\eta)\mathbf{e}_1,
+    \qquad
+    \mathbf{e}_1\coloneqq (1,0)^\top,
+    \label{eq:appE-modal-ode}
+\end{equation}
+where
+\begin{equation}
+    \widehat{\mathbf{w}}_n
+    \coloneqq
+    \begin{bmatrix}
+        \widehat{u}_n \\[2pt]
+        \widehat{v}_n
+    \end{bmatrix},
+    \qquad
+    \mathbf{A}_n(\eta)
+    \coloneqq
+    \begin{bmatrix}
+        -D_e\omega_n(\eta)-c_e & c_e                    \\
+        c_l                    & -D_l\omega_n(\eta)-c_l
+    \end{bmatrix},
+    \label{eq:appE-modal-matrix}
+\end{equation}
+with
+\begin{equation}
+    \omega_n(\eta)\coloneqq \eta^2+\mu_n^2.
+    \label{eq:appE-omega-def}
+\end{equation}
+
+Hence the original axisymmetric PDE system is reduced to a doubly indexed
+family of linear ODE systems in \((\tau,\eta,n)\), as in classical
+Hankel/Fourier transform methods for axisymmetric heat-type equations
+\cite{Davies_2002_Hankel,Rogers_2012,Kunga_2021}.
+
+\section{Modal solution formula and spectral stability}
+\label{sec:appE-modal-solution}
+
+The solution of \eqref{eq:appE-modal-ode} is given by Duhamel's formula:\footnote{For a comprehensive account of the Duhamel integral and its various applications, see R{\'o}{\.z}a{\'n}ski et al. \cite{Różański_2021}.}
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    e^{\tau \mathbf{A}_n(\eta)}
+    \widehat{\mathbf{w}}_n(0,\eta)
+    +
+    \int_0^\tau
+    e^{(\tau-\sigma)\mathbf{A}_n(\eta)}
+    \widehat{s}_n(\sigma,\eta)\mathbf{e}_1\, d\sigma.
+    \label{eq:appE-duhamel}
+\end{equation}
+
+The modal matrix has trace
+\begin{equation}
+    \operatorname{tr}\mathbf{A}_n(\eta)
+    =
+    -(D_e+D_l)\omega_n(\eta)-(c_e+c_l)<0,
+    \label{eq:appE-trace}
+\end{equation}
+and determinant
+\begin{equation}
+    \det \mathbf{A}_n(\eta)
+    =
+    D_eD_l\,\omega_n(\eta)^2
+    +
+    (D_ec_l + D_lc_e)\omega_n(\eta)
+    \ge 0.
+    \label{eq:appE-determinant}
+\end{equation}
+Therefore both eigenvalues of \(\mathbf{A}_n(\eta)\) have non-positive real
+part.
+
+\begin{proposition}
+    \label{prop:appE-modal-stability}
+    For every \(\eta\ge 0\) and \(n\ge 1\), the matrix
+    \(\mathbf{A}_n(\eta)\) generates a contractive semigroup on \(\mathbb{R}^2\).\footnote{
+    In this context, the semigroup $\{e^{\tau \mathbf{A}_n(\eta)}\}_{\tau \geq 0}$ is contractive if $\|e^{\tau \mathbf{A}_n(\eta)}\| \leq 1$ for all $\tau \geq 0$ with respect to a suitable norm.
+    } In particular, there exists a constant \(C\ge 1\), independent of
+    \((\eta,n)\), such that
+    \begin{equation}
+        \left\|
+        e^{\tau \mathbf{A}_n(\eta)}
+        \right\|
+        \le
+        C\, e^{-c_\star \tau},
+        \qquad
+        c_\star \coloneqq \frac{1}{2}\min\{c_e,c_l\},
+        \qquad
+        \tau\ge 0.
+        \label{eq:appE-modal-semigroup-bound}
+    \end{equation}
+\end{proposition}
+
+\begin{proof}
+    The claim follows from \eqref{eq:appE-trace} and
+    \eqref{eq:appE-determinant}, together with the fact that the symmetric part of
+    \(\mathbf{A}_n(\eta)\) is strictly negative definite up to the coupling
+    weights. Since \(\omega_n(\eta)\ge \pi^2\), the diffusive contribution adds
+    further damping and cannot destabilize the system.
+\end{proof}
+
+The inverse reconstruction is
+\begin{equation}
+    \mathbf{w}(\tau,\xi,\zeta)
+    =
+    \sum_{n=1}^{\infty}
+    \phi_n(\zeta)
+    \int_0^\infty
+    \eta\, J_0(\eta\xi)\,
+    \widehat{\mathbf{w}}_n(\tau,\eta)\, d\eta,
+    \qquad
+    \mathbf{w}\coloneqq (u,v)^\top.
+    \label{eq:appE-inverse-reconstruction}
+\end{equation}
+
+\section{Energy estimate and well-posedness}
+\label{sec:appE-wellposedness}
+
+Define the weighted Lebesgue space
+\begin{equation}
+    \mathcal{X} \coloneqq L^2\bigl((0,\infty)\times(0,1);\, \xi\, d\xi\, d\zeta\bigr),
+    \label{eq:appE-weighted-space}
+\end{equation}
+equipped with the inner product
+\begin{equation}
+    \langle f,g\rangle_\mathcal{X} \coloneqq \int_0^1\!\!\int_0^\infty f(\xi,\zeta)g(\xi,\zeta)\,\xi\, d\xi\, d\zeta.
+    \label{eq:appE-weighted-inner-product}
+\end{equation}
+To accommodate the diffusion operators, we introduce the weighted Sobolev space
+\begin{equation}
+    \mathcal{V} \coloneqq \bigl\{ \phi \in \mathcal{X} : \partial_\xi \phi \in \mathcal{X}, \, \partial_\zeta \phi \in \mathcal{X}, \, \phi|_{\zeta \in \{0,1\}} = 0 \bigr\},
+\end{equation}
+where derivatives are understood in the distributional sense.
+The natural energy space for the coupled system is the product space $\mathbb{X} \coloneqq \mathcal{X} \times \mathcal{X}$.
+
+\begin{theorem}
+    \label{thm:appE-energy-estimate}
+    Let $(u_0,v_0)\in \mathbb X$ and let $s\in L^2(0,\tau_f;\mathcal X)$.
+    Then the system \eqref{eq:appE-linear-axisym-pttm}--\eqref{eq:appE-initial-data}
+    admits a unique mild solution
+    \[
+        (u,v)\in C([0,\tau_f];\mathbb X).
+    \]
+    If, in addition, $(u_0,v_0)\in D(\mathcal A)$, where
+    \[
+        D(\mathcal A)
+        =
+        \Bigl\{(u,v)\in \mathcal V\times\mathcal V:
+        \mathcal L_\xi u+\partial_{\zeta\zeta}u\in\mathcal X,\
+        \mathcal L_\xi v+\partial_{\zeta\zeta}v\in\mathcal X
+        \Bigr\},
+    \]
+    then $(u,v)$ is a strong solution and, for a.e. $\tau\in(0,\tau_f)$, satisfies
+    \begin{align}
+        \frac{d}{d\tau}\mathcal E(\tau)
+        + D_e\|\nabla u\|_\mathcal X^2
+        + \frac{c_e}{c_l}D_l\|\nabla v\|_\mathcal X^2
+        + c_e\|u-v\|_\mathcal X^2
+        =
+        \langle s(\tau),u(\tau)\rangle_\mathcal X,
+        \label{eq:appE-energy-identity}
+    \end{align}
+    with
+    \begin{equation}
+        \mathcal{E}(\tau) \coloneqq \frac{1}{2}\|u(\tau)\|_\mathcal{X}^2 + \frac{c_e}{2c_l}\|v(\tau)\|_\mathcal{X}^2.
+        \label{eq:appE-energy-functional}
+    \end{equation}
+    Consequently,
+    \begin{equation}
+        \sup_{0\le \tau\le \tau_f}\mathcal E(\tau)
+        \le
+        e^{\tau_f}
+        \left(
+        \mathcal E(0)+\|s\|_{L^2(0,\tau_f;\mathcal X)}^2
+        \right).
+        \label{eq:appE-energy-bound}
+    \end{equation}
+\end{theorem}
+
+\begin{proof}
+    We divide the argument into two steps.
+
+    \smallskip
+    \noindent
+    \textit{Step 1: existence and uniqueness of the mild solution.}
+    Let
+    \[
+        \phi_n(\zeta) \coloneqq \sqrt{2}\sin(n\pi\zeta),
+        \qquad n\in\mathbb{N},
+    \]
+    be the orthonormal Dirichlet basis in \(L^2(0,1)\), and let
+    \(\mathscr H_0\) denote the order-zero Hankel transform in the radial
+    variable \(\xi\). Expanding \(u\), \(v\), and \(s\) in the depth basis and
+    then applying \(\mathscr H_0\) in \(\xi\), one obtains for each
+    \((n,\eta)\in \mathbb{N}\times [0,\infty)\) the transformed modal system
+    \[
+        \partial_\tau \widehat{\mathbf w}_n(\tau,\eta)
+        =
+        \mathbf A_n(\eta)\widehat{\mathbf w}_n(\tau,\eta)
+        +
+        \widehat{s}_n(\tau,\eta)\mathbf e_1,
+        \qquad
+        \widehat{\mathbf w}_n(0,\eta)=\widehat{\mathbf w}_{n,0}(\eta),
+    \]
+    where
+    \[
+        \widehat{\mathbf w}_n
+        =
+        \begin{bmatrix}
+            \widehat u_n \\[2pt]
+            \widehat v_n
+        \end{bmatrix},
+        \qquad
+        \mathbf e_1=
+        \begin{bmatrix}
+            1 \\[2pt]
+            0
+        \end{bmatrix},
+    \]
+    and \(\mathbf A_n(\eta)\) is the \(2\times 2\) modal matrix introduced in
+    \eqref{eq:appE-modal-matrix}. By
+    Proposition~\ref{prop:appE-modal-stability}, the family
+    \(e^{\tau \mathbf A_n(\eta)}\) is uniformly bounded for
+    \(\tau\in[0,\tau_f]\). Hence, for each \((n,\eta)\), Duhamel's formula gives
+    the unique modal solution
+    \[
+        \widehat{\mathbf w}_n(\tau,\eta)
+        =
+        e^{\tau \mathbf A_n(\eta)}\widehat{\mathbf w}_{n,0}(\eta)
+        +
+        \int_0^\tau
+        e^{(\tau-\sigma)\mathbf A_n(\eta)}
+        \widehat{s}_n(\sigma,\eta)\mathbf e_1\, d\sigma.
+    \]
+
+    Using Parseval's identity for \(\mathscr H_0\),
+    equation~\eqref{eq:appE-hankel-parseval}, and the orthonormality of
+    \(\{\phi_n\}_{n\ge 1}\), one reconstructs from these modal solutions a unique
+    pair $(u,v)\in C([0,\tau_f];\mathbb X)$, which proves the existence and uniqueness of the mild solution.
+
+    \smallskip
+    \noindent
+    \textit{Step 2: energy identity and a priori estimate.}
+    Assume now that \((u_0,v_0)\in D(\mathcal A)\), so that \((u,v)\) is a strong
+    solution. To justify the weighted integration by parts, one may
+    either work directly at the level of strong solutions or
+    establish the identity first for Galerkin approximants in the modal basis and
+    then pass to the limit. We proceed formally, noting that the Galerkin passage
+    is standard and yields the same identity.
+
+    Test \eqref{eq:appE-linear-axisym-pttm-e} with \(u\) and
+    \eqref{eq:appE-linear-axisym-pttm-l} with \(\frac{c_e}{c_l}v\) in
+    \(\mathcal X\). For a sufficiently regular function \(\phi\) satisfying the
+    Dirichlet conditions in \(\zeta\), one has
+    \begin{align*}
+        \bigl\langle \mathcal L_\xi \phi,\phi\bigr\rangle_{\mathcal X}
+         & =
+        \int_0^1\!\!\int_0^\infty
+        \frac{1}{\xi}\partial_\xi(\xi\partial_\xi\phi)\,\phi\,
+        \xi\, d\xi\, d\zeta
+        =
+        \int_0^1\!\!\int_0^\infty
+        \partial_\xi(\xi\partial_\xi\phi)\,\phi\, d\xi\, d\zeta
+        \\
+         & =
+        -\int_0^1\!\!\int_0^\infty
+        \xi\, |\partial_\xi\phi|^2\, d\xi\, d\zeta
+        =
+        -\|\partial_\xi\phi\|_{\mathcal X}^2,
+    \end{align*}
+    where the boundary terms vanish at \(\xi=0\) by axis regularity, at
+    \(\xi\to\infty\) by the decay inherited from the Galerkin approximation (and
+    then by passage to the limit), and at \(\zeta\in\{0,1\}\) by the homogeneous
+    Dirichlet condition. Similarly,
+    \[
+        \bigl\langle \partial_{\zeta\zeta}\phi,\phi\bigr\rangle_{\mathcal X}
+        =
+        -\|\partial_\zeta\phi\|_{\mathcal X}^2.
+    \]
+    Therefore,
+    \[
+        \bigl\langle \mathcal L_\xi\phi+\partial_{\zeta\zeta}\phi,\phi
+        \bigr\rangle_{\mathcal X}
+        =
+        -\|\partial_\xi\phi\|_{\mathcal X}^2
+        -\|\partial_\zeta\phi\|_{\mathcal X}^2
+        =
+        -\|\nabla \phi\|_{\mathcal X}^2.
+    \]
+
+    Applying this with \(\phi=u\) and \(\phi=v\), and summing the two tested
+    equations, yields
+    \begin{align*}
+        \frac{1}{2}\frac{d}{d\tau}\|u(\tau)\|_{\mathcal X}^2
+        +
+        \frac{c_e}{2c_l}\frac{d}{d\tau}\|v(\tau)\|_{\mathcal X}^2
+         & +
+        D_e\|\nabla u(\tau)\|_{\mathcal X}^2
+        +
+        \frac{c_e}{c_l}D_l\|\nabla v(\tau)\|_{\mathcal X}^2
+        \\
+         & \qquad
+        -c_e\langle u-v,u\rangle_{\mathcal X}
+        +
+        c_e\langle u-v,v\rangle_{\mathcal X}
+        =
+        \langle s(\tau),u(\tau)\rangle_{\mathcal X}.
+    \end{align*}
+    The coupling terms combine as
+    \[
+        -c_e\langle u-v,u\rangle_{\mathcal X}
+        +
+        c_e\langle u-v,v\rangle_{\mathcal X}
+        =
+        -c_e\|u-v\|_{\mathcal X}^2.
+    \]
+    Hence
+    \eqref{eq:appE-energy-identity} follows, with
+    \(\mathcal E(\tau)\) given by \eqref{eq:appE-energy-functional}.
+
+    To obtain the stability estimate, discard the non-negative dissipation terms in
+    \eqref{eq:appE-energy-identity}. Then
+    \[
+        \frac{d}{d\tau}\mathcal E(\tau)
+        \le
+        \langle s(\tau),u(\tau)\rangle_{\mathcal X}.
+    \]
+    By Cauchy--Schwarz and Young's inequality,
+    \[
+        \langle s(\tau),u(\tau)\rangle_{\mathcal X}
+        \le
+        \|s(\tau)\|_{\mathcal X}\|u(\tau)\|_{\mathcal X}
+        \le
+        \frac12\|s(\tau)\|_{\mathcal X}^2
+        +
+        \frac12\|u(\tau)\|_{\mathcal X}^2.
+    \]
+    Since
+    \[
+        \mathcal E(\tau)
+        =
+        \frac12\|u(\tau)\|_{\mathcal X}^2
+        +
+        \frac{c_e}{2c_l}\|v(\tau)\|_{\mathcal X}^2
+        \ge
+        \frac12\|u(\tau)\|_{\mathcal X}^2,
+    \]
+    it follows that
+    \[
+        \frac{d}{d\tau}\mathcal E(\tau)
+        \le
+        \mathcal E(\tau)
+        +
+        \frac12\|s(\tau)\|_{\mathcal X}^2.
+    \]
+    Integrating over \((0,\tau)\) gives
+    \[
+        \mathcal E(\tau)
+        \le
+        \mathcal E(0)
+        +
+        \int_0^\tau \mathcal E(t)\, dt
+        +
+        \frac12\int_0^\tau \|s(t)\|_{\mathcal X}^2\, dt.
+    \]
+    An application of Gr\"onwall's inequality yields
+    \[
+        \mathcal E(\tau)
+        \le
+        e^\tau
+        \left(
+        \mathcal E(0)
+        +
+        \frac12\int_0^\tau \|s(t)\|_{\mathcal X}^2\, dt
+        \right)
+        \le
+        e^{\tau_f}
+        \left(
+        \mathcal E(0)
+        +
+        \|s\|_{L^2(0,\tau_f;\mathcal X)}^2
+        \right).
+    \]
+    Taking the supremum over \(0\le \tau\le \tau_f\) proves
+    \eqref{eq:appE-energy-bound}.
+\end{proof}
+
+\begin{remark}
+    If one wishes to begin on a transform-invariant dense test-function space
+    before passing to \(\mathcal{X}\), the weighted Gelfand--Shilov framework of type \(W\)
+    developed for Hankel-related operators in \cite{Mahato_Pasawan_2021} provides
+    a natural alternative. In the present appendix, however, the weighted
+    \(L^2\)-theory is already sufficient for both the modal representation and the
+    convergence analysis.
+\end{remark}
+
+\section{Convergence of truncated Hankel--eigenfunction expansions}
+\label{sec:appE-convergence}
+
+For \(K>0\) and \(N\in\mathbb{N}\), define the truncated reconstruction
+\begin{equation}
+    \mathbf{w}_{K,N}(\tau,\xi,\zeta)
+    \coloneqq
+    \sum_{n=1}^{N}
+    \phi_n(\zeta)
+    \int_0^{K}
+    \eta\, J_0(\eta\xi)\,
+    \widehat{\mathbf{w}}_n(\tau,\eta)\, d\eta.
+    \label{eq:appE-truncated-reconstruction}
+\end{equation}
+
+\begin{theorem}
+    \label{thm:appE-spectral-convergence}
+    Let \((u,v)\) be the solution of
+    \eqref{eq:appE-linear-axisym-pttm}--\eqref{eq:appE-initial-data} with
+    \((u_0,v_0)\in \mathcal{X}\times \mathcal{X}\) and \(s\in L^2(0,\tau_f;\mathcal{X})\).
+    Then
+    \begin{equation}
+        \sup_{0\le \tau\le \tau_f}
+        \left\|
+        \mathbf{w}(\tau)-\mathbf{w}_{K,N}(\tau)
+        \right\|_{\mathcal{X}\times \mathcal{X}}
+        \longrightarrow 0
+        \qquad
+        \text{as } K\to\infty,\; N\to\infty.
+        \label{eq:appE-spectral-convergence}
+    \end{equation}
+    More precisely,
+    \begin{equation}
+        \sup_{0\le \tau\le \tau_f}
+        \left\|
+        \mathbf{w}(\tau)-\mathbf{w}_{K,N}(\tau)
+        \right\|_{\mathcal{X}\times \mathcal{X}}^2
+        \le
+        C(\tau_f)\Bigl(\mathcal{T}_0(K,N)+\mathcal{T}_s(K,N)\Bigr),
+        \label{eq:appE-spectral-tail-bound}
+    \end{equation}
+    where
+    \begin{align}
+        \mathcal{T}_0(K,N)
+         & \coloneqq
+        \sum_{n>N}\int_0^\infty
+        \eta\,\|\widehat{\mathbf{w}}_n(0,\eta)\|_{\mathbb{R}^2}^2\, d\eta
+        +
+        \sum_{n=1}^{N}\int_K^\infty
+        \eta\,\|\widehat{\mathbf{w}}_n(0,\eta)\|_{\mathbb{R}^2}^2\, d\eta,
+        \label{eq:appE-tail-initial}
+        \\
+        \mathcal{T}_s(K,N)
+         & \coloneqq
+        \int_0^{\tau_f}
+        \left[
+            \sum_{n>N}\int_0^\infty \eta\, |\widehat{s}_n(\tau,\eta)|^2\, d\eta
+            +
+            \sum_{n=1}^{N}\int_K^\infty \eta\, |\widehat{s}_n(\tau,\eta)|^2\, d\eta
+            \right] d\tau.
+        \label{eq:appE-tail-source}
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    Let
+    \[
+        \mathbf w(\tau,\xi,\zeta)\coloneqq
+        \begin{bmatrix}
+            u(\tau,\xi,\zeta) \\[2pt]
+            v(\tau,\xi,\zeta)
+        \end{bmatrix},
+        \qquad
+        \widehat{\mathbf w}_n(\tau,\eta)\coloneqq
+        \begin{bmatrix}
+            \widehat u_n(\tau,\eta) \\[2pt]
+            \widehat v_n(\tau,\eta)
+        \end{bmatrix},
+    \]
+    where \(\{\phi_n\}_{n\ge 1}\) is the depth eigenbasis and
+    \(\widehat{\mathbf w}_n\) denotes the order-zero Hankel transform of the
+    \(n\)-th depth mode. We also write
+    \[
+        \mathbf e_1 \coloneqq
+        \begin{bmatrix}
+            1 \\[2pt]
+            0
+        \end{bmatrix}.
+    \]
+
+    For each \(n\in\mathbb N\) and \(\eta\ge 0\), the modal coefficients satisfy
+    the transformed system
+    \begin{equation}
+        \partial_\tau \widehat{\mathbf w}_n(\tau,\eta)
+        =
+        \mathbf A_n(\eta)\widehat{\mathbf w}_n(\tau,\eta)
+        +
+        \widehat s_n(\tau,\eta)\mathbf e_1,
+        \qquad
+        \widehat{\mathbf w}_n(0,\eta)=\widehat{\mathbf w}_{n,0}(\eta),
+        \label{eq:appE-proof-modal-ode}
+    \end{equation}
+    hence, by Duhamel's formula \eqref{eq:appE-duhamel},
+    \begin{equation}
+        \widehat{\mathbf w}_n(\tau,\eta)
+        =
+        e^{\tau \mathbf A_n(\eta)}\widehat{\mathbf w}_{n,0}(\eta)
+        +
+        \int_0^\tau
+        e^{(\tau-\sigma)\mathbf A_n(\eta)}
+        \widehat s_n(\sigma,\eta)\mathbf e_1\, d\sigma.
+        \label{eq:appE-proof-duhamel}
+    \end{equation}
+
+    \smallskip
+    \noindent
+    \textit{Step 1: exact representation of the truncation error.}
+    Since \(\{\phi_n\}_{n\ge 1}\) is orthonormal in \(L^2(0,1)\) and the
+    order-zero Hankel transform is an isometry on
+    \(L^2((0,\infty);\xi\,d\xi)\), Parseval's identity yields, for every
+    \(\tau\in[0,\tau_f]\),
+    \begin{align}
+        \bigl\|\mathbf w(\tau)-\mathbf w_{K,N}(\tau)\bigr\|_{\mathcal X\times\mathcal X}^2
+         & =
+        \sum_{n>N}\int_0^\infty
+        \eta\,\bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2\, d\eta
+        +
+        \sum_{n=1}^{N}\int_K^\infty
+        \eta\,\bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2\, d\eta.
+        \label{eq:appE-proof-tail-identity}
+    \end{align}
+    Thus the reconstruction error corresponds to the spectral tail in the
+    \((n,\eta)\)-variables.
+
+    \smallskip
+    \noindent
+    \textit{Step 2: pointwise estimate of each modal coefficient.}
+    By Proposition~\ref{prop:appE-modal-stability}, there exist constants
+    \(M\ge 1\) and \(\omega>0\), independent of \(n\) and \(\eta\), such that
+    \begin{equation}
+        \bigl\|e^{t\mathbf A_n(\eta)}\bigr\|
+        \le
+        M e^{-\omega t},
+        \qquad t\ge 0.
+        \label{eq:appE-proof-semigroup}
+    \end{equation}
+    Applying \eqref{eq:appE-proof-semigroup} to
+    \eqref{eq:appE-proof-duhamel} gives
+    \begin{align}
+        \bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}
+         & \le
+        M\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}
+        +
+        M\int_0^\tau
+        e^{-\omega(\tau-\sigma)}\,|\widehat s_n(\sigma,\eta)|\, d\sigma.
+        \label{eq:appE-proof-modal-bound-L1}
+    \end{align}
+    Using \((a+b)^2\le 2a^2+2b^2\) and then Cauchy--Schwarz in time, we obtain
+    \begin{align}
+        \bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2
+         & \le
+        2M^2\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2
+        +
+        2M^2
+        \left(
+        \int_0^\tau
+        e^{-\omega(\tau-\sigma)}|\widehat s_n(\sigma,\eta)|\, d\sigma
+        \right)^2
+        \notag \\
+         & \le
+        2M^2\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2
+        +
+        2M^2
+        \left(
+        \int_0^\tau e^{-2\omega(\tau-\sigma)}\, d\sigma
+        \right)
+        \left(
+        \int_0^\tau |\widehat s_n(\sigma,\eta)|^2\, d\sigma
+        \right)
+        \notag \\
+         & \le
+        2M^2\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2
+        +
+        \frac{M^2}{\omega}
+        \int_0^\tau |\widehat s_n(\sigma,\eta)|^2\, d\sigma
+        \notag \\
+         & \le
+        2M^2\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2
+        +
+        \frac{M^2}{\omega}
+        \int_0^{\tau_f} |\widehat s_n(\sigma,\eta)|^2\, d\sigma.
+        \label{eq:appE-proof-modal-bound-L2}
+    \end{align}
+    Therefore,
+    \begin{equation}
+        \sup_{0\le \tau\le \tau_f}
+        \bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2
+        \le
+        2M^2\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2
+        +
+        \frac{M^2}{\omega}
+        \int_0^{\tau_f} |\widehat s_n(\sigma,\eta)|^2\, d\sigma.
+        \label{eq:appE-proof-uniform-modal-bound}
+    \end{equation}
+
+    \smallskip
+    \noindent
+    \textit{Step 3: summation over the spectral tail.}
+    Insert \eqref{eq:appE-proof-uniform-modal-bound} into
+    \eqref{eq:appE-proof-tail-identity}. Since all terms are non-negative, Tonelli's theorem yields
+    \begin{align}
+         & \sup_{0\le \tau\le \tau_f}
+        \bigl\|\mathbf w(\tau)-\mathbf w_{K,N}(\tau)\bigr\|_{\mathcal X\times\mathcal X}^2
+        \notag                        \\
+         & \le
+        \sum_{n>N}\int_0^\infty
+        \eta\,
+        \sup_{0\le \tau\le \tau_f}
+        \bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2
+        \, d\eta
+        +
+        \sum_{n=1}^{N}\int_K^\infty
+        \eta\,
+        \sup_{0\le \tau\le \tau_f}
+        \bigl\|\widehat{\mathbf w}_n(\tau,\eta)\bigr\|_{\mathbb R^2}^2
+        \, d\eta
+        \notag                        \\
+         & \le
+        2M^2
+        \left[
+        \sum_{n>N}\int_0^\infty
+        \eta\,\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2\, d\eta
+        +
+        \sum_{n=1}^{N}\int_K^\infty
+        \eta\,\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2\, d\eta
+        \right]
+        \notag                        \\
+         & \quad
+        +
+        \frac{M^2}{\omega}
+        \int_0^{\tau_f}
+        \left[
+            \sum_{n>N}\int_0^\infty
+            \eta\, |\widehat s_n(\sigma,\eta)|^2\, d\eta
+            +
+            \sum_{n=1}^{N}\int_K^\infty
+            \eta\, |\widehat s_n(\sigma,\eta)|^2\, d\eta
+            \right] d\sigma.
+        \label{eq:appE-proof-tail-estimate}
+    \end{align}
+    Hence \eqref{eq:appE-spectral-tail-bound} follows with
+    \[
+        C(\tau_f)\coloneqq \max\!\left\{2M^2,\frac{M^2}{\omega}\right\}.
+    \]
+    In particular, any larger constant depending only on \(\tau_f\) is also
+    admissible.
+
+    \smallskip
+    \noindent
+    \textit{Step 4: passage to the limit \(K,N\to\infty\).}
+    By Parseval's identity and orthonormality of the depth basis,
+    \[
+        \sum_{n=1}^\infty\int_0^\infty
+        \eta\,\bigl\|\widehat{\mathbf w}_{n,0}(\eta)\bigr\|_{\mathbb R^2}^2\, d\eta
+        =
+        \bigl\|\mathbf w(0)\bigr\|_{\mathcal X\times\mathcal X}^2
+        <
+        \infty,
+    \]
+    and similarly
+    \[
+        \int_0^{\tau_f}
+        \sum_{n=1}^\infty\int_0^\infty
+        \eta\, |\widehat s_n(\tau,\eta)|^2\, d\eta\, d\tau
+        =
+        \|s\|_{L^2(0,\tau_f;\mathcal X)}^2
+        <
+        \infty.
+    \]
+    Therefore the tails \(\mathcal T_0(K,N)\) and \(\mathcal T_s(K,N)\) tend to
+    zero as \(K,N\to\infty\), by monotone convergence (equivalently, by the
+    absolute continuity of the integral on the product measure space
+    \(\mathbb N\times [0,\infty)\), with counting measure in \(n\) and
+    \(\eta\,d\eta\) in the Hankel variable). Returning to
+    \eqref{eq:appE-spectral-tail-bound}, we conclude that
+    \[
+        \sup_{0\le \tau\le \tau_f}
+        \bigl\|\mathbf w(\tau)-\mathbf w_{K,N}(\tau)\bigr\|_{\mathcal X\times\mathcal X}
+        \longrightarrow 0
+        \qquad
+        \text{as } K\to\infty,\; N\to\infty.
+    \]
+    This proves \eqref{eq:appE-spectral-convergence}.
+\end{proof}
+
+\begin{corollary}
+    \label{cor:appE-algebraic-rate}
+    Assume that there exists \(m>0\) such that
+    \begin{equation}
+        \sum_{n=1}^\infty \int_0^\infty
+        (1+\eta^2+\mu_n^2)^m
+        \eta\, \|\widehat{\mathbf{w}}_n(0,\eta)\|_{\mathbb{R}^2}^2\, d\eta
+        <\infty,
+        \label{eq:appE-spectral-regularity-initial}
+    \end{equation}
+    and similarly
+    \begin{equation}
+        \int_0^{\tau_f}
+        \sum_{n=1}^\infty \int_0^\infty
+        (1+\eta^2+\mu_n^2)^m
+        \eta\, |\widehat{s}_n(\tau,\eta)|^2\, d\eta\, d\tau
+        <\infty.
+        \label{eq:appE-spectral-regularity-source}
+    \end{equation}
+    Then the truncation error satisfies the algebraic estimate
+    \begin{equation}
+        \sup_{0\le \tau\le \tau_f}
+        \left\|
+        \mathbf{w}(\tau)-\mathbf{w}_{K,N}(\tau)
+        \right\|_{X\times X}
+        \le
+        C_m(\tau_f)\bigl(K^{-m}+N^{-m}\bigr).
+        \label{eq:appE-spectral-rate}
+    \end{equation}
+\end{corollary}
+
+\begin{proof}
+    On the tail \(\eta\ge K\), one has
+    \((1+\eta^2+\mu_n^2)^{-m}\le K^{-2m}\), while on the tail \(n>N\), one has
+    \((1+\eta^2+\mu_n^2)^{-m}\le \mu_N^{-2m}\sim N^{-2m}\).
+    The estimate then follows directly from
+    Theorem~\ref{thm:appE-spectral-convergence}.
+\end{proof}
+
+\section{Closed-form modal source coefficients for constant optical coefficients}
+\label{sec:appE-special-source-cases}
+
+We now specialise the source to the constant-optics linear setting, namely to
+the case in which the reflectivity and effective absorption coefficient are
+held fixed,
+\[
+    R\equiv R_\star,
+    \qquad
+    \alpha' \equiv \alpha_\star.
+\]
+This is precisely the regime in which the linear pTTM reduces to a
+constant-coefficient parabolic system, and it corresponds to the fixed-optics
+simplification of the ULP source discussed in
+Chapter~\ref{ch:theoretical-background}.
+Specialising the source term inherited from the axisymmetric ULP construction (e.g., \eqref{eq:ch1-ulp_heat_source}),
+one may write in solver units
+\begin{equation}
+    s(\tau,\xi,\zeta)
+    =
+    A_\star\, E(\tau)\,
+    \exp\!\left\{-\frac{\xi^2}{R_0^2}\right\}\,
+    \exp\{-\beta \zeta\},
+    \label{eq:appE-separable-source}
+\end{equation}
+where \(A_\star>0\) collects all constant prefactors,
+\(E(\tau)\) is the temporal envelope, and
+\(\beta>0\) is the dimensionless attenuation coefficient in the depth
+direction.
+
+\subsection{Hankel transform of the Gaussian radial profile}
+\label{sec:appE-gaussian-radial-transform}
+
+The order-zero Hankel transform of the Gaussian factor is classical:
+\begin{equation}
+    \int_0^\infty
+    \xi\,
+    \exp\!\left\{-\frac{\xi^2}{R_0^2}\right\}
+    J_0(\eta\xi)\, d\xi
+    =
+    \frac{R_0^2}{2}\,
+    \exp\!\left\{-\frac{R_0^2\eta^2}{4}\right\}.
+    \label{eq:appE-gaussian-hankel}
+\end{equation}
+Therefore the radial transform of the source remains Gaussian in transform
+space.
+
+\subsection{Depth coefficients under homogeneous Dirichlet conditions}
+\label{sec:appE-depth-source-coeffs}
+
+The Dirichlet depth coefficient is
+\begin{align}
+    \beta_n
+     & \coloneqq
+    \int_0^1 e^{-\beta\zeta}\phi_n(\zeta)\, d\zeta
+    =
+    \sqrt{2}\int_0^1 e^{-\beta\zeta}\sin(n\pi\zeta)\, d\zeta
+    \notag       \\
+     & =
+    \sqrt{2}\,
+    \frac{n\pi\bigl(1-(-1)^n e^{-\beta}\bigr)}
+    {\beta^2+n^2\pi^2}.
+    \label{eq:appE-depth-exp-decay}
+\end{align}
+Hence the fully transformed modal source is
+\begin{equation}
+    \widehat{s}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)\, E(\tau),
+    \label{eq:appE-transformed-source}
+\end{equation}
+where
+\begin{equation}
+    \Gamma_n(\eta)
+    \coloneqq
+    A_\star\,
+    \frac{R_0^2}{2}\,
+    \exp\!\left\{-\frac{R_0^2\eta^2}{4}\right\}\,
+    \beta_n.
+    \label{eq:appE-gamma-n}
+\end{equation}
+
+\subsection{Closed-form modal responses}
+\label{sec:appE-closed-form-modal-responses}
+
+With zero initial data,
+\(
+\widehat{\mathbf{w}}_n(0,\eta)=0
+\),
+equation \eqref{eq:appE-duhamel} becomes
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)
+    \int_0^\tau
+    e^{(\tau-\sigma)\mathbf{A}_n(\eta)}
+    E(\sigma)\,\mathbf{e}_1\, d\sigma.
+    \label{eq:appE-modal-source-only}
+\end{equation}
+
+\paragraph{Constant envelope.}
+If \(E(\tau)\equiv 1\), then
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)\,
+    \mathbf{A}_n(\eta)^{-1}
+    \bigl(
+    e^{\tau \mathbf{A}_n(\eta)}-\mathbf{I}
+    \bigr)\mathbf{e}_1.
+    \label{eq:appE-constant-envelope}
+\end{equation}
+
+\paragraph{Exponential envelope.}
+If \(E(\tau)=e^{-\sigma\tau}\) with \(\sigma>0\), then
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)\,
+    \bigl(\mathbf{A}_n(\eta)+\sigma\mathbf{I}\bigr)^{-1}
+    \bigl(
+    e^{\tau \mathbf{A}_n(\eta)}-e^{-\sigma\tau}\mathbf{I}
+    \bigr)\mathbf{e}_1.
+    \label{eq:appE-exponential-envelope}
+\end{equation}
+
+\paragraph{Gaussian envelope.}
+If
+\begin{equation}
+    E(\tau)=\exp\!\bigl\{-\kappa(\tau-\tau_c)^2\bigr\},
+    \qquad
+    \kappa>0,
+    \label{eq:appE-gaussian-envelope}
+\end{equation}
+and
+\(
+\mathbf{A}_n(\eta)=\mathbf{P}_n(\eta)\mathbf{\Lambda}_n(\eta)\mathbf{P}_n(\eta)^{-1}
+\)
+with
+\[
+    \mathbf{\Lambda}_n(\eta)
+    =
+    \operatorname{diag}\bigl(\lambda_{+,n}(\eta),\lambda_{-,n}(\eta)\bigr),
+\]
+then
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)\,
+    \mathbf{P}_n(\eta)
+    \begin{bmatrix}
+        \mathcal{I}_{\lambda_{+,n}(\eta)}(\tau) & 0                                       \\
+        0                                       & \mathcal{I}_{\lambda_{-,n}(\eta)}(\tau)
+    \end{bmatrix}
+    \mathbf{P}_n(\eta)^{-1}\mathbf{e}_1,
+    \label{eq:appE-gaussian-modal-solution}
+\end{equation}
+where
+\begin{align}
+    \mathcal{I}_{\lambda}(\tau)
+     & \coloneqq
+    \int_0^\tau
+    e^{\lambda(\tau-\sigma)}
+    e^{-\kappa(\sigma-\tau_c)^2}\, d\sigma
+    \notag       \\
+     & =
+    \frac{\sqrt{\pi}}{2\sqrt{\kappa}}\,
+    \exp\!\left\{
+    \lambda(\tau-\tau_c)+\frac{\lambda^2}{4\kappa}
+    \right\}
+    \left[
+        \operatorname{erf}\!\left(
+        \sqrt{\kappa}(\tau-\tau_c)-\frac{\lambda}{2\sqrt{\kappa}}
+        \right)
+        -
+        \operatorname{erf}\!\left(
+        -\sqrt{\kappa}\,\tau_c-\frac{\lambda}{2\sqrt{\kappa}}
+        \right)
+        \right].
+    \label{eq:appE-gaussian-convolution}
+\end{align}
+
+\paragraph{Lorentzian envelope.}
+In the notation of Chapter~\ref{ch:theoretical-background}, the Lorentzian pulse centered at \(\tau_c\)
+with half-width at half-maximum \(\gamma>0\) is
+\begin{equation}
+    E(\tau)
+    =
+    \frac{1}{\pi\gamma}
+    \left[
+        1+\left(\frac{\tau-\tau_c}{\gamma}\right)^2
+        \right]^{-1},
+    \label{eq:appE-lorentzian-envelope}
+\end{equation}
+which reduces to \eqref{eq:ch1-lorentzian} by letting \(\tau_p \coloneqq 2\gamma\) denote the full width at half maximum,
+and after passage to scaled time.
+
+Assuming again that
+\(
+\mathbf{A}_n(\eta)=\mathbf{P}_n(\eta)\mathbf{\Lambda}_n(\eta)\mathbf{P}_n(\eta)^{-1}
+\)
+with
+\[
+    \mathbf{\Lambda}_n(\eta)
+    =
+    \operatorname{diag}\bigl(\lambda_{+,n}(\eta),\lambda_{-,n}(\eta)\bigr),
+\]
+the modal response takes the form
+\begin{equation}
+    \widehat{\mathbf{w}}_n(\tau,\eta)
+    =
+    \Gamma_n(\eta)\,
+    \mathbf{P}_n(\eta)
+    \begin{bmatrix}
+        \mathcal{L}_{\lambda_{+,n}(\eta)}(\tau) & 0                                       \\
+        0                                       & \mathcal{L}_{\lambda_{-,n}(\eta)}(\tau)
+    \end{bmatrix}
+    \mathbf{P}_n(\eta)^{-1}\mathbf{e}_1,
+    \label{eq:appE-lorentzian-modal-solution}
+\end{equation}
+where
+\begin{align}
+    \mathcal{L}_{\lambda}(\tau)
+     & \coloneqq
+    \int_0^\tau
+    e^{\lambda(\tau-\sigma)}
+    \frac{1}{\pi\gamma}
+    \left[
+        1+\left(\frac{\sigma-\tau_c}{\gamma}\right)^2
+        \right]^{-1}
+    d\sigma
+    \notag            \\
+     & =
+    \frac{e^{\lambda(\tau-\tau_c)}}{2\pi i}
+    \Bigl[
+        e^{-i\lambda\gamma}
+        \Bigl(
+        \operatorname{Ei}\!\bigl(-\lambda(\tau-\tau_c)+i\lambda\gamma\bigr)
+        -
+        \operatorname{Ei}\!\bigl(\lambda\tau_c+i\lambda\gamma\bigr)
+        \Bigr)
+    \notag            \\
+     & \hspace{4.5em}
+        -
+        e^{i\lambda\gamma}
+        \Bigl(
+        \operatorname{Ei}\!\bigl(-\lambda(\tau-\tau_c)-i\lambda\gamma\bigr)
+        -
+        \operatorname{Ei}\!\bigl(\lambda\tau_c-i\lambda\gamma\bigr)
+        \Bigr)
+        \Bigr].
+    \label{eq:appE-lorentzian-convolution}
+\end{align}
+Here \(\operatorname{Ei}\) denotes the exponential-integral function on its
+principal branch. The formula is obtained by the substitution
+\(
+u=(\sigma-\tau_c)/\gamma
+\)
+and the partial-fraction identity
+\[
+    \frac{1}{1+u^2}
+    =
+    \frac{1}{2i}
+    \left(
+    \frac{1}{u-i}-\frac{1}{u+i}
+    \right).
+\]
+
+As a consistency check, in the limit \(\lambda\to 0\),
+\eqref{eq:appE-lorentzian-convolution} reduces to the elementary primitive
+\begin{equation}
+    \mathcal{L}_{0}(\tau)
+    =
+    \frac{1}{\pi}
+    \left[
+        \arctan\!\left(\frac{\tau-\tau_c}{\gamma}\right)
+        +
+        \arctan\!\left(\frac{\tau_c}{\gamma}\right)
+        \right].
+    \label{eq:appE-lorentzian-zero-mode-check}
+\end{equation}
+
+\paragraph{Remark on double-pulse forcing.}
+Because the modal problem \eqref{eq:appE-modal-source-only} is linear, a
+double-pulse envelope of the form
+\[
+    E_{\mathrm{DP}}(\tau)
+    =
+    E_1(\tau-\tau_{c,1})+E_2(\tau-\tau_{c,2})
+\]
+is treated by superposition: the corresponding modal response is the sum of
+the two single-pulse responses computed from
+\eqref{eq:appE-gaussian-modal-solution} or
+\eqref{eq:appE-lorentzian-modal-solution}, respectively.
+
+These formulae provide closed-form modal responses for the most common
+constant-optics heat-source specialisations relevant to the linear solver.
+
+\section{Remarks on alternative depth conditions and finite-radius truncation}
+\label{sec:appE-extensions}
+
+\begin{remark}[Homogeneous Neumann depth conditions]
+    \label{rem:appE-neumann-case}
+    If homogeneous Neumann conditions are imposed in the depth variable, then the
+    appropriate basis is the cosine family
+    \[
+        \phi_n^{(N)}(\zeta)=
+        \begin{cases}
+            1,                       & n=0,    \\[2pt]
+            \sqrt{2}\cos(n\pi\zeta), & n\ge 1,
+        \end{cases}
+        \qquad
+        \mu_n=n\pi.
+    \]
+    The modal derivation remains unchanged after replacing the sine basis
+    \eqref{eq:appE-depth-basis} by this cosine basis. In that case the depth
+    transform is the one most closely associated with a cosine-transform or DCT
+    implementation \cite{Rogers_2012}.
+\end{remark}
+
+\begin{remark}[Finite radial domain]
+    If the radial variable is truncated to \(\xi\in[0,\xi_{\max}]\) rather than
+    \([0,\infty)\), then one should replace the infinite Hankel transform by a
+    finite Hankel transform or a generalized finite Hankel transform. This is the
+    natural setting for the constructions developed by Cinelli
+    \cite{Cinelli_1965}. Since the present appendix is concerned with the
+    continuous infinite-radius axisymmetric formulation, we do not pursue that
+    variant here.
+\end{remark}
+
+\begin{remark}[Relation to the proposed numerical pipeline]
+    The appendix establishes the continuous spectral structure underlying the
+    proposed transform-based axisymmetric solver. In particular, it justifies the
+    radial use of an order-zero Hankel transform and the depth use of a sine or
+    cosine spectral basis according to the depth boundary conditions.
+    A pseudo-spectral implementation based on operator splitting and a discrete or
+    quasi-discrete Hankel transform may therefore be interpreted as a consistent
+    discretization of the continuous modal system
+    \eqref{eq:appE-modal-ode}. This observation is consistent with transform-based
+    axisymmetric heat-conduction solvers already used in the literature
+    \cite{Rogers_2012,Kunga_2021}.
+\end{remark}

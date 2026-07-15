@@ -25,3 +25,24 @@ licence.
 
 No asset is cleared by this template alone. The record must be completed before
 the asset is added to public source.
+
+## Extended-thesis import inventory
+
+The following path groups are retained as author-generated project outputs for
+source compilation. Their detailed generator, source-data, checksum, and
+reproducibility records remain to be completed before a release build. They
+are not a claim that the underlying simulations or datasets are reproduced in
+this repository.
+
+| Public path group | Current classification | Public-source treatment | Reproducibility scope |
+|---|---|---|---|
+| `thesis/figures/ch1/optical_*_spectrum_comparison_10_1200_RT.png` | Author-generated optical-model output | Retained | Source compilation only |
+| `thesis/figures/ch2/*.png` and `thesis/figures/ch2/energy_diagnostics/*.png` | Author-generated numerical-method output | Retained | Source compilation only |
+| `thesis/figures/ch3/*.png` | Author-generated optical, thermophysical, and threshold-study output | Retained | Source compilation only |
+| `thesis/figures/ch4/linear_ttm/{material_feature_percentile_heatmap,model_metric_comparison,retained_discarded_vs_fluence,selected_material_physical_parameters_linear,target_distribution_filter}.png` | Author-generated surrogate-study output | Retained | Source compilation only |
+| `thesis/figures/ch4/nonlinear_ttm/{nonlinear_ce_g_spline_overlay,nonlinear_derived_parameter_marginals,nonlinear_sampled_parameter_marginals,nonlinear_scalar_feature_correlation,nonlinear_spline_basis_knots_no_greville,nonlinear_spline_coefficient_range_comb,real_material_ld_oscillator_histograms}.png` | Author-generated surrogate-study output | Retained | Source compilation only |
+| `thesis/figures/ch4/nonlinear_ttm/final_20k/{high_grid_delta_vs_report,high_grid_threshold_stability,nonlinear_Ag_validation,nonlinear_Au_validation,nonlinear_Cu_validation,nonlinear_Ni_validation,nonlinear_Ti_validation,selected_feature_correlation_matrix}.png` | Author-generated surrogate-study output | Retained | Source compilation only |
+
+Third-party/adapted Chapter 1 raster figures are represented by a labelled
+public-source omission notice. External cross-model comparison figures and
+supplied numeric values are omitted pending documented redistribution terms.

@@ -1,0 +1,23 @@
+\begin{tabular}{p{0.32\textwidth}p{0.56\textwidth}}
+\toprule
+Quantity & Value \\
+\midrule
+Run identifier & \texttt{nonlinear\_pm1\_c4\_tail\_modal\_stage\_20k} \\
+Grid & $N_x=101$, $N_z=101$, $N_t=201$ \\
+Backend & CPU with PyPardiso sparse solves \\
+GPU requested/effective & False / False \\
+Sampler & Fixed log-spline coefficients with $\pm 1$ envelope and $c_4$ tail constraint \\
+Requested shards & 200 \\
+Completed shards & 200 \\
+Accepted samples & 20000 \\
+Attempts & 22153 \\
+Rejected or diverged samples & 2153 \\
+Acceptance rate & $90.2812\%$ \\
+Rejection reason & Solver diverged or incomplete after accepted-sample cleaning \\
+Manifest span & 32.70 h \\
+Accepted samples per hour & 611.6 \\
+Successful manifest container-hours & 200.508 \\
+Runtime per accepted sample & p50 39.02 s; p90 43.13 s; p95 43.72 s \\
+Observed preemptions & At least 14 \\
+\bottomrule
+\end{tabular}

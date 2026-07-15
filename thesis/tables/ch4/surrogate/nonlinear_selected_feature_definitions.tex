@@ -1,0 +1,16 @@
+\begin{tabular}{p{0.22\textwidth}p{0.22\textwidth}p{0.46\textwidth}}
+\toprule
+Feature group & Included descriptors & Definition or role \\
+\midrule
+\multicolumn{3}{p{0.92\textwidth}}{Feature set name used in the thesis: source-term-informed feature set. Internal analysis identifier: \texttt{source\_enhanced}.} \\
+\midrule
+Sampled scalar inputs & $F$, $k_{e0}$, $C_l$, $A_e$, $B_L$, $L_b$, $h$, $\lambda$ & Incident fluence, conductivity scale, lattice heat capacity, conductivity-model coefficients, ballistic length, film thickness, and wavelength. \\
+Derived optical inputs & $\alpha$, $R$ & Absorption coefficient and reflectivity derived from the Lorentz--Drude optical descriptor sample at the reference state. \\
+Room-temperature curve summaries & $C_e(T_0)$, $G(T_0)$ & Values of the nonlinear thermophysical curves at $T_0=\SI{300}{\kelvin}$. \\
+Grid curve summaries & $C_{e,\min}^{\mathcal{T}}$, $C_{e,\max}^{\mathcal{T}}$, $G_{\min}^{\mathcal{T}}$, $G_{\max}^{\mathcal{T}}$ & Minimum and maximum values over the accepted thermophysical evaluation grid $\mathcal{T}$, spanning \SI{300}{\kelvin} to \SI{50000}{\kelvin}. \\
+Log-spline coefficients & $c^{C_e}_0,\ldots,c^{C_e}_6$ and $c^G_0,\ldots,c^G_6$ & Cubic B-spline coefficients for $\log C_e(T_e)$ and $\log G(T_e)$, with the high-temperature tail constraint $c_5=c_4$ and $c_6=c_4$ for each property. \\
+Ballistic-corrected absorption & $\alpha_{\mathrm{eff},0}$ & $\alpha_{\mathrm{eff},0}=\alpha_0/(1+\alpha_0 L_b)$, using $L_b$ in metres. \\
+Source prefactor & $\chi_{S,0}$ & $\chi_{S,0}=\alpha_{\mathrm{eff},0}(1-R_0)/(1-\exp(-\alpha_{\mathrm{eff},0}h))$. \\
+Fluence-source interaction & $F\chi_{S,0}$ & Product of incident fluence and source prefactor. This is a source-prefactor descriptor, not the full volumetric source term. \\
+\bottomrule
+\end{tabular}
