@@ -7,13 +7,12 @@ documentation, build scaffolding, and licensing records.
 
 ## compact-thesis
 
-compact-thesis contains the compact thesis variant. `make thesis` builds its
-`thesis/thesis.tex` root. The branch inherits the verified presentation source
-from main. Its compact appendix set contains Appendices A--C; Appendix D is
-excluded to retain the compact scope and avoid unavailable cross-references.
+compact-thesis contains the compact thesis source at `thesis/thesis.tex`. It
+includes Chapters 1--4 and Appendices A--C. Appendix D is intentionally absent
+from the compact branch. The presentation source is inherited and available on
+both branches.
 
 ## Releases
 
-Approved PDFs belong only in GitHub Releases. No release-pdfs branch is used.
-An optional documentation site may be considered later, independently of the
-source-branch design.
+PDFs belong in GitHub Releases, not branch history. No `release-pdfs` branch
+is used. `gh-pages` remains optional and absent.

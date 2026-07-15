@@ -9,8 +9,8 @@ figure-level reproducibility.
 
 ## Repository structure
 
-- thesis/ contains the public extended-thesis source and selected public-safe
-  compile inputs.
+- thesis/ contains the thesis variant for the checked-out branch: the extended
+  thesis on main and the compact thesis on compact-thesis.
 - presentation/ contains the public-safe Beamer source. It reuses selected
   public-safe thesis figures and uses explicit omission notices where an asset
   cannot be redistributed.
@@ -23,10 +23,15 @@ figure-level reproducibility.
 
 - main contains the extended thesis and presentation source.
 - compact-thesis contains the compact thesis variant and inherits the
-  presentation source from main.
+  presentation source.
 
-Approved PDFs, if published, are GitHub Release assets. Source branches do not
-contain PDFs, and no release-pdfs branch is used.
+The repository's PDF distribution channel is
+[GitHub Releases](https://github.com/GVourvachakis/surrogate-damage-threshold-thesis/releases).
+Release distributions contain the approved public PDFs together with
+`SHA256SUMS` and `BUILD_MANIFEST.txt`. PDFs are not committed to source
+branches. The build manifest records the exact source commits used for each
+release. Existing private or submitted PDFs are not automatically
+public-release assets.
 
 ## Build requirements
 
@@ -42,14 +47,15 @@ build requires pdfLaTeX and the Beamer/TikZ packages recorded there.
     make clean
     make verify
 
-On main, the thesis target builds the extended variant. On compact-thesis, it
-builds the compact variant. The presentation target is active on both branches.
+`make thesis` builds the extended variant on main and the compact variant on
+compact-thesis. The presentation target is active on both branches.
 
 ## Release PDFs
 
-Final public-safe PDFs will be built from clean source and distributed only
-through GitHub Releases. Checksums and a build manifest will accompany any
-release. Existing submitted PDFs are not automatically public-release assets.
+Release distributions contain public-safe PDFs built from clean source,
+`SHA256SUMS`, and `BUILD_MANIFEST.txt`. PDFs are not committed to source
+branches. Existing private or submitted PDFs are not automatically
+public-release assets.
 
 ## Relationship to DeeplIPSS
 
