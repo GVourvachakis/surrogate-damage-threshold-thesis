@@ -1,5 +1,7 @@
 # Surrogate Modelling for Damage Threshold Estimation in Ultrashort Laser-Metal Interactions
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21397081.svg)](https://doi.org/10.5281/zenodo.21397081)
+
 ## Overview
 
 This repository provides public-safe LaTeX source for an extended MSc thesis,
@@ -84,6 +86,22 @@ DeepLIPSS-derived outputs are excluded unless separately cleared.
 See LICENSING.md, NOTICE.md, and docs/ASSET_PROVENANCE.md.
 
 ## Citation
+
+The Zenodo v1.0.0 record is available at
+<https://zenodo.org/records/21397082>.
+
+- Version DOI: <https://doi.org/10.5281/zenodo.21397082>
+- Concept DOI: <https://doi.org/10.5281/zenodo.21397081>
+
+Preferred citation:
+
+> Vakis, Georgios (2026). *Surrogate Modelling for Damage Threshold Estimation
+> in Ultrashort Laser-Metal Interactions* (Version 1.0.0). Zenodo.
+> https://doi.org/10.5281/zenodo.21397082
+
+The thesis title page uses the full name Georgios S. Vourvachakis. The
+preferred scholarly citation name for the Zenodo record is Georgios Vakis,
+linked through ORCID.
 
 Citation metadata is provided in CITATION.cff. DeepLIPSS and its manuscript
 repository are separate research artefacts and should be cited independently
