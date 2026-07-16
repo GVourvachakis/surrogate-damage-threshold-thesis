@@ -57,12 +57,14 @@ Release distributions contain public-safe PDFs built from clean source,
 branches. Existing private or submitted PDFs are not automatically
 public-release assets.
 
-## Relationship to DeeplIPSS
+## Relationship to DeepLIPSS
 
 Implementation code and broader numerical workflows are maintained in
-[DeeplIPSS](https://github.com/GVourvachakis/deeplipss). This repository does
-not vendor DeeplIPSS code, notebooks, raw datasets, external calculators, or
-derived outputs without complete public provenance.
+[DeepLIPSS](https://github.com/GVourvachakis/deeplipss). Associated simulation
+data and LaTeX reports are organised in the
+[DeepLIPSS manuscript repository](https://github.com/GVourvachakis/DeepLIPSS-manuscript).
+This repository does not vendor DeepLIPSS code, notebooks, raw datasets,
+external calculators, or derived outputs without complete public provenance.
 
 ## Public-source scope and limitations
 
@@ -77,11 +79,12 @@ Original thesis/presentation prose and original author-created figures are
 CC BY 4.0. Original build utilities are MIT-licensed. The retained thesis
 template has its own MIT Licence and notice. Third-party/adapted material,
 institutional logos, PLAN-hub/RIANA values, and unprovenanced
-DeeplIPSS-derived outputs are excluded unless separately cleared.
+DeepLIPSS-derived outputs are excluded unless separately cleared.
 
 See LICENSING.md, NOTICE.md, and docs/ASSET_PROVENANCE.md.
 
 ## Citation
 
-Citation metadata is provided in CITATION.cff. DeeplIPSS is a separate
-research artefact and should be cited independently where relevant.
+Citation metadata is provided in CITATION.cff. DeepLIPSS and its manuscript
+repository are separate research artefacts and should be cited independently
+where relevant.

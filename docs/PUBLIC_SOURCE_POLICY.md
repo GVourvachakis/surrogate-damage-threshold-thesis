@@ -13,8 +13,8 @@ The repository uses a conservative redistribution policy.
 - No generated output is included without public provenance appropriate to its
   category.
 - No PDF belongs in a source branch.
-- DeeplIPSS code, raw data, notebooks, and external calculators are not
-  vendored. Figure-level reproducibility is delegated to DeeplIPSS unless a
+- DeepLIPSS code, raw data, notebooks, and external calculators are not
+  vendored. Figure-level reproducibility is delegated to DeepLIPSS unless a
   retained asset explicitly documents a different public scope.
 
 A public-safe source document may differ from a submitted/private document in
