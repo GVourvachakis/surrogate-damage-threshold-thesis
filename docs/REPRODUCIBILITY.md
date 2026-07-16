@@ -7,9 +7,10 @@ does not claim full simulation, dataset, model-training, or figure-level
 regeneration.
 
 Implementation code and broader numerical workflows are maintained separately
-in the public DeeplIPSS repository:
-
-https://github.com/GVourvachakis/deeplipss
+in [DeepLIPSS](https://github.com/GVourvachakis/deeplipss). The companion
+[DeepLIPSS manuscript repository](https://github.com/GVourvachakis/DeepLIPSS-manuscript)
+organises associated simulation data and LaTeX reports. These related
+repositories are not vendored here.
 
 Included original figures have the provenance records required by the public
 asset policy. Restricted third-party material, uncleared supplied values, and

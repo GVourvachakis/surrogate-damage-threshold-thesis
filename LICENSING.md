@@ -26,7 +26,7 @@ The general CC BY 4.0 licence does not cover:
   covers the public use;
 - PLAN-hub/RIANA supplied values, data, or derived comparisons, unless their
   redistribution and attribution terms are documented;
-- DeeplIPSS-derived figures unless public provenance identifies the relevant
+- DeepLIPSS-derived figures unless public provenance identifies the relevant
   release/tag/commit, licence, input basis, and permitted scope; or
 - any file carrying its own licence or rights statement.
 

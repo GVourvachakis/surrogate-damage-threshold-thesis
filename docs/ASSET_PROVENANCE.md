@@ -21,7 +21,7 @@ licence.
 | Required credit | Exact attribution wording where applicable. |
 | Modification statement | Whether and how the public asset was changed. |
 | SHA-256 | Checksum recorded at release preparation. |
-| Reproducibility scope | Regenerable here, delegated to DeeplIPSS, or not included. |
+| Reproducibility scope | Regenerable here, delegated to DeepLIPSS, or not included. |
 
 No asset is cleared by this template alone. The record must be completed before
 the asset is added to public source.
