@@ -1,6 +1,6 @@
 # Surrogate Modelling for Damage Threshold Estimation in Ultrashort Laser-Metal Interactions
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21397081.svg)](https://doi.org/10.5281/zenodo.21397081)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.21397081-1682D4?logo=zenodo&logoColor=white)](https://doi.org/10.5281/zenodo.21397081)
 
 ## Overview
 
